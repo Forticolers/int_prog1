@@ -1,4 +1,4 @@
-[<-- Back to README](../README.md)
+[Back to README](../README.md)
 # int prog1 BDD
 
 ## Activité n° 1
@@ -41,6 +41,7 @@ SELECT ;
 #### 3) Expression régulière POSIX
 * Usage
 	* 
+<<<<<<< HEAD
 	
 
 
@@ -49,3 +50,5 @@ SELECT ;
 ```
 SELECT ;
 ```
+=======
+>>>>>>> 87bbc172e37bd53a80b5fdc9b9e17718d5d3d3e6
