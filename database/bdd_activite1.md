@@ -79,3 +79,9 @@ Note : Comme il y a une grande quantité d'"opérateur" je met le liens vers [la
 ```
 SELECT ;
 ```
+
+
+### Conslusion
+Pour les correspondance relativement simple, l'usage du LIKE est largement suffisant. Puis SIMILAR TO offre la possibilité de faire correspondres plusieurs choses ensemble, mais garde une certaine limite.
+
+POSIX permet de faire à peu près tout le reste.
