@@ -50,5 +50,3 @@ SELECT ;
 ```
 SELECT ;
 ```
-=======
->>>>>>> 87bbc172e37bd53a80b5fdc9b9e17718d5d3d3e6
