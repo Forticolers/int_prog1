@@ -1,8 +1,25 @@
 # int_prog1
 ## Activité n° 1
+---
 
 ### Recherche par correspondance de motif
+---
 #### 1) LIKE 
 * Usage
- 	* \<chaîne> (NOT) LIKE \<motif> \[ESCAPE caractère d'échappement] 
- 	* 
+	* \<chaîne> (NOT) LIKE \<motif> \[ESCAPE caractère d'échappement] 
+ 	* LIKE permet, s'il n'y a pas de signe pourcent (%) ou tiret bas (_), d'effectuer une recherche sur la chaîne elle-même. 
+ 	* le % correspond à un seul caractère alors que _ correspond à toutes les chaînes de zéro à plusieurs caractères.
+* Particularité
+	* Pour rechercher les caractère spéciaux (% et _), il faut utiliser un cractère d'échappement.
+	* Par défaut celui-ci est \ (backslash) mais peut être spécifiée dans la clause ESCAPE du LIKE.
+
+#### 2) SIMILAR TO
+* Usage
+	* \<chaîne> (NOT) SIMILAR TO \<motif> \[ESCAPE caractère d'échappement]
+	* Assez similaire to LIKE sauf que SIMILAR TO interpète les motifs en utilisant les expression rationnelle SQL
+	* Il utilise également les caractère spéciaux % et _ ainsi que :
+		* | qui dénote une alternative (une des deux possibilité)
+		* \* qui dénote la répétition d'éléments précédents (0 ou plusieurs fois)
+		* + qui dénote la répétion d'éléments précédents (une ou plusieurs fois)
+		* les parenthèses qui premettent de grouper des éléments en un seul élément logique
+		* Les expression entre crochet \[...] qui délimite une classe de caractère. Comme les expressions régulière POSIX.
