@@ -4,5 +4,5 @@
 ### Recherche par correspondance de motif
 #### 1) LIKE 
 * Usage
- * \<chaîne> (NOT) LIKE \<motif> \[ESCAPE caractère d'échappement] 
- * 
+ 	* \<chaîne> (NOT) LIKE \<motif> \[ESCAPE caractère d'échappement] 
+ 	* 
