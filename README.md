@@ -20,6 +20,6 @@
 	* Il utilise également les caractère spéciaux % et _ ainsi que :
 		* | qui dénote une alternative (une des deux possibilité)
 		* \* qui dénote la répétition d'éléments précédents (0 ou plusieurs fois)
-		* + qui dénote la répétion d'éléments précédents (une ou plusieurs fois)
+		* \+ qui dénote la répétion d'éléments précédents (une ou plusieurs fois)
 		* les parenthèses qui premettent de grouper des éléments en un seul élément logique
 		* Les expression entre crochet \[...] qui délimite une classe de caractère. Comme les expressions régulière POSIX.
