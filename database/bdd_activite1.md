@@ -1,7 +1,8 @@
+[<-- Back](../README.md)
 # int prog1 BDD
+
 ## Activité n° 1
 ---
-
 ### Recherche par correspondance de motif
 ---
 #### 1) LIKE 
@@ -12,6 +13,12 @@
 * Particularité
 	* Pour rechercher les caractère spéciaux (% et _), il faut utiliser un cractère d'échappement.
 	* Par défaut celui-ci est \ (backslash) mais peut être spécifiée dans la clause ESCAPE du LIKE.
+
+##### Exemple
+
+```
+SELECT ;
+```
 
 #### 2) SIMILAR TO
 * Usage
