@@ -1,4 +1,4 @@
-[<-- Back](../README.md)
+[<-- Back to README](../README.md)
 # int prog1 BDD
 
 ## Activité n° 1
@@ -14,7 +14,7 @@
 	* Pour rechercher les caractère spéciaux (% et _), il faut utiliser un cractère d'échappement.
 	* Par défaut celui-ci est \ (backslash) mais peut être spécifiée dans la clause ESCAPE du LIKE.
 
-##### Exemple
+##### 1.1) Exemple
 
 ```
 SELECT ;
@@ -31,6 +31,21 @@ SELECT ;
 		* les parenthèses qui premettent de grouper des éléments en un seul élément logique
 		* Les expression entre crochet \[...] qui délimite une classe de caractère. Comme les expressions régulière POSIX.
 
+##### 2.1) Exemple
+
+```
+SELECT ;
+```
+
+
 #### 3) Expression régulière POSIX
 * Usage
 	* 
+	
+
+
+##### 3.1) Exemple
+
+```
+SELECT ;
+```
