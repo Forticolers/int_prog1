@@ -1,7 +1,8 @@
 [Back to README](../README.md)
 # int prog1 BDD
 
-## Activité n° 1
+## Activité n° 1 
+##### _BDD utilisée : [magasinDB](https://mylos.cifom.ch/gitlab/dhu.cours/intbasdb/activites/intbasdb.schema-magasin)_
 ---
 ### Recherche par correspondance de motif
 ---
@@ -17,7 +18,15 @@
 ##### 1.1) Exemple
 
 ```
-SELECT ;
+(Retourne une liste des articles commençant par PESE)
+ SELECT nom FROM articles WHERE nom LIKE 'PESE%';
+        nom
+-------------------
+ PESE-LETTRE1-500
+ PESE-LETTRE1-1000
+ PESE-LETTRE1-500
+ PESE-LETTRE1-1000
+(4 rows)
 ```
 
 #### 2) SIMILAR TO
@@ -34,14 +43,34 @@ SELECT ;
 ##### 2.1) Exemple
 
 ```
-SELECT ;
+(Retourne une liste des articles contenant 2 F consecutif ou commençant par PESE)
+SELECT nom FROM articles WHERE nom SIMILAR TO '(%FF%)|(PESE%)';
+        nom
+-------------------
+ PESE-LETTRE1-500
+ PESE-LETTRE1-1000
+ PESE-LETTRE1-500
+ PESE-LETTRE1-1000
+ COFFRET SIMPLE
+ COFFRET LUXE
+(6 rows)
 ```
 
 
 #### 3) Expression régulière POSIX
+Note : Comme il y a une grande quantité d'"opérateur" je met le liens vers [la documentation postgres](https://docs.postgresql.fr/8.2/functions-matching.html#functions-posix-regexp).
+
 * Usage
-	* 
-<<<<<<< HEAD
+	* Opérateur
+		- **~** Fais correspondre deux expession en tenant compte de la casse
+		- **~*** Correspond deux expression, sans prendre compte de la casse
+		- **!~** Non-correspondance en tenant compte de la casse
+		- **!~*** Non-correspondance sans tenir compte de la casse
+	* Atomes
+		- les atomes sont ce qui composent les différentes branches d'une expression régulière.
+		- Quantificateur
+		- Contrainte
+	* Échappements
 	
 
 
