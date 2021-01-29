@@ -16,3 +16,5 @@ d=<PROJECT NAME>(Exemple: maven-project)" "-DarchetypeArtifactId=maven-archetype
 ```
 
 Le nom de projet va aussi servir de nom pour le dossier de projet que maven va créer.
+
+[Project maven (classe Data)](./src/main/java/ch/jeanbourquj/cifom/)
