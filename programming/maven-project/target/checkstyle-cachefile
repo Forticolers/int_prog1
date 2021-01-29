@@ -1,5 +1,5 @@
-#Fri Jan 29 14:03:50 CET 2021
+#Fri Jan 29 15:41:55 CET 2021
 module-resource*?\:checkstyle-suppressions.xml=6193EC72DCDBBCFF5C2AAB8A8B9698A90F8A9B39
 C\:\\Users\\jeanbourquj\\Desktop\\WORKING_DIR\\PROG\\maven-project\\src\\main\\java\\ch\\jeanbourquj\\cifom\\package-info.java=1611925423841
 module-resource*?\:checkstyle-xpath-suppressions.xml=15943B6F48E02A3A40098FE8A2DC9379E67F2DC3
-configuration*?=69BA38A971E9EEDA04C1238A1E5067DEC3B3544A
+configuration*?=5DD2922A13516B12CAD314D2E974CD61B6261FAD
