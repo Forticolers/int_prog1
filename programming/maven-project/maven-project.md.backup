@@ -5,7 +5,7 @@
 
 Une fois cela fait, ajoutez le dossier (par exemple :_C:\Program Files (x86)\apache-maven-3.6.3_) dans votre variable d'environnement PATH.
 
-Si vous n'en avez pas d'installer, télécharger et installer java JDK puis vérifier qu'une variable d'environnement -JAVA_HOME se créer, crée là si elle ne se créer pas automatiquement 
+Si vous n'en avez pas d'installer, télécharger et installer java JDK puis vérifier qu'une variable d'environnement JAVA_HOME se créer, crée là si elle ne se créer pas automatiquement 
 ### Création d'un projet
  Déplacer vous dans le dossier où vous souhaitez créer votre projet maven puis ouvrez y un promt cdm pour y entrer la commande suivant :
 
