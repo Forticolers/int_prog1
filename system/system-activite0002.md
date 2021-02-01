@@ -70,24 +70,7 @@ trav2
 ├── argz.h
 ├── cpio.h
 ├── crypt.h
-├── ctype.h
-├── envz.h
-├── errno.h
-├── error.h
-├── fcntl.h
-├── fenv.h
-├── gconv.h
-├── glob.h
-├── iconv.h
-├── libio.h
-├── link.h
-├── math.h
-├── paths.h
-├── poll.h
-├── regex.h
-├── sched.h
-├── sgtty.h
-├── spawn.h
+[...]
 ├── stab.h
 ├── stdio.h
 ├── time.h
