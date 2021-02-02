@@ -30,25 +30,9 @@ jeanbourquj@lozan:~$ cp /usr/include/[a-d]*.h ~/trav1
 #### 2.2) Vérification :
 
 ```
-jeanbourquj@lozan:~$ tree \trav1
-trav1
-├── aio.h
-├── aliases.h
-├── alloca.h
-├── argp.h
-├── argz.h
-├── ar.h
-├── assert.h
-├── byteswap.h
-├── cifsidmap.h
-├── complex.h
-├── cpio.h
-├── crypt.h
-├── ctype.h
-├── dirent.h
-└── dlfcn.h
-
-0 directories, 15 files
+jeanbourquj@lozan:~$ ls trav1/[a-d]*.h
+trav1/aio.h      trav1/alloca.h  trav1/argz.h  trav1/assert.h    trav1/cifsidmap.h  trav1/cpio.h   trav1/dirent.h
+trav1/Aliases.h  trav1/argp.h    trav1/ar.h    trav1/byteswap.h  trav1/complex.h    trav1/ctype.h  trav1/dlfcn.h
 ```
 
 ### 3)
@@ -58,28 +42,15 @@ _Copier dans le répertoire trav2 tous les fichiers dont le nom commence par 3 c
 #### 3.1) Commande :
 
 ```
-jeanbourquj@lozan:~$ cp /usr/include/?(???)?([e-z])?.h ~/trav2
+jeanbourquj@lozan:~$ cp /usr/include/???[e-z]?.h ~/trav2
 
 ```
 #### 3.2) Vérification :
  
 ```
-jeanbourquj@lozan:~$ tree \trav2
-trav2
-├── argp.h
-├── argz.h
-├── cpio.h
-├── crypt.h
-[...]
-├── stab.h
-├── stdio.h
-├── time.h
-├── utime.h
-├── utmp.h
-├── utmpx.h
-└── wait.h
-
-0 directories, 29 files
+jeanbourquj@lozan:~$ ls trav2/???[e-z]?.h
+trav2/crypt.h  trav2/errno.h  trav2/fcntl.h  trav2/iconv.h  trav2/paths.h  trav2/sched.h  trav2/spawn.h  trav2/utime.h
+trav2/ctype.h  trav2/error.h  trav2/gconv.h  trav2/libio.h  trav2/regex.h  trav2/sgtty.h  trav2/stdio.h  trav2/utmpx.h
 ```
 
 ### 4)
