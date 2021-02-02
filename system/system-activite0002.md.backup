@@ -84,7 +84,7 @@ _Visualiser votre répertoire de travail courant et choisir trav3._
 
 #### 5.1) Commande :
 
-```console
+```ms
 jeanbourquj@lozan:~$ pwd && cd \trav3
 /home/S2/jeanbourquj
 jeanbourquj@lozan:~/trav3$
