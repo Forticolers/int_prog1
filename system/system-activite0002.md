@@ -92,7 +92,7 @@ jeanbourquj@lozan:~/trav3$
 
 #### 5.2) Vérification :
 
-```ShellSession
+```{r, engine='bash', count_lines}
 jeanbourquj@lozan:~/trav3$ pwd
 /home/S2/jeanbourquj/trav3
 ```
