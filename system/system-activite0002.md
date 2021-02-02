@@ -13,7 +13,7 @@ jeanbourquj@lozan:~$ mkdir trav{1..3}
 #### 1.2) Vérification :
  
 ```
-jeanbourquj@lozan:~$ ls
+jeanbourquj@lozan:~$ ls -d trav*
 trav1  trav2  trav3
 ``` 
 ### 2)
