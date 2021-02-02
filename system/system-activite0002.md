@@ -84,7 +84,7 @@ _Visualiser votre répertoire de travail courant et choisir trav3._
 
 #### 5.1) Commande :
 
-```{r, engine='console', count_lines}
+```
 jeanbourquj@lozan:~$ pwd && cd \trav3
 /home/S2/jeanbourquj
 jeanbourquj@lozan:~/trav3$
@@ -92,7 +92,7 @@ jeanbourquj@lozan:~/trav3$
 
 #### 5.2) Vérification :
 
-```posh
+```
 jeanbourquj@lozan:~/trav3$ pwd
 /home/S2/jeanbourquj/trav3
 ```
