@@ -92,7 +92,7 @@ jeanbourquj@lozan:~/trav3$
 
 #### 5.2) Vérification :
 
-```
+```bash
 jeanbourquj@lozan:~/trav3$ pwd
 /home/S2/jeanbourquj/trav3
 ```
