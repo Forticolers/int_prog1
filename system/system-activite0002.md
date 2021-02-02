@@ -5,14 +5,14 @@ _Créer trois sous-répertoires dans votre «home directory»: trav1, trav2 et t
 
 #### 1.1) Commande :
  
-```
+```console
 jeanbourquj@lozan:~$ mkdir trav{1..3}
 
 ``` 
 
 #### 1.2) Vérification :
  
-```
+```console
 jeanbourquj@lozan:~$ ls -d trav*
 trav1  trav2  trav3
 ``` 
@@ -22,14 +22,14 @@ _Copier dans le répertoire trav1 tous les fichiers .h dont le nom commence par 
 
 #### 2.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ cp /usr/include/[a-d]*.h ~/trav1
 
 ``` 
 
 #### 2.2) Vérification :
 
-```
+```console
 jeanbourquj@lozan:~$ ls trav1/[a-d]*.h
 trav1/aio.h      trav1/alloca.h  trav1/argz.h  trav1/assert.h    trav1/cifsidmap.h  trav1/cpio.h   trav1/dirent.h
 trav1/Aliases.h  trav1/argp.h    trav1/ar.h    trav1/byteswap.h  trav1/complex.h    trav1/ctype.h  trav1/dlfcn.h
@@ -41,13 +41,13 @@ _Copier dans le répertoire trav2 tous les fichiers dont le nom commence par 3 c
 
 #### 3.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ cp /usr/include/???[e-z]?.h ~/trav2
 
 ```
 #### 3.2) Vérification :
  
-```
+```console
 jeanbourquj@lozan:~$ ls trav2/???[e-z]?.h
 trav2/crypt.h  trav2/errno.h  trav2/fcntl.h  trav2/iconv.h  trav2/paths.h  trav2/sched.h  trav2/spawn.h  trav2/utime.h
 trav2/ctype.h  trav2/error.h  trav2/gconv.h  trav2/libio.h  trav2/regex.h  trav2/sgtty.h  trav2/stdio.h  trav2/utmpx.h
@@ -58,7 +58,7 @@ _Lister le contenu de ces répertoires._
 
 #### 4.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ tree
 .
 ├── trav1
@@ -84,7 +84,7 @@ _Visualiser votre répertoire de travail courant et choisir trav3._
 
 #### 5.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ pwd && cd \trav3
 /home/S2/jeanbourquj
 jeanbourquj@lozan:~/trav3$
@@ -92,7 +92,7 @@ jeanbourquj@lozan:~/trav3$
 
 #### 5.2) Vérification :
 
-```
+```console
 jeanbourquj@lozan:~/trav3$ pwd
 /home/S2/jeanbourquj/trav3
 ```
@@ -103,7 +103,7 @@ _Copier dans trav3 les fichiers a.out.h, crypt.h et math.h qui se trouvent dans 
 
 #### 6.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ cp /*/*/{a.out.h,crypt.h,math.h} ~/trav3
 cp: cannot stat '/*/*/a.out.h': No such file or directory
 
@@ -111,7 +111,7 @@ cp: cannot stat '/*/*/a.out.h': No such file or directory
 
 #### 6.2) Vérification :
 
-```
+```console
 
 jeanbourquj@lozan:~$ tree trav3/
 trav3/
@@ -128,14 +128,14 @@ _Renommer le fichier aliases.h du répertoire trav1 et math.h du répertoire tra
 
 #### 7.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ mv trav1/aliases.h trav1/Aliases.h | mv trav3/math.h trav3/Math.h
 
 ```
 
 #### 7.2) Vérification :
 
-```
+```console
 jeanbourquj@lozan:~$ ls trav[1,3]/[A,M]*.h
 trav1/Aliases.h trav3/Math.h
 
@@ -147,7 +147,7 @@ _Effacer tous les fichiers dont le nom commence par cry et qui se trouvent dans 
 
 #### 8.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ tree \trav1
 trav1
 ├── aio.h
@@ -168,7 +168,7 @@ jeanbourquj@lozan:~$ rm trav1/cry*.*
 
 #### 8.2) Vérification :
 
-```
+```console
 jeanbourquj@lozan:~$ tree trav1/
 trav1/
 ├── aio.h
@@ -190,13 +190,13 @@ _Supprimer le répertoire trav3._
 
 #### 9.1) Commande :
 
-```
+```console
 jeanbourquj@lozan:~$ rm -r trav3/
 ```
 
 #### 9.2) Vérification :
 
-```
+```console
 jeanbourquj@lozan:~$ ls
 trav1  trav2
 ```
