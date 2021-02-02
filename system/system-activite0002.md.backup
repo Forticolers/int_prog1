@@ -48,22 +48,9 @@ jeanbourquj@lozan:~$ cp /usr/include/???[e-z]?.h ~/trav2
 #### 3.2) Vérification :
  
 ```
-jeanbourquj@lozan:~$ tree \trav2
-trav2
-├── argp.h
-├── argz.h
-├── cpio.h
-├── crypt.h
-[...]
-├── stab.h
-├── stdio.h
-├── time.h
-├── utime.h
-├── utmp.h
-├── utmpx.h
-└── wait.h
-
-0 directories, 29 files
+jeanbourquj@lozan:~$ ls trav2/???[e-z]?.h
+trav2/crypt.h  trav2/errno.h  trav2/fcntl.h  trav2/iconv.h  trav2/paths.h  trav2/sched.h  trav2/spawn.h  trav2/utime.h
+trav2/ctype.h  trav2/error.h  trav2/gconv.h  trav2/libio.h  trav2/regex.h  trav2/sgtty.h  trav2/stdio.h  trav2/utmpx.h
 ```
 
 ### 4)
@@ -81,14 +68,14 @@ jeanbourquj@lozan:~$ tree
 │   ├── dirent.h
 │   └── dlfcn.h
 ├── trav2
-│   ├── argp.h
-│   ├── argz.h
+│   ├── crypt.h
+│   ├── ctype.h
 [...]
-│   ├── utmpx.h
-│   └── wait.h
+│   ├── utime.h
+│   └── utmpx.h
 └── trav3
 
-3 directories, 44 files
+3 directories, 30 files
 ```
 
 ### 5)
@@ -98,10 +85,8 @@ _Visualiser votre répertoire de travail courant et choisir trav3._
 #### 5.1) Commande :
 
 ```
-jeanbourquj@lozan:~$ pwd
+jeanbourquj@lozan:~$ pwd && cd \trav3
 /home/S2/jeanbourquj
------
-jeanbourquj@lozan:~$ cd \trav3
 jeanbourquj@lozan:~/trav3$
 ```
 
@@ -151,7 +136,7 @@ jeanbourquj@lozan:~$ mv trav1/aliases.h trav1/Aliases.h | mv trav3/math.h trav3/
 #### 7.2) Vérification :
 
 ```
-jeanbourquj@lozan:~$ tree trav1/ && tree trav3/
+jeanbourquj@lozan:~$ tree trav[1,3]/[A,M]*.h
 trav1/
 ├── aio.h
 ├── Aliases.h

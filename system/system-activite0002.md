@@ -68,14 +68,14 @@ jeanbourquj@lozan:~$ tree
 │   ├── dirent.h
 │   └── dlfcn.h
 ├── trav2
-│   ├── argp.h
-│   ├── argz.h
+│   ├── crypt.h
+│   ├── ctype.h
 [...]
-│   ├── utmpx.h
-│   └── wait.h
+│   ├── utime.h
+│   └── utmpx.h
 └── trav3
 
-3 directories, 44 files
+3 directories, 30 files
 ```
 
 ### 5)
@@ -85,10 +85,8 @@ _Visualiser votre répertoire de travail courant et choisir trav3._
 #### 5.1) Commande :
 
 ```
-jeanbourquj@lozan:~$ pwd
+jeanbourquj@lozan:~$ pwd && cd \trav3
 /home/S2/jeanbourquj
------
-jeanbourquj@lozan:~$ cd \trav3
 jeanbourquj@lozan:~/trav3$
 ```
 
@@ -138,20 +136,8 @@ jeanbourquj@lozan:~$ mv trav1/aliases.h trav1/Aliases.h | mv trav3/math.h trav3/
 #### 7.2) Vérification :
 
 ```
-jeanbourquj@lozan:~$ tree trav1/ && tree trav3/
-trav1/
-├── aio.h
-├── Aliases.h
-[...]
-└── dlfcn.h
-
-0 directories, 15 files
-[1]+  Done                    tree trav1/
-trav3/
-├── crypt.h
-└── Math.h
-
-0 directories, 2 files
+jeanbourquj@lozan:~$ ls trav[1,3]/[A,M]*.h
+trav1/Aliases.h trav3/Math.h
 
 ```
 
