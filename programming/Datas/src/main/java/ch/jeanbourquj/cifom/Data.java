@@ -9,14 +9,17 @@ import java.util.Objects;
  */
 public class Data {
 
+    /**
+     * Valeur.
+     */
     private Integer valeur;
 
     /**
-     *
-     * @param valeur
+     * Data containes an integer value.
+     * @param pValeur
      */
-    public Data(final Integer valeur) {
-        this.valeur = valeur;
+    public Data(final Integer pValeur) {
+        this.valeur = pValeur;
     }
 
     /**
@@ -47,7 +50,13 @@ public class Data {
         hash = HASH_CODE_2 * hash + Objects.hashCode(this.valeur);
         return hash;
     }
+    /**
+     * hashcode 2.
+     */
     private static final int HASH_CODE_2 = 59;
+    /**
+     * hashcode 1.
+     */
     private static final int HASH_CODE_1 = 3;
 
     /**

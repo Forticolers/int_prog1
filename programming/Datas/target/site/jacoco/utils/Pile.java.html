@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Datas</a> &gt; <a href="index.source.html" class="el_package">utils</a> &gt; <span class="el_source">Pile.java</span></div><h1>Pile.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package utils;
+
+import ch.jeanbourquj.cifom.Data;
+
+/**
+ *
+ * @author JeanbourquJ
+ */
+public class Pile {
+
+    /**
+     * Taille maximale.
+     */
+    private Integer tailleMax;
+    /**
+     * Sommet actuel.
+     */
+    private Integer sommet;
+    /**
+     * Tableau de valuer Data.
+     */
+    private Data[] valeurs;
+    /**
+     * Valeur contsante de la taille maximale.
+     */
+    public static final int TAILLE_MAX_PILE = 5;
+    /**
+     * Une pile a une taille maximale de 5.
+     */
+<span class="fc" id="L35">    public Pile() {</span>
+<span class="fc" id="L36">        this.tailleMax = TAILLE_MAX_PILE;</span>
+<span class="fc" id="L37">        this.sommet = -1;</span>
+<span class="fc" id="L38">        this.valeurs = new Data[this.tailleMax];</span>
+<span class="fc" id="L39">    }</span>
+    /**
+     * Retourne vrai si la pile est vide.
+     * @return true if pile is empty.
+     */
+    public boolean etreVide() {
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        return this.sommet == -1;</span>
+    }
+    /**
+     * Ajoute une entrée à la pile.
+     * @param d data-
+     * @throws Exception if pile is full.
+     */
+    public void empiler(final Data d) throws Exception {
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (this.etrePlein()) {</span>
+<span class="nc" id="L54">            throw new Exception(&quot;La pile est pleine.&quot;);</span>
+        }
+
+<span class="fc" id="L57">        this.sommet += 1;</span>
+<span class="fc" id="L58">        this.valeurs[this.sommet] = d;</span>
+<span class="fc" id="L59">    }</span>
+    /**
+     * Retire la denière entrée de la pile.
+     * @throws Exception if pile is empty.
+     */
+    public void depiler() throws Exception {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L66">            throw new Exception(&quot;La pile est vide.&quot;);</span>
+        }
+
+<span class="fc" id="L69">        this.valeurs[this.sommet] = null;</span>
+<span class="fc" id="L70">        this.sommet -= 1;</span>
+<span class="fc" id="L71">    }</span>
+    /**
+     * Retourne le sommet de la pile.
+     * @return Data.
+     * @throws Exception if empty.
+     */
+    public Data retournerSommet() throws Exception {
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L79">            throw new Exception(&quot;La pile est vide.&quot;);</span>
+        }
+<span class="fc" id="L81">        return this.valeurs[this.sommet];</span>
+    }
+    /**
+     * Retourne vrai si la pile est pleine.
+     * @return true if pile is full.
+     */
+    public boolean etrePlein() {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        return this.sommet == this.tailleMax - 1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.29">
-<file name="C:\Users\jeanbourquj\Desktop\WORKING_DIR\PROG\Datas\src\main\java\ch\jeanbourquj\cifom\Data.java">
-<error line="12" column="5" severity="error" message="Commentaire Javadoc manquant." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
-<error line="18" column="31" severity="error" message="&apos;valeur&apos; masque un attribut." source="com.puppycrawl.tools.checkstyle.checks.coding.HiddenFieldCheck"/>
-<error line="50" column="5" severity="error" message="Commentaire Javadoc manquant." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
-<error line="51" column="5" severity="error" message="Commentaire Javadoc manquant." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
-</file>
 <file name="C:\Users\jeanbourquj\Desktop\WORKING_DIR\PROG\Datas\src\main\java\ch\jeanbourquj\cifom\package-info.java">
-<error line="6" severity="error" message="Commentaire Javadoc manquant." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
 </file>
 <file name="C:\Users\jeanbourquj\Desktop\WORKING_DIR\PROG\Datas\src\main\java\utils\package-info.java">
-<error line="6" severity="error" message="Commentaire Javadoc manquant." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
-</file>
-<file name="C:\Users\jeanbourquj\Desktop\WORKING_DIR\PROG\Datas\src\main\java\utils\Pile.java">
-<error line="13" severity="error" message="Line has trailing spaces." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck"/>
 </file>
 </checkstyle>
