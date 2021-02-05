@@ -44,7 +44,7 @@ public class PileTest {
         data_33 = new Data(33);
     }
     @Test
-    public void test1(){
+    public void test1() throws Exception{
         Pile p = new Pile();
         Assert.assertTrue(p.etreVide());
         p.empiler(data_11);
@@ -53,7 +53,7 @@ public class PileTest {
         Assert.assertTrue(p.etreVide());
     }
     @Test
-    public void test2(){
+    public void test2() throws Exception{
         Pile p = new Pile();
         p.empiler(data_11);
         p.empiler(data_22);
@@ -64,7 +64,7 @@ public class PileTest {
         Assert.assertEquals(p.retournerSommet(), data_22);
     }
     @Test
-    public void test3(){
+    public void test3() throws Exception{
         Pile p = new Pile();
         p.empiler(data_11);
         p.empiler(data_22);
