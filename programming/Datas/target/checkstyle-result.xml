@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.29">
-<file name="C:\Users\jeanbourquj\Desktop\WORKING_DIR\PROG\Datas\src\main\java\ch\jeanbourquj\cifom\package-info.java">
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\Data.java">
 </file>
-<file name="C:\Users\jeanbourquj\Desktop\WORKING_DIR\PROG\Datas\src\main\java\utils\package-info.java">
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\package-info.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\utils\package-info.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\utils\Pile.java">
 </file>
 </checkstyle>
