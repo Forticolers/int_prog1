@@ -1,3 +1,4 @@
+{::options parse_block_html="true" /}
 [Back to README](https://mylos.cifom.ch/gitlab/JeanbourquJ/int_prog1/-/tree/master)
 
 ### 1)
@@ -633,7 +634,7 @@ nagios:/var/lib/nagios
 		<details>
 			  <summary markdown="span">Commande de vérification ```jeanbourquj@lozan:~$ cat liste_comptes```</summary>
 			
-				```
+		```
 				root:/root
 				daemon:/usr/sbin
 				bin:/bin
@@ -665,6 +666,6 @@ nagios:/var/lib/nagios
 				pollinate:/var/cache/pollinate
 				ubuntu:/home/ubuntu
 				nagios:/var/lib/nagios
-				```
+		```
 			  
 </details>

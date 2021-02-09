@@ -1,3 +1,4 @@
+{::options parse_block_html="true" /}
 [Back to README](https://mylos.cifom.ch/gitlab/JeanbourquJ/int_prog1/-/tree/master)
 
 ### 1)
