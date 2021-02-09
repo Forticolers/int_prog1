@@ -74,9 +74,10 @@ cut -d: -f1,3 /etc/group
 	- Affiche le contenu du fichier /etc/passwd de manière paginer simple
 	
 <details>
-<summary markdown="span">Commande 
+<summary markdown="span">Commande
+
 ``` 
-		jeanbourquj@lozan:~$ more /etc/passwd 
+jeanbourquj@lozan:~$ more /etc/passwd 
 ```
 </summary>
 

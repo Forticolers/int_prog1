@@ -112,7 +112,7 @@ sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
 pollinate:x:110:1::/var/cache/pollinate:/bin/false
 ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
 nagios:x:111:115::/var/lib/nagios:/usr/sbin/nologin
-	```  
+```  
 </details>	 
 
 * grep li /etc/passwd
