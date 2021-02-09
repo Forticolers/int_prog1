@@ -749,17 +749,230 @@ users:x:100:
 _Écrire/Construire les commandes fournissant:_
 
 1.	la liste des noms d’utilisateurs locaux avec leurs UID et GID (sur écran et sur fichier)
-2.	la liste des noms des groupes locaux
-3.	le nombre de comptes locaux
-4.	le nombre de groupes locaux
+	* Usage de la commande `cat` combinée avec la commande `cut` délimité par ':' sur les collone '1', '3' et '4' (username, uid & gid) et de la commande `tee` qui crée un fichier nomé user\_uid_gid.list.
+		
+	<details>
+	<summary markdown="span">1.1 Commande
+	 
+	```
+	jeanbourquj@lozan:~$ cat /etc/passwd | cut -d: -f1,3,4 | tee ./user_uid_gid.list
+	```
+	
+	</summary>
+	
+	```
+	root:0:0
+	daemon:1:1
+	bin:2:2
+	sys:3:3
+	sync:4:65534
+	games:5:60
+	man:6:12
+	lp:7:7
+	mail:8:8
+	news:9:9
+	uucp:10:10
+	proxy:13:13
+	www-data:33:33
+	backup:34:34
+	list:38:38
+	irc:39:39
+	gnats:41:41
+	nobody:65534:65534
+	systemd-network:100:102
+	systemd-resolve:101:103
+	syslog:102:106
+	messagebus:103:107
+	_apt:104:65534
+	lxd:105:65534
+	uuidd:106:110
+	dnsmasq:107:65534
+	landscape:108:112
+	sshd:109:65534
+	pollinate:110:1
+	ubuntu:1000:1000
+	nagios:111:115
+	```
+	
+	</details>
 
+2.	la liste des noms des groupes locaux
+	-	Usage de la commande `cat` ainsi que la commande `cut` avec délimitation ':' et groupe '1'.
+
+	<details>
+	<summary markdown="span">2.1 Commande
+	
+	```
+	jeanbourquj@lozan:~$ cat /etc/group | cut -d: -f1
+	```
+	
+	</summary>
+	
+	```
+	root
+	daemon
+	bin
+	sys
+	adm
+	tty
+	disk
+	lp
+	mail
+	news
+	uucp
+	man
+	proxy
+	kmem
+	dialout
+	fax
+	voice
+	cdrom
+	floppy
+	tape
+	sudo
+	audio
+	dip
+	www-data
+	backup
+	operator
+	list
+	irc
+	src
+	gnats
+	shadow
+	utmp
+	video
+	sasl
+	plugdev
+	staff
+	games
+	users
+	nogroup
+	systemd-journal
+	systemd-network
+	systemd-resolve
+	input
+	crontab
+	syslog
+	messagebus
+	lxd
+	mlocate
+	uuidd
+	ssh
+	landscape
+	admin
+	netdev
+	ubuntu
+	nagios
+	winbindd_priv
+	```
+
+	</details>
+
+3.	le nombre de comptes locaux
+	* Usage de la commande `wc` sur le fichier /etc/passwd
+	
+	```
+	jeanbourquj@lozan:~$ wc -l /etc/passwd
+	31 /etc/passwd
+	```
+4.	le nombre de groupes locaux
+	* Usage de la commande `wc` sur le fichier /etc/group
+	
+	```
+	jeanbourquj@lozan:~$ wc -l /etc/group
+	56 /etc/group
+	```
 ### 6)
 
 _Exercer la commande find dans les 4 cas suivants:_
 
 1.	recherche selon le nom du fichier
+	* 	`$HOME` signifie qu'on cherche dans le dossier home courant (/home/S2/jeanbourquj)
+	*	`-print` affiche le chemin du fichier trouver
+
+		```
+		jeanbourquj@lozan:~$ find $HOME -name "user_uid_gid.list" -print
+		/home/S2/jeanbourquj/user_uid_gid.list
+		```
 2.	recherche selon le code de permission
+	* 	`-perm` offre la possibilité de chercher avec les permission. 644
+	*	`644` signifie `rw-r--r--`
+	
+	<details>
+	<summary markdown="span">Commande
+	  
+	 ``` 
+	 jeanbourquj@lozan:~$ find -perm 644
+	 ```
+	 
+	 </summary>
+	
+	```
+	./liste_comptes
+	./.bash_logout
+	./file2.txt
+	./.bashrc
+	./.profile
+	./file3
+	./trav1/complex.h
+	./trav1/aio.h
+	./trav1/cpio.h
+	./trav1/dirent.h
+	./trav1/assert.h
+	./trav1/ctype.h
+	./trav1/byteswap.h
+	./trav1/dlfcn.h
+	./trav1/cifsidmap.h
+	./trav1/Aliases.h
+	./trav1/ar.h
+	./trav1/alloca.h
+	./trav1/argp.h
+	./trav1/argz.h
+	./file4
+	./trav2/errno.h
+	./trav2/utmpx.h
+	./trav2/stdio.h
+	./trav2/regex.h
+	./trav2/spawn.h
+	./trav2/ctype.h
+	./trav2/crypt.h
+	./trav2/utime.h
+	./trav2/error.h
+	./trav2/paths.h
+	./trav2/fcntl.h
+	./trav2/libio.h
+	./trav2/gconv.h
+	./trav2/sched.h
+	./trav2/iconv.h
+	./trav2/sgtty.h
+	./file1.txt
+	./liste_comptes.triee
+	./.cache/motd.legal-displayed
+	./user_uid_gid.list
+	./test.file
+	```
+	  
+	</details>
+	
 3.	recherche selon la date de modification
+	* `-atime n` signifie qu'il cherche les fichier ayant été accédé au moin n*24h avant
+	* `-cmin n` signifie dernière modification il y a _n_ minutes
+	* `-ctime n` signifide qu'il cherche les fichier ayant été modifié il y a n*24h (même arrondissement que `-atime`)
+	* `+` devant `n`indique plus de `n` temps
+	* `-` indique moin de `n` temps
+	* rien signifie une égalité stricte
+	
+	```
+	(recherche les fichier ayant été modifié il y a moins de 30 minutes)
+	jeanbourquj@lozan:~$ find -cmin -30
+	.
+	./newfile
+	./S2Partages/Robocopy_2020/0406/MC0-0406-00_Historique.txt
+	./.viminfo
+	./test.file
+	```
+	
 4.	recherche selon un code de permission et le modifier
 
 ### 7)
