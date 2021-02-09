@@ -72,16 +72,15 @@ cut -d: -f1,3 /etc/group
 
 * more /etc/passwd 
 	- Affiche le contenu du fichier /etc/passwd de manière paginer simple
+	
 <details>
-<summary markdown="span">Commande
-
-```
-	jeanbourquj@lozan:~$ more /etc/passwd
-``` 
-
+<summary markdown="span">Commande 
+	``` 
+		jeanbourquj@lozan:~$ more /etc/passwd 
+	```
 </summary>
 	
-```
+	```
 		root:x:0:0:root:/root:/bin/bash
 		daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 		bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -113,8 +112,7 @@ cut -d: -f1,3 /etc/group
 		pollinate:x:110:1::/var/cache/pollinate:/bin/false
 		ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
 		nagios:x:111:115::/var/lib/nagios:/usr/sbin/nologin
-```
-	  
+	```  
 </details>	 
 
 * grep li /etc/passwd
