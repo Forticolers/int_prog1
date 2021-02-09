@@ -975,12 +975,36 @@ _Exercer la commande find dans les 4 cas suivants:_
 	
 4.	recherche selon un code de permission et le modifier
 
+	```
+	jeanbourquj@lozan:~/test$ ls -l
+	total 1
+	-rwxr-xr-x 1 jeanbourquj domain users 421 fév  9 07:46 user_uid_gid.list
+	jeanbourquj@lozan:~/test$ find . -type f -perm 755 -exec chmod 644 {} \;
+	jeanbourquj@lozan:~/test$ ls -l
+	total 1
+	-rw-r--r-- 1 jeanbourquj domain users 421 fév  9 07:46 user_uid_gid.list
+	```
+
 ### 7)
 
 1.	Créez une instruction qui permet de compter le nombre de fichiers et de répertoires contenus dans un répertoire et ses descendants.
+	
+	```
+	jeanbourquj@lozan:~$ ls -R | wc -l
+	333880
+	```
 2.	Modifiez l’instruction sous 1) pour ne compter que les fichiers ordinaires.
+	
+	```
+	jeanbourquj@lozan:~$ ls -R | find -type f |wc -l
+	278279
+	```
 3.	Modifiez l’instruction sous 1) pour ne compter que les répertoires.
-
+	
+	```
+	jeanbourquj@lozan:~$ ls -R | find -type d |wc -l
+	20206
+	```
 ### 8)
 
 _Construire la commande qui_
