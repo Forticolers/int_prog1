@@ -118,18 +118,26 @@ nagios:x:111:115::/var/lib/nagios:/usr/sbin/nologin
 
 * grep li /etc/passwd
 	- Affiche les lignes contenant le motif 'li' du fichier /etc/passwd
+
 <details>
-	  <summary markdown="span">Commande ``` jeanbourquj@lozan:~$ grep li /etc/passwd ```</summary>
-	
-		```
-		list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
-		gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
-		lxd:x:105:65534::/var/lib/lxd/:/bin/false
-		dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
-		landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin
-		pollinate:x:110:1::/var/cache/pollinate:/bin/false
-		nagios:x:111:115::/var/lib/nagios:/usr/sbin/nologin
-		``` 
+<summary markdown="span">Commande 
+
+``` 
+jeanbourquj@lozan:~$ grep li /etc/passwd 
+```
+
+</summary>
+
+```
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+lxd:x:105:65534::/var/lib/lxd/:/bin/false
+dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+nagios:x:111:115::/var/lib/nagios:/usr/sbin/nologin
+``` 
+
 </details>	 
 
 * grep \^li /etc/passwd
