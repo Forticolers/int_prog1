@@ -1012,8 +1012,8 @@ _Construire la commande qui_
 *	permet de compter le nombre d’utilisateurs qui possède un GID compris entre 100 et 199.
 	
 	```
-	jeanbourquj@lozan:~$ cat /etc/passwd | cut -d: -f3 | grep [100..199] | wc -l
-	20
+	jeanbourquj@lozan:~$ cat /etc/passwd | cut -d: -f4 | grep 1[0-9][0-9]$ | wc -l
+	7
 	```
 *	indique le nom de l’utilisateur et l’IP de sa machine connectés au système sur le terminal 4 (/dev/pts/4)
 	
@@ -1030,5 +1030,7 @@ _Analyser les commandes suivantes_
 
 ```
 find / -user "$USER"
+ --> Retourne tous les fichier de l'utilisateur courant
 find / -user "$USER" 2>/dev/null
+	--> Retourne tous les fichier de l'utilisateur courant mais supprime les erreurs
 ```

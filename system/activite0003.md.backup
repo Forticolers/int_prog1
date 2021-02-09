@@ -1012,14 +1012,15 @@ _Construire la commande qui_
 *	permet de compter le nombre d’utilisateurs qui possède un GID compris entre 100 et 199.
 	
 	```
-	jeanbourquj@lozan:~$ cat /etc/passwd | cut -d: -f3 | grep [100..199] | wc -l
-	20
+	jeanbourquj@lozan:~$ cat /etc/passwd | cut -d: -f4 | grep 1[0-9][0-9]$ | wc -l
+	7
 	```
 *	indique le nom de l’utilisateur et l’IP de sa machine connectés au système sur le terminal 4 (/dev/pts/4)
 	
 	```
+	(effectué avec pts/0 car personne sur pts/4)
 	jeanbourquj@lozan:~$ who | grep "pts/0" | tr -s [:space:] ':' | cut -d: -f1,6
-jeanbourquj:(10.7.0.1)
+	jeanbourquj:(10.7.0.1)
 	```
 
 >	aide : utiliser la commande tr (translate) : tr –s ' ' ':' file(s)
@@ -1029,5 +1030,6 @@ _Analyser les commandes suivantes_
 
 ```
 find / -user "$USER"
+ --> Retourne tous les fichier de l'utilisa
 find / -user "$USER" 2>/dev/null
 ```
