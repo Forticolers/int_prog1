@@ -1003,14 +1003,24 @@ _Exercer la commande find dans les 4 cas suivants:_
 	
 	```
 	jeanbourquj@lozan:~$ ls -R | find -type d |wc -l
-	278279
+	20206
 	```
 ### 8)
 
 _Construire la commande qui_
 
 *	permet de compter le nombre d’utilisateurs qui possède un GID compris entre 100 et 199.
+	
+	```
+	jeanbourquj@lozan:~$ cat /etc/passwd | cut -d: -f3 | grep [100..199] | wc -l
+	20
+	```
 *	indique le nom de l’utilisateur et l’IP de sa machine connectés au système sur le terminal 4 (/dev/pts/4)
+	
+	```
+	jeanbourquj@lozan:~$ who | grep "pts/0" | tr -s [:space:] ':' | cut -d: -f1,6
+jeanbourquj:(10.7.0.1)
+	```
 
 >	aide : utiliser la commande tr (translate) : tr –s ' ' ':' file(s)
 
