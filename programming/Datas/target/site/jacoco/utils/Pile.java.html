@@ -6,7 +6,7 @@
 package utils;
 
 import ch.jeanbourquj.cifom.Data;
-import javax.management.RuntimeErrorException;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  *
@@ -49,11 +49,11 @@ public class Pile {
 <span class="nc" id="L49">    }</span>
 
     /**
-     * Une pile de taille taillePile
+     * Une pile de taille taillePile.
      *
      * @param taillePile
      */
-<span class="fc" id="L56">    Pile(int taillePile) {</span>
+<span class="fc" id="L56">    Pile(final int taillePile) {</span>
 <span class="fc" id="L57">        this.tailleMax = taillePile;</span>
 <span class="fc" id="L58">        this.sommet = -1;</span>
 <span class="fc" id="L59">        this.valeurs = new Data[this.tailleMax];</span>
@@ -88,14 +88,14 @@ public class Pile {
      *
      * @throws Exception if pile is empty.
      */
-    public void depilerWE() throws Exception {
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (this.etreVide()) {</span>
-<span class="nc" id="L93">            throw new Exception(PILE_VIDE);</span>
+   /* public void depilerWE() throws Exception {
+        if (this.etreVide()) {
+            throw new Exception(PILE_VIDE);
         }
 
-<span class="nc" id="L96">        this.valeurs[this.sommet] = null;</span>
-<span class="nc" id="L97">        this.sommet -= 1;</span>
-<span class="nc" id="L98">    }</span>
+        this.valeurs[this.sommet] = null;
+        this.sommet -= 1;
+    }*/
 
     /**
      * Retire la denière entrée de la pile.

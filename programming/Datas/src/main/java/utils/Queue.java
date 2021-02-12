@@ -1,6 +1,7 @@
 package utils;
 
 import ch.jeanbourquj.cifom.Data;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  * Permet de gérer la structure dynamique Queue/File.
@@ -9,7 +10,13 @@ import ch.jeanbourquj.cifom.Data;
  */
 public class Queue {
 
+    /**
+     * Valeur queue pleine.
+     */
     public static final String PILE_PLEINE = "Pile pleine!";
+    /**
+     * Valeur queue vide.
+     */
     public static final String PILE_VIDE = "Pile vide!";
     private Integer tailleMax;
     private Integer fin;
@@ -69,7 +76,7 @@ public class Queue {
     /**
      *
      */
-    public void retirerWE() throws RuntimeException {
+    /*public void retirerWE() throws RuntimeException {
         if (this.etreVide()) {
             throw new RuntimeException(PILE_VIDE);
         }
@@ -77,7 +84,7 @@ public class Queue {
             this.valeurs[i - 1] = this.valeurs[i];
         }
         this.fin -= 1;
-    }
+    }*/
 
     /**
      *
