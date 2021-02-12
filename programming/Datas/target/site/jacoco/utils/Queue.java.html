@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Queue.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Datas</a> &gt; <a href="index.source.html" class="el_package">utils</a> &gt; <span class="el_source">Queue.java</span></div><h1>Queue.java</h1><pre class="source lang-java linenums">package utils;
 
 import ch.jeanbourquj.cifom.Data;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  * Permet de gérer la structure dynamique Queue/File.
@@ -9,7 +10,13 @@ import ch.jeanbourquj.cifom.Data;
  */
 public class Queue {
 
+    /**
+     * Valeur queue pleine.
+     */
     public static final String PILE_PLEINE = &quot;Pile pleine!&quot;;
+    /**
+     * Valeur queue vide.
+     */
     public static final String PILE_VIDE = &quot;Pile vide!&quot;;
     private Integer tailleMax;
     private Integer fin;
@@ -19,18 +26,18 @@ public class Queue {
      *
      * @param taille
      */
-<span class="fc" id="L22">    public Queue(final int taille) {</span>
-<span class="fc" id="L23">        this.tailleMax = taille;</span>
-<span class="fc" id="L24">        this.fin = -1;</span>
-<span class="fc" id="L25">        this.valeurs = new Data[this.tailleMax];</span>
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L29">    public Queue(final int taille) {</span>
+<span class="fc" id="L30">        this.tailleMax = taille;</span>
+<span class="fc" id="L31">        this.fin = -1;</span>
+<span class="fc" id="L32">        this.valeurs = new Data[this.tailleMax];</span>
+<span class="fc" id="L33">    }</span>
 
     /**
      *
      * @return vrai si la queue est vide
      */
     public boolean etreVide() {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        return this.fin == -1;</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        return this.fin == -1;</span>
     }
 
     /**
@@ -38,7 +45,7 @@ public class Queue {
      * @return vrai si la queue est pleine
      */
     public boolean etrePlein() {
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        return this.fin == this.tailleMax - 1;</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        return this.fin == this.tailleMax - 1;</span>
     }
 
     /**
@@ -46,48 +53,48 @@ public class Queue {
      * @param valeur
      */
     public void ajouter(final Data valeur) throws RuntimeException {
-<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (this.etrePlein()) {</span>
-<span class="fc" id="L50">            throw new RuntimeException(PILE_PLEINE);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (this.etrePlein()) {</span>
+<span class="fc" id="L57">            throw new RuntimeException(PILE_PLEINE);</span>
         }
-<span class="fc" id="L52">        this.fin += 1;</span>
-<span class="fc" id="L53">        this.valeurs[this.fin] = valeur;</span>
-<span class="fc" id="L54">    }</span>
+<span class="fc" id="L59">        this.fin += 1;</span>
+<span class="fc" id="L60">        this.valeurs[this.fin] = valeur;</span>
+<span class="fc" id="L61">    }</span>
 
     /**
      *
      */
     public void retirer() {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!this.etreVide()) {</span>
-<span class="fc bfc" id="L61" title="All 2 branches covered.">            for (int i = 1; i &lt; this.fin; i++) {</span>
-<span class="fc" id="L62">                this.valeurs[i - 1] = this.valeurs[i];</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (!this.etreVide()) {</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">            for (int i = 1; i &lt; this.fin; i++) {</span>
+<span class="fc" id="L69">                this.valeurs[i - 1] = this.valeurs[i];</span>
             }
-<span class="fc" id="L64">            this.fin -= 1;</span>
+<span class="fc" id="L71">            this.fin -= 1;</span>
         }
 
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L74">    }</span>
 
     /**
      *
      */
-    public void retirerWE() throws RuntimeException {
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (this.etreVide()) {</span>
-<span class="nc" id="L74">            throw new RuntimeException(PILE_VIDE);</span>
+    /*public void retirerWE() throws RuntimeException {
+        if (this.etreVide()) {
+            throw new RuntimeException(PILE_VIDE);
         }
-<span class="nc bnc" id="L76" title="All 2 branches missed.">        for (int i = 1; i &lt; this.fin; i++) {</span>
-<span class="nc" id="L77">            this.valeurs[i - 1] = this.valeurs[i];</span>
+        for (int i = 1; i &lt; this.fin; i++) {
+            this.valeurs[i - 1] = this.valeurs[i];
         }
-<span class="nc" id="L79">        this.fin -= 1;</span>
-<span class="nc" id="L80">    }</span>
+        this.fin -= 1;
+    }*/
 
     /**
      *
      * @return la valeur
      */
     public Data retournerValeur() throws RuntimeException {
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
-<span class="nc" id="L88">            throw new RuntimeException(PILE_VIDE);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L95">            throw new RuntimeException(PILE_VIDE);</span>
         }
-<span class="fc" id="L90">        return this.valeurs[0];</span>
+<span class="fc" id="L97">        return this.valeurs[0];</span>
     }
 
 }

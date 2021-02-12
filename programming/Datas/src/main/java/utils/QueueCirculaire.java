@@ -18,10 +18,22 @@ public class QueueCirculaire {
     private Integer tete;
     private Integer fin;
     private Data[] valeurs;
+
+    /**
+     *
+     */
     public static final String PILE_PLEINE = "Pile pleine!";
+
+    /**
+     *
+     */
     public static final String PILE_VIDE = "Pile vide!";
 
-    public QueueCirculaire(int tailleQueue) {
+    /**
+     *
+     * @param tailleQueue
+     */
+    public QueueCirculaire(final int tailleQueue) {
         this.tailleMax = tailleQueue;
         this.number = 0;
         this.tete = -1;
@@ -29,17 +41,21 @@ public class QueueCirculaire {
         this.valeurs = new Data[this.tailleMax];
     }
 
-    public void ajouter(Data data) throws RuntimeException {
+    /**
+     *
+     * @param data
+     * @throws RuntimeException
+     */
+    public void ajouter(final Data data) throws RuntimeException {
         if (this.etrePlein()) {
             throw new RuntimeException(PILE_PLEINE);
         }
         if (this.number == 0) {
             this.tete = 0;
             this.fin = 0;
-        }
-        else{
+        } else {
             this.fin += 1;
-            if(this.fin >= this.tailleMax){
+            if (this.fin >= this.tailleMax) {
                 this.fin = 0;
             }
         }
@@ -47,27 +63,42 @@ public class QueueCirculaire {
         this.valeurs[this.fin] = data;
     }
 
+    /**
+     *
+     */
     public void retirer() {
-        if(!this.etreVide()){
-            this.number -=1;
-            this.tete +=1;
-            if(this.tete >= this.tailleMax){
+        if (!this.etreVide()) {
+            this.number -= 1;
+            this.tete += 1;
+            if (this.tete >= this.tailleMax) {
                 this.tete = 0;
             }
         }
     }
 
-    public Data retournerValeur() throws RuntimeException{
-        if(this.etreVide()){
+    /**
+     *
+     * @return @throws RuntimeException
+     */
+    public Data retournerValeur() throws RuntimeException {
+        if (this.etreVide()) {
             throw new RuntimeException(PILE_VIDE);
         }
         return this.valeurs[this.tete];
     }
 
+    /**
+     *
+     * @return TRUE si la queue est pleine.
+     */
     public boolean etrePlein() {
         return this.number == this.tailleMax;
     }
 
+    /**
+     *
+     * @return TRUE si la queue est vide.
+     */
     public boolean etreVide() {
         return this.number == 0;
     }
