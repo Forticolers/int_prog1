@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -178,8 +178,4 @@ public class QueueCirculaireTest {
                 queueRef.etreVide());
 
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0227339e6bca1d7851ffb3257672629e902a6819
 }

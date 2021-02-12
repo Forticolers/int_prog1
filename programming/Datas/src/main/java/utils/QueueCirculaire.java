@@ -71,5 +71,4 @@ public class QueueCirculaire {
     public boolean etreVide() {
         return this.number == 0;
     }
->>>>>>> 0227339e6bca1d7851ffb3257672629e902a6819
 }
