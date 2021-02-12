@@ -6,6 +6,7 @@
 package utils;
 
 import ch.jeanbourquj.cifom.Data;
+import javax.management.RuntimeErrorException;
 
 /**
  *
@@ -13,6 +14,14 @@ import ch.jeanbourquj.cifom.Data;
  */
 public class Pile {
 
+    /**
+     * Valeur d'exception pile vide.
+     */
+    public static final String PILE_VIDE = &quot;La pile est vide.&quot;;
+    /**
+     * Valeur d'exception pile pleine.
+     */
+    public static final String PILE_PLEINE = &quot;La pile est pleine.&quot;;
     /**
      * Taille maximale.
      */
@@ -29,63 +38,96 @@ public class Pile {
      * Valeur contsante de la taille maximale.
      */
     public static final int TAILLE_MAX_PILE = 5;
+
     /**
      * Une pile a une taille maximale de 5.
      */
-<span class="fc" id="L35">    public Pile() {</span>
-<span class="fc" id="L36">        this.tailleMax = TAILLE_MAX_PILE;</span>
-<span class="fc" id="L37">        this.sommet = -1;</span>
-<span class="fc" id="L38">        this.valeurs = new Data[this.tailleMax];</span>
-<span class="fc" id="L39">    }</span>
+<span class="nc" id="L45">    public Pile() {</span>
+<span class="nc" id="L46">        this.tailleMax = TAILLE_MAX_PILE;</span>
+<span class="nc" id="L47">        this.sommet = -1;</span>
+<span class="nc" id="L48">        this.valeurs = new Data[this.tailleMax];</span>
+<span class="nc" id="L49">    }</span>
+
+    /**
+     * Une pile de taille taillePile
+     *
+     * @param taillePile
+     */
+<span class="fc" id="L56">    Pile(int taillePile) {</span>
+<span class="fc" id="L57">        this.tailleMax = taillePile;</span>
+<span class="fc" id="L58">        this.sommet = -1;</span>
+<span class="fc" id="L59">        this.valeurs = new Data[this.tailleMax];</span>
+<span class="fc" id="L60">    }</span>
+
     /**
      * Retourne vrai si la pile est vide.
+     *
      * @return true if pile is empty.
      */
     public boolean etreVide() {
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        return this.sommet == -1;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        return this.sommet == -1;</span>
     }
+
     /**
      * Ajoute une entrée à la pile.
+     *
      * @param d data-
      * @throws Exception if pile is full.
      */
-    public void empiler(final Data d) throws Exception {
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (this.etrePlein()) {</span>
-<span class="nc" id="L54">            throw new Exception(&quot;La pile est pleine.&quot;);</span>
+    public void empiler(final Data d) throws RuntimeException {
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if (this.etrePlein()) {</span>
+<span class="fc" id="L79">            throw new RuntimeException(PILE_PLEINE);</span>
         }
 
-<span class="fc" id="L57">        this.sommet += 1;</span>
-<span class="fc" id="L58">        this.valeurs[this.sommet] = d;</span>
-<span class="fc" id="L59">    }</span>
+<span class="fc" id="L82">        this.sommet += 1;</span>
+<span class="fc" id="L83">        this.valeurs[this.sommet] = d;</span>
+<span class="fc" id="L84">    }</span>
+
     /**
      * Retire la denière entrée de la pile.
+     *
      * @throws Exception if pile is empty.
      */
-    public void depiler() throws Exception {
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
-<span class="nc" id="L66">            throw new Exception(&quot;La pile est vide.&quot;);</span>
+    public void depilerWE() throws Exception {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L93">            throw new Exception(PILE_VIDE);</span>
         }
 
-<span class="fc" id="L69">        this.valeurs[this.sommet] = null;</span>
-<span class="fc" id="L70">        this.sommet -= 1;</span>
-<span class="fc" id="L71">    }</span>
+<span class="nc" id="L96">        this.valeurs[this.sommet] = null;</span>
+<span class="nc" id="L97">        this.sommet -= 1;</span>
+<span class="nc" id="L98">    }</span>
+
+    /**
+     * Retire la denière entrée de la pile.
+     *
+     */
+    public void depiler() {
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (!this.etreVide()) {</span>
+<span class="fc" id="L106">            this.valeurs[this.sommet] = null;</span>
+<span class="fc" id="L107">            this.sommet -= 1;</span>
+        }
+<span class="fc" id="L109">    }</span>
+
     /**
      * Retourne le sommet de la pile.
+     *
      * @return Data.
      * @throws Exception if empty.
      */
     public Data retournerSommet() throws Exception {
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
-<span class="nc" id="L79">            throw new Exception(&quot;La pile est vide.&quot;);</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L119">            throw new Exception(&quot;La pile est vide.&quot;);</span>
         }
-<span class="fc" id="L81">        return this.valeurs[this.sommet];</span>
+<span class="fc" id="L121">        return this.valeurs[this.sommet];</span>
     }
+
     /**
      * Retourne vrai si la pile est pleine.
+     *
      * @return true if pile is full.
      */
     public boolean etrePlein() {
-<span class="fc bfc" id="L88" title="All 2 branches covered.">        return this.sommet == this.tailleMax - 1;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        return this.sommet == this.tailleMax - 1;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
