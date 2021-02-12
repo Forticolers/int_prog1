@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +18,18 @@ import static org.junit.Assert.*;
 /**
  *
  * @author JeanbourquJ
+=======
+package utils;
+
+import ch.jeanbourquj.cifom.Data;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.Assert;
+
+/**
+ *
+ * @author dominique huguenin (dominique.huguenin at rpn.ch)
+>>>>>>> 0227339e6bca1d7851ffb3257672629e902a6819
  */
 public class QueueCirculaireTest {
 
@@ -29,15 +42,11 @@ public class QueueCirculaireTest {
     private Data n55;
     private Data n66;
 
+
+    /**
+     *
+     */
     public QueueCirculaireTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
     }
 
     /**
@@ -57,14 +66,6 @@ public class QueueCirculaireTest {
 
     }
 
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     *
-     * @throws Exception
-     */
     @Test
     public void testCreationQueue() throws Exception {
         Assert.assertTrue("Erreur:La queue devrait etre vide!",
@@ -177,4 +178,8 @@ public class QueueCirculaireTest {
                 queueRef.etreVide());
 
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0227339e6bca1d7851ffb3257672629e902a6819
 }
