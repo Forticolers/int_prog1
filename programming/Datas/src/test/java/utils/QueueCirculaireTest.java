@@ -17,19 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author JeanbourquJ
-=======
-package utils;
-
-import ch.jeanbourquj.cifom.Data;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Assert;
-
-/**
- *
  * @author dominique huguenin (dominique.huguenin at rpn.ch)
->>>>>>> 0227339e6bca1d7851ffb3257672629e902a6819
  */
 public class QueueCirculaireTest {
 
