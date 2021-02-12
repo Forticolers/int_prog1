@@ -1,1 +1,21 @@
 [Back to root](https://mylos.cifom.ch/gitlab/JeanbourquJ/int_prog1/-/tree/master)
+
+## Recherche plein texte
+
+1.	Afficher la configuration par défaut de la recherche plein texte du cluster PostgreSQL en cours d’utilisation.
+	1.	`\dF+` Affiche toutes la configuration.
+	
+2.	Sur le schéma recette, construire un document comprenant le nom, la description et la préparation de la recette; mettre un poids plus important sur le nom ensuite sur la description et pour finir sur la préparation.
+	
+	```sql
+	SELECT 
+	setweight(to_tsvector('french', coalesce(r.nom,'')),'A') ||
+	setweight(to_tsvector('french', coalesce(r.detail,'')),'B') ||
+	setweight(to_tsvector('french', coalesce(r.preparation,'')),'C')
+	FROM recettes as "r";
+	```
+	
+3.	Dans le document précédent, rechercher les recettes contenant tomate ou poire dans le titre uniquement.
+	```
+	
+	```

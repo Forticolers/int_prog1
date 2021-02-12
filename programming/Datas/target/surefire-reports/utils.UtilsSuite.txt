@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: utils.UtilsSuite
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 4, Errors: 2, Skipped: 0, Time elapsed: 0.059 s <<< FAILURE! - in utils.UtilsSuite
+testEmpiler(utils.PileTest)  Time elapsed: 0.011 s  <<< FAILURE!
+java.lang.AssertionError: The test case is a prototype.
+	at utils.PileTest.testEmpiler(PileTest.java:104)
+
+testEtreVide(utils.PileTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<false> but was:<true>
+	at utils.PileTest.testEtreVide(PileTest.java:89)
+
+testEtrePlein(utils.PileTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: The test case is a prototype.
+	at utils.PileTest.testEtrePlein(PileTest.java:144)
+
+testRetournerSommet(utils.PileTest)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.Exception: La pile est vide.
+	at utils.PileTest.testRetournerSommet(PileTest.java:127)
+
+testDepiler(utils.PileTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: La pile est vide.
+	at utils.PileTest.testDepiler(PileTest.java:114)
+
+testSomeMethod(utils.QueueTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: The test case is a prototype.
+	at utils.QueueTest.testSomeMethod(QueueTest.java:43)
+

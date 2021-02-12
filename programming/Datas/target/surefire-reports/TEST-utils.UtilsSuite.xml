@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.PileTest" time="0.051" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.UtilsSuite" time="0.059" tests="9" errors="2" skipped="0" failures="4">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,8 +18,8 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire8531059144496864343\surefirebooter1078175013373156144.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire8531059144496864343 2021-02-12T12-09-26_379-jvmRun1 surefire7333289514555319157tmp surefire_05790427630790777131tmp"/>
-    <property name="test" value="utils.PileTest"/>
+    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire4851563153553998736\surefirebooter5769389757122469107.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire4851563153553998736 2021-02-12T11-23-36_679-jvmRun1 surefire6458342462511451961tmp surefire_04472320497692046918tmp"/>
+    <property name="test" value="utils.UtilsSuite"/>
     <property name="surefire.test.class.path" value="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\test-classes;C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\classes;C:\Users\jeanbourquj\.m2\repository\junit\junit\4.13\junit-4.13.jar;C:\Users\jeanbourquj\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\jeanbourquj"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire8531059144496864343\surefirebooter1078175013373156144.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire4851563153553998736\surefirebooter5769389757122469107.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -44,7 +44,7 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar;C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="localRepository" value="C:\Users\jeanbourquj\.m2\repository"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\JEANBO~1\AppData\Local\Temp\"/>
@@ -62,12 +62,47 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testEmpiler" classname="utils.PileTest" time="0.004"/>
-  <testcase name="testCreationPile" classname="utils.PileTest" time="0"/>
-  <testcase name="testDepilerSommet" classname="utils.PileTest" time="0"/>
-  <testcase name="testEmpilerPilePleine" classname="utils.PileTest" time="0"/>
-  <testcase name="testPilePleine" classname="utils.PileTest" time="0.001"/>
-  <testcase name="testPileVide" classname="utils.PileTest" time="0"/>
-  <testcase name="testDepiler" classname="utils.PileTest" time="0"/>
-  <testcase name="testSommet" classname="utils.PileTest" time="0"/>
+  <testcase name="testEmpiler" classname="utils.PileTest" time="0.011">
+    <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
+	at utils.PileTest.testEmpiler(PileTest.java:104)
+</failure>
+    <system-out><![CDATA[empiler
+]]></system-out>
+  </testcase>
+  <testcase name="testEtreVide" classname="utils.PileTest" time="0">
+    <failure message="expected:&lt;false&gt; but was:&lt;true&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<false> but was:<true>
+	at utils.PileTest.testEtreVide(PileTest.java:89)
+]]></failure>
+    <system-out><![CDATA[etreVide
+]]></system-out>
+  </testcase>
+  <testcase name="testEtrePlein" classname="utils.PileTest" time="0">
+    <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
+	at utils.PileTest.testEtrePlein(PileTest.java:144)
+</failure>
+    <system-out><![CDATA[etrePlein
+]]></system-out>
+  </testcase>
+  <testcase name="test1" classname="utils.PileTest" time="0"/>
+  <testcase name="test2" classname="utils.PileTest" time="0.001"/>
+  <testcase name="test3" classname="utils.PileTest" time="0"/>
+  <testcase name="testRetournerSommet" classname="utils.PileTest" time="0.001">
+    <error message="La pile est vide." type="java.lang.Exception">java.lang.Exception: La pile est vide.
+	at utils.PileTest.testRetournerSommet(PileTest.java:127)
+</error>
+    <system-out><![CDATA[retournerSommet
+]]></system-out>
+  </testcase>
+  <testcase name="testDepiler" classname="utils.PileTest" time="0">
+    <error message="La pile est vide." type="java.lang.Exception">java.lang.Exception: La pile est vide.
+	at utils.PileTest.testDepiler(PileTest.java:114)
+</error>
+    <system-out><![CDATA[depiler
+]]></system-out>
+  </testcase>
+  <testcase name="testSomeMethod" classname="utils.QueueTest" time="0.001">
+    <failure message="The test case is a prototype." type="java.lang.AssertionError">java.lang.AssertionError: The test case is a prototype.
+	at utils.QueueTest.testSomeMethod(QueueTest.java:43)
+</failure>
+  </testcase>
 </testsuite>

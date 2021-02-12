@@ -1,0 +1,192 @@
+[Back to README](https://mylos.cifom.ch/gitlab/JeanbourquJ/int_prog1/-/tree/master)
+
+### 1)
+
+_Créez 3 fichiers dans `~`_
+
+*	file1
+*	file2
+*	file3
+
+Vérifier les droits par défaut.
+
+##### 1.1)
+
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ touch file{1..3}
+-----
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 2
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 14:05 file1
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 14:05 file2
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 14:05 file3
+```
+
+### 2)
+
+_Assignez les droits suivants grâce à la forme littérale_
+
+```
+file1 rwx------
+file2 r—-r—----
+file3 r----x--x
+```
+
+#### 2.1)
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod u=rwx,g=,o= file1;chmod u=r,g=r,o= file2;chmod u=r,g=x,o=x file3;
+
+---------------------
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 2
+-rwx------ 1 jeanbourquj domain users 0 fév  9 14:29 file1
+-r--r----- 1 jeanbourquj domain users 0 fév  9 14:29 file2
+-r----x--x 1 jeanbourquj domain users 0 fév  9 14:29 file3
+```
+
+### 3)
+
+_A l’aide de la forme octale , définissez les droits d’accès comme suit :_
+
+```
+file1 r-x-----x
+file2 -w--w--w-
+file3 ---rwx--x
+```
+
+#### 3.1)
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod 501 file1 ; chmod 222 file2; chmod 071 file3
+
+----------
+
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 2
+-r-x-----x 1 jeanbourquj domain users 0 fév  9 14:29 file1
+--w--w--w- 1 jeanbourquj domain users 0 fév  9 14:29 file2
+----rwx--x 1 jeanbourquj domain users 0 fév  9 14:29 file3
+```
+
+
+### 4)
+1.	_Ajouter un texte dans le fichier file1. Constatations ?_
+2. _Idem pour file2. Constatations ?_
+3. _Idem pour file3. Constatations ?_
+
+#### 4.1)
+
+```
+4.1.1) impossible (pas de droit d'écriture pour user)
+
+jeanbourquj@lozan:~/tmp/activite0004$ echo test > file1
+-bash: file1: Permission denied
+
+4.1.2) possible 
+
+jeanbourquj@lozan:~/tmp/activite0004$ echo test > file2
+
+4.1.3) impossible (pas de droit d'écriture pour user)
+
+jeanbourquj@lozan:~/tmp/activite0004$ echo test > file3
+-bash: file3: Permission denied
+```
+
+### 5)
+_Assigner les droits suivants:_
+
+```
+file1 ---------
+file2 r--------
+file3 rw-------
+```
+
+1.	_Copier le fichier file1 en file4. Constations ?_
+2.	_Copier le fichier file2 en file5 et regarder les droits d’accès. Constatations ?_
+3.	_Supprimez les fichiers file1 à file5. Constations ?_
+
+#### 5.1)
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod 000 file1 ; chmod 400 file2; chmod 600 file3
+
+---------
+
+jeanbourquj@lozan:~/tmp/activite0004$ cp file1 file4
+cp: cannot open 'file1' for reading: Permission denied
+
+--------
+
+jeanbourquj@lozan:~/tmp/activite0004$ cp file2 file5
+
+----------
+
+jeanbourquj@lozan:~/tmp/activite0004$ rm file{1..5}
+rm: remove write-protected regular empty file 'file1'? y
+rm: remove write-protected regular file 'file2'? y
+rm: cannot remove 'file4': No such file or directory
+rm: remove write-protected regular file 'file5'? y
+```
+
+### 6)
+
+_Créez un répertoire ~/test avec les droits suivants :_
+
+`test drwx------`
+
+1. _Dans le répertoire test, créez les fichier file1,file2,file5,file6,file7_
+2. _Dans le répertoire test, créez un fichier testdroit.txt. Droits par défaut ?_
+3. _Ajouter un texte dans ce fichier. Constatations?_
+4. _Supprimer le fichier file1 . Constatations_
+
+#### 6.1)
+
+```
+
+jeanbourquj@lozan:~/tmp/activite0004$ mkdir -m 700 test
+jeanbourquj@lozan:~/tmp/activite0004$ ls
+test
+-------------------------
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ touch file{1,2,5,6,7}
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ ls
+
+file1  file2  file5  file6  file7
+-------------------------
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ touch testdroit.txt
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ ls -l
+
+total 3
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file1
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file2
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file5
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file6
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file7
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 testdroit.txt
+-------------------------
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ echo test > testdroit.txt
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ cat testdroit.txt
+
+test
+-------------------------
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ rm file1
+
+jeanbourquj@lozan:~/tmp/activite0004/test$ ls -l
+
+total 3
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file2
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file5
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file6
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file7
+-rw-r--r-- 1 jeanbourquj domain users 5 fév  9 15:09 testdroit.txt
+
+```
+

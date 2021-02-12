@@ -1,82 +1,164 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utils;
 
 import ch.jeanbourquj.cifom.Data;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author JeanbourquJ
+ * @author dominique huguenin (dominique.huguenin at rpn.ch)
  */
 public class PileTest {
 
-    private Data data_11;
-    private Data data_22;
-    private Data data_33;
-    private Data data_44;
-    private Data data_55;
-    
+    private int taillePile;
+    private Pile pileRef;
+
+    /**
+     *
+     */
     public PileTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
+    /**
+     *
+     */
     @Before
     public void setUp() {
-        data_11 = new Data(11);
-        data_22 = new Data(22);
-        data_33 = new Data(33);
-    }
-    @Test
-    public void test1() throws Exception{
-        Pile p = new Pile();
-        Assert.assertTrue(p.etreVide());
-        p.empiler(data_11);
-        Assert.assertFalse(p.etreVide());
-        p.depiler();
-        Assert.assertTrue(p.etreVide());
-    }
-    @Test
-    public void test2() throws Exception{
-        Pile p = new Pile();
-        p.empiler(data_11);
-        p.empiler(data_22);
-        p.empiler(data_33);
-        Assert.assertEquals(p.retournerSommet(), data_33);
-        
-        p.depiler();
-        Assert.assertEquals(p.retournerSommet(), data_22);
-    }
-    @Test
-    public void test3() throws Exception{
-        Pile p = new Pile();
-        p.empiler(data_11);
-        p.empiler(data_22);
-        p.empiler(data_33);
-        p.empiler(data_44);
-        p.empiler(data_55);
-       Assert.assertTrue(p.etrePlein());
-    }
-    @After
-    public void tearDown() {
+        taillePile = 5;
+        pileRef = new Pile(taillePile);
     }
 
-   
-    
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCreationPile() throws Exception {
+        Assert.assertTrue("Erreur:La pile devrait etre vide!",
+                pileRef.etreVide());
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testEmpiler() throws Exception {
+        pileRef.empiler(new Data(11));
+        Assert.assertFalse("Erreur:La pile ne devrait pas etre vide!",
+                pileRef.etreVide());
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testDepiler() throws Exception {
+        pileRef.empiler(new Data(11));
+        pileRef.depiler();
+
+        Assert.assertTrue("Erreur:La pile ne devrait pas etre vide!",
+                pileRef.etreVide());
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSommet() throws Exception {
+        pileRef.empiler(new Data(11));
+        pileRef.empiler(new Data(22));
+
+        Data n33 = new Data(33);
+        pileRef.empiler(n33);
+        Data n33bis = pileRef.retournerSommet();
+
+        Assert.assertEquals(n33, n33bis);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testDepilerSommet() throws Exception {
+        Data n11 = new Data(11);
+        Data n22 = new Data(22);
+        Data n33 = new Data(33);
+
+        pileRef.empiler(n11);
+        pileRef.empiler(n22);
+        pileRef.empiler(n33);
+        pileRef.depiler();
+
+        Data n22bis = pileRef.retournerSommet();
+
+        Assert.assertEquals(n22, n22bis);
+
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPilePleine() throws Exception {
+        Data n11 = new Data(11);
+        Data n22 = new Data(22);
+        Data n33 = new Data(33);
+        Data n44 = new Data(44);
+        Data n55 = new Data(55);
+
+        pileRef.empiler(n11);
+        pileRef.empiler(n22);
+        pileRef.empiler(n33);
+        pileRef.empiler(n44);
+        pileRef.empiler(n55);
+
+        Assert.assertTrue("Erreur:La pile devrait etre pleine!", pileRef.etrePlein());
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test(expected = RuntimeException.class)
+    public void testEmpilerPilePleine() throws Exception {
+        Data n11 = new Data(11);
+        Data n22 = new Data(22);
+        Data n33 = new Data(33);
+        Data n44 = new Data(44);
+        Data n55 = new Data(55);
+        Data n66 = new Data(66);
+
+        pileRef.empiler(n11);
+        pileRef.empiler(n22);
+        pileRef.empiler(n33);
+        pileRef.empiler(n44);
+        pileRef.empiler(n55);
+
+        pileRef.empiler(n66);
+        Assert.fail();
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testPileVide() throws Exception {
+        pileRef.depiler();
+        pileRef.depiler();
+        pileRef.depiler();
+
+        pileRef.empiler(new Data(11));
+        
+        Assert.assertFalse("Erreur:La pile ne devrait pas etre vide!",
+                pileRef.etreVide());
+
+    }
+
 }
