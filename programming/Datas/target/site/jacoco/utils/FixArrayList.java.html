@@ -18,113 +18,212 @@ public class FixArrayList {
     private Integer maxSize;
     private Integer size;
     private Data[] values;
+
+    /**
+     * Stirng value of empty array.
+     */
     public static final String ARRAY_VIDE = &quot;L'array est pleine&quot;;
 
-<span class="fc" id="L23">    public FixArrayList(final Integer pmaxSize) {</span>
-<span class="fc" id="L24">        this.maxSize = pmaxSize;</span>
-<span class="fc" id="L25">        this.size = 0;</span>
-<span class="fc" id="L26">        this.values = new Data[this.maxSize];</span>
-<span class="fc" id="L27">    }</span>
+    /**
+     * String value of out of bounds index.
+     */
+    public static final String OUT_OF_BOUNDS = &quot;Index hors limite.&quot;;
 
-<span class="nc" id="L29">    public FixArrayList(final FixArrayList list) {</span>
-<span class="nc" id="L30">        throw new UnsupportedOperationException();</span>
+    /**
+     * FixArrayList constructor.
+     *
+     * @param pmaxSize Used for now but will be upgraded to an array with no max
+     * size.
+     */
+<span class="fc" id="L38">    public FixArrayList(final Integer pmaxSize) {</span>
+<span class="fc" id="L39">        this.maxSize = pmaxSize;</span>
+<span class="fc" id="L40">        this.size = 0;</span>
+<span class="fc" id="L41">        this.values = new Data[this.maxSize];</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * FixArrayList clone constructor. Will be implemented in the future.
+     *
+     * @param list
+     */
+<span class="nc" id="L49">    public FixArrayList(final FixArrayList list) {</span>
+<span class="nc" id="L50">        throw new UnsupportedOperationException();</span>
     }
 
+    /**
+     * Add a value to the array.
+     *
+     * @param value
+     */
     public void add(final Data value) {
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (this.size - 1 &lt; this.maxSize) {</span>
-<span class="fc" id="L35">            this.values[this.size] = value;</span>
-<span class="fc" id="L36">            this.size += 1;</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (this.size - 1 &lt; this.maxSize) {</span>
+<span class="fc" id="L60">            this.values[this.size] = value;</span>
+<span class="fc" id="L61">            this.size += 1;</span>
         }
-<span class="fc" id="L38">    }</span>
+<span class="fc" id="L63">    }</span>
 
+    /**
+     * Add value to specifix index to the array.
+     *
+     * @param index
+     * @param value
+     */
     public void add(final int index, final Data value) {
-<span class="nc" id="L41">        throw new UnsupportedOperationException();</span>
-    }
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (this.size - 1 &lt; this.maxSize) {</span>
+            Data tmp;
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            for (int i = this.size() - 1; i &gt;= index; i--) {</span>
+<span class="fc" id="L75">                this.values[i + 1] = this.values[i];</span>
+            }
+<span class="fc" id="L77">            this.values[index] = value;</span>
+<span class="fc" id="L78">            this.size += 1;</span>
+        }
+<span class="fc" id="L80">    }</span>
 
+    /**
+     * Remove last entry.
+     */
     public void remove() {
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
-<span class="nc" id="L46">            throw new RuntimeException(ARRAY_VIDE);</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L87">            throw new RuntimeException(ARRAY_VIDE);</span>
         }
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (int i = 1; i &lt; this.size; i++) {</span>
-<span class="fc" id="L49">            this.values[i - 1] = this.values[i];</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        for (int i = 1; i &lt; this.size; i++) {</span>
+<span class="fc" id="L90">            this.values[i - 1] = this.values[i];</span>
         }
-<span class="fc" id="L51">        this.size -= 1;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L92">        this.size -= 1;</span>
+<span class="fc" id="L93">    }</span>
 
+    /**
+     * Remove at specific index.
+     *
+     * @param index
+     */
     public void remove(final int index) {
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
-<span class="nc" id="L56">            throw new RuntimeException(ARRAY_VIDE);</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L102">            throw new RuntimeException(ARRAY_VIDE);</span>
         }
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (index &gt; this.size()) {</span>
-<span class="nc" id="L59">            throw new RuntimeException(&quot;Index hors limite.&quot;);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (index &gt; this.size()) {</span>
+<span class="nc" id="L105">            throw new RuntimeException(OUT_OF_BOUNDS);</span>
         }
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (int i = index; i &lt; this.size - 1; i++) {</span>
-<span class="fc" id="L62">            this.values[i] = this.values[i + 1];</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">        for (int i = index; i &lt; this.size - 1; i++) {</span>
+<span class="fc" id="L108">            this.values[i] = this.values[i + 1];</span>
         }
-<span class="fc" id="L64">        this.size -= 1;</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L110">        this.size -= 1;</span>
+<span class="fc" id="L111">    }</span>
 
+    /**
+     * Return the size of the array (the number of objects in it).
+     *
+     * @return int
+     */
     public int size() {
-<span class="fc" id="L68">        return this.size;</span>
+<span class="fc" id="L119">        return this.size;</span>
     }
 
+    /**
+     * Clear the whole array.
+     */
     public void clear() {
-<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (int i = 0; i &lt; this.size; i++) {</span>
-<span class="fc" id="L73">            this.values[i] = null;</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        for (int i = 0; i &lt; this.size; i++) {</span>
+<span class="fc" id="L127">            this.values[i] = null;</span>
         }
-<span class="fc" id="L75">        this.size = 0;</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L129">        this.size = 0;</span>
+<span class="fc" id="L130">    }</span>
 
-
+    /**
+     * Return first entry.
+     *
+     * @return Data
+     */
     public Data getFirst() {
-<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
-<span class="nc" id="L81">            throw new RuntimeException(ARRAY_VIDE);</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L139">            throw new RuntimeException(ARRAY_VIDE);</span>
         }
-<span class="fc" id="L83">        return this.values[0];</span>
+<span class="fc" id="L141">        return this.values[0];</span>
     }
 
+    /**
+     * Return last entry.
+     *
+     * @return Data
+     */
     public Data getLast() {
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
-<span class="nc" id="L88">            throw new RuntimeException(ARRAY_VIDE);</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L151">            throw new RuntimeException(ARRAY_VIDE);</span>
         }
-<span class="fc" id="L90">        return this.values[this.size-1];</span>
+<span class="fc" id="L153">        return this.values[this.size - 1];</span>
     }
 
+    /**
+     * Get data at specifix index.
+     *
+     * @param index
+     * @return Data
+     */
     public Data get(final int index) {
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (index &gt; this.size()) {</span>
-<span class="nc" id="L95">            throw new RuntimeException(&quot;Index hors limite.&quot;);</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        if (index &gt; this.size()) {</span>
+<span class="nc" id="L164">            throw new RuntimeException(&quot;Index hors limite.&quot;);</span>
         }
-<span class="fc" id="L97">        return this.values[index];</span>
+<span class="fc" id="L166">        return this.values[index];</span>
     }
 
+    /**
+     * Return true if empty.
+     *
+     * @return boolean
+     */
     public boolean isEmpty() {
-<span class="fc bfc" id="L101" title="All 2 branches covered.">        return this.size == 0;</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        return this.size == 0;</span>
     }
 
+    /**
+     * Returns true if obj is equals.
+     *
+     * @param obj
+     * @return
+     */
     @Override
-    public boolean equals(Object obj) {
-<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (this == obj) {</span>
-<span class="nc" id="L107">            return true;</span>
+    public boolean equals(final Object obj) {
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L187">            return true;</span>
         }
-<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (obj == null) {</span>
-<span class="nc" id="L110">            return false;</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L190">            return false;</span>
         }
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
-<span class="nc" id="L113">            return false;</span>
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L193">            return false;</span>
         }
-<span class="fc" id="L115">        final FixArrayList other = (FixArrayList) obj;</span>
-<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        if (!Objects.equals(this.maxSize, other.maxSize)) {</span>
-<span class="nc" id="L117">            return false;</span>
+<span class="fc" id="L195">        final FixArrayList other = (FixArrayList) obj;</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">        if (!Objects.equals(this.maxSize, other.maxSize)) {</span>
+<span class="nc" id="L197">            return false;</span>
         }
-<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (!Objects.equals(this.size, other.size)) {</span>
-<span class="fc" id="L120">            return false;</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        if (!Objects.equals(this.size, other.size)) {</span>
+<span class="fc" id="L200">            return false;</span>
         }
-<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (!Arrays.deepEquals(this.values, other.values)) {</span>
-<span class="nc" id="L123">            return false;</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        if (!Arrays.deepEquals(this.values, other.values)) {</span>
+<span class="nc" id="L203">            return false;</span>
         }
-<span class="fc" id="L125">        return true;</span>
+<span class="fc" id="L205">        return true;</span>
     }
 
-    
+    /**
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L214">        int hash = HASH_HASH;</span>
+<span class="nc" id="L215">        hash = HASH_SEL * hash + Objects.hashCode(this.maxSize);</span>
+<span class="nc" id="L216">        hash = HASH_SEL * hash + Objects.hashCode(this.size);</span>
+<span class="nc" id="L217">        hash = HASH_SEL * hash + Arrays.deepHashCode(this.values);</span>
+<span class="nc" id="L218">        return hash;</span>
+    }
+    /**
+     *
+     */
+    public static final int HASH_HASH = 5;
+    /**
+     *
+     */
+    public static final int HASH_SEL = 83;
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

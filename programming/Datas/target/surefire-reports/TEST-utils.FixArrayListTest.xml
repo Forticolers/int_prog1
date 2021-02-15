@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.FixArrayListTest" time="3.315" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.FixArrayListTest" time="0.001" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
-    <property name="jpda.address" value="59474"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="java.specification.version" value="1.8"/>
@@ -13,15 +12,13 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
-    <property name="user.timezone" value=""/>
-    <property name="forkMode" value="once"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="os.name" value="Windows 10"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire5651932211576795825\surefirebooter7745402257276421428.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire5651932211576795825 2021-02-15T01-13-05_396-jvmRun1 surefire488422192126907755tmp surefire_03706064191524513226tmp"/>
-    <property name="test" value="utils.FixArrayListTest"/>
+    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire8600051241244756979\surefirebooter539836901768350618.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire8600051241244756979 2021-02-15T01-29-28_631-jvmRun1 surefire3596383763835057980tmp surefire_01294066735821376811tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\test-classes;C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\classes;C:\Users\jeanbourquj\.m2\repository\junit\junit\4.13\junit-4.13.jar;C:\Users\jeanbourquj\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\jeanbourquj"/>
@@ -34,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire5651932211576795825\surefirebooter7745402257276421428.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire8600051241244756979\surefirebooter539836901768350618.jar;C:\\Users\\jeanbourquj\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.6\\org.jacoco.agent-0.8.6-runtime.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -46,8 +43,7 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="jpda.listen" value="true"/>
-    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar;C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="localRepository" value="C:\Users\jeanbourquj\.m2\repository"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\JEANBO~1\AppData\Local\Temp\"/>
@@ -64,15 +60,14 @@
     <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
-    <property name="maven.surefire.debug" value="-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=59474"/>
   </properties>
-  <testcase name="testAddIndexArrayList" classname="utils.FixArrayListTest" time="3.236"/>
+  <testcase name="testAddIndexArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testAddMultipleArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testEqualsArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testGetLastArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testAddArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testCreationArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testClearArrayList" classname="utils.FixArrayListTest" time="0"/>
-  <testcase name="testRemoveArrayList" classname="utils.FixArrayListTest" time="0.001"/>
+  <testcase name="testRemoveArrayList" classname="utils.FixArrayListTest" time="0"/>
   <testcase name="testRemoveIndexArrayList" classname="utils.FixArrayListTest" time="0"/>
 </testsuite>
