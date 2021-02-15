@@ -190,3 +190,293 @@ total 3
 
 ```
 
+### 7)
+
+_Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test drw-------`_
+
+```
+jeanbourquj@lozan:~$ chmod go-rwx,u+rw ./test
+jeanbourquj@lozan:~$ ls -l
+total 33
+[...]
+drw------- 2 jeanbourquj domain users     4 fév  9 07:50 test
+[...]
+
+```
+
+#### 7.1)
+_Visualisez le contenu du répertoire test et vérifiez les droits d’accès du fichier testdroit.txt. Constatation ?_
+
+Droit refusé car pas d'accès d'éxecution.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l ./test/
+ls: cannot access './test/file7': Permission denied
+ls: cannot access './test/testdroit.txt': Permission denied
+ls: cannot access './test/file6': Permission denied
+ls: cannot access './test/file2': Permission denied
+ls: cannot access './test/file5': Permission denied
+total 0
+-????????? ? ? ? ?            ? file2
+-????????? ? ? ? ?            ? file5
+-????????? ? ? ? ?            ? file6
+-????????? ? ? ? ?            ? file7
+-????????? ? ? ? ?            ? testdroit.txt
+
+```
+
+#### 7.2)
+
+_Créer un nouveau fichier testdroit1.txt dans le répertoire test. Constations ?_
+
+Droit refusé car pas d'accès d'éxecution.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/testdroit1.txt
+touch: cannot touch './test/testdroit1.txt': Permission denied
+
+```
+
+#### 7.3)
+
+_Supprimez le fichier file2. Constations ?_
+
+Droit refusé car pas d'accès d'éxecution.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ rm ./test/file2
+rm: cannot remove './test/file2': Permission denied
+
+```
+
+### 8)
+
+_Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test d-w-------`_
+
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod u-r ./test/
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
+d-w------- 2 jeanbourquj domain users 7 fév  9 15:09 test
+
+```
+
+#### 8.1)
+
+_Visualisez le contenu du répertoire test et vérifiez les droits d’accès aux fichiers contenus dans ce répertoire. Constatation ?_
+
+Pas d'accès au dossier car pas de droit de lecture.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l ./test/
+ls: cannot open directory './test/': Permission denied
+```
+
+### 9)
+
+_Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test dr--------`_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod u-w,u+r ./test
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
+dr-------- 2 jeanbourquj domain users 7 fév  9 15:09 test
+```
+
+#### 9.1)
+
+_Visualisez le contenu du répertoire test et vérifiez les droits d’accès aux fichiers contenus dans ce répertoire. Constatation ?_
+
+Possibilité de lecture du dossier, mais toujours pas d'execution.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l ./test/
+ls: cannot access './test/file7': Permission denied
+ls: cannot access './test/testdroit.txt': Permission denied
+ls: cannot access './test/file6': Permission denied
+ls: cannot access './test/file2': Permission denied
+ls: cannot access './test/file5': Permission denied
+total 0
+-????????? ? ? ? ?            ? file2
+-????????? ? ? ? ?            ? file5
+-????????? ? ? ? ?            ? file6
+-????????? ? ? ? ?            ? file7
+-????????? ? ? ? ?            ? testdroit.txt
+```
+
+### 10)
+
+_Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test dr-x------`_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod u+x ./test
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
+dr-x------ 2 jeanbourquj domain users 7 fév  9 15:09 test
+```
+
+#### 10.1)
+
+_Visualisez le contenu du répertoire test et vérifiez les droits d’accès aux fichiers contenus dans ce répertoire. Constatation ?_
+
+On peut à nouveau executé les commandes dans le dossier.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l ./test/
+total 3
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file2
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file5
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file6
+-rw-r--r-- 1 jeanbourquj domain users 0 fév  9 15:08 file7
+-rw-r--r-- 1 jeanbourquj domain users 5 fév  9 15:09 testdroit.txt
+```
+
+#### 10.2)
+
+_Créez un nouveau fichier testdroit5.txt dans le répertoire test. Remarques ?_
+
+On ne peut pas cérer un nouveau fichier car on a pas les droit d'écriture.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/testdroit5.txt
+touch: cannot touch './test/testdroit5.txt': Permission denied
+```
+
+#### 10.3)
+
+_Ajoutez un texte au fichier file5. Constations ?_
+
+On peut écrire dans le fichier, ainsi que le lire car le fichier en lui même en a les droits (`-rw-r--r-- 1 jeanbourquj domain users 17 fév 15 23:37 file5`)
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ echo "Exemple de texte" >> ./test/file5
+jeanbourquj@lozan:~/tmp/activite0004$ cat ./test/file5
+Exemple de texte
+```
+
+#### 10.4)
+
+_Supprimez le fichier file5. Constatations ?_
+
+On a pas les droit d'execution sur le fichier, mais on l'a sur le dossier.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ rm ./test/file5
+rm: cannot remove './test/file5': Permission denied
+```
+
+### 11)
+
+_Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test d--x------`_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod u-r ./test
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
+d--x------ 2 jeanbourquj domain users 7 fév  9 15:09 test
+
+```
+
+#### 11.1)
+
+_Visualisez le contenu du répertoire test et vérifiez les droits d’accès aux fichiers contenus dans ce répertoire. Constatations ?_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l ./test/
+ls: cannot open directory './test/': Permission denied
+```
+
+#### 11.2)
+
+_Créez un fichier testdroit6.txt dans test. Constatations ?_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/testdroit6.txt
+touch: cannot touch './test/testdroit6.txt': Permission denied
+
+```
+
+#### 11.3)
+
+_Ajoutez un texte de votre choix au fichier file6. Constatations ?_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ echo "Text" >> ./test/file6
+jeanbourquj@lozan:~/tmp/activite0004$ cat ./test/file6
+Text
+
+```
+
+#### 11.4)
+
+_Supprimez le fichier file6. Constatations ?_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ rm ./test/file6
+rm: cannot remove './test/file6': Permission denied
+```
+
+### 12)
+
+_Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test d-wx------`_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ chmod u+w ./test
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
+d-wx------ 2 jeanbourquj domain users 7 fév  9 15:09 test
+```
+
+#### 12.1)
+
+_Visualisez le contenu du répertoire test et vérifiez les droits d’accès aux fichiers contenus dans ce répertoire. Constatations ?_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l ./test/
+ls: cannot open directory './test/': Permission denied
+```
+
+#### 12.2)
+
+Créez un fichier testdroit7.txt dans test. Constatations ?
+
+On peut le créer mais pas vérifier sîl a été correctement créer.
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/testdroit7.text
+```
+
+#### 12.3)
+
+Ajoutez un texte de votre choix au fichier file7. Constatations ?
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ echo "Texte au choix" >> ./test/file7
+jeanbourquj@lozan:~/tmp/activite0004$ cat ./test/file7
+Texte au choix
+```
+
+#### 12.4)
+
+_Supprimez le fichier file7. Constatations ?_
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ rm ./test/file7
+jeanbourquj@lozan:~/tmp/activite0004$ rm ./test/file7
+rm: cannot remove './test/file7': No such file or directory
+```
+
+### 13)
+
+_Créer un sous-répertoire test_sec et y placer quelques fichiers._
+
+### 14)
+
+_Placer les bons codes de protection à votre répertoire test_sec et à ses fichiers afin de permettre aux membres de votre groupe de:_
+
+1.	lire le contenu des fichiers
+2.	lister les fichiers sans pouvoir lire leur contenu
+3.	lire le contenu d’un fichier connu sans pouvoir faire la liste des fichiers
+4. modifier un fichier existant
+5. ajouter et effacer un fichier
