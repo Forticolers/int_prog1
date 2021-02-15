@@ -6,7 +6,6 @@
 package utils;
 
 import ch.jeanbourquj.cifom.Data;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  *
@@ -72,7 +71,6 @@ public class Pile {
      * Ajoute une entrée à la pile.
      *
      * @param d data-
-     * @throws Exception if pile is full.
      */
     public void empiler(final Data d) throws RuntimeException {
         if (this.etrePlein()) {
@@ -83,11 +81,6 @@ public class Pile {
         this.valeurs[this.sommet] = d;
     }
 
-    /**
-     * Retire la denière entrée de la pile.
-     *
-     * @throws Exception if pile is empty.
-     */
    /* public void depilerWE() throws Exception {
         if (this.etreVide()) {
             throw new Exception(PILE_VIDE);

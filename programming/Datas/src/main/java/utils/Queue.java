@@ -1,7 +1,6 @@
 package utils;
 
 import ch.jeanbourquj.cifom.Data;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  * Permet de gérer la structure dynamique Queue/File.
@@ -72,10 +71,6 @@ public class Queue {
         }
 
     }
-
-    /**
-     *
-     */
     /*public void retirerWE() throws RuntimeException {
         if (this.etreVide()) {
             throw new RuntimeException(PILE_VIDE);
@@ -85,10 +80,9 @@ public class Queue {
         }
         this.fin -= 1;
     }*/
-
     /**
      *
-     * @return la valeur
+     * @return Data
      */
     public Data retournerValeur() throws RuntimeException {
         if (this.etreVide()) {

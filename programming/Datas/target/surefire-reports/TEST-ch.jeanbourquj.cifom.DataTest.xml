@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ch.jeanbourquj.cifom.DataTest" time="0.085" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ch.jeanbourquj.cifom.DataTest" time="0.072" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire4331478195459685755\surefirebooter2642998379037558489.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire4331478195459685755 2021-02-15T00-30-00_226-jvmRun1 surefire2498319229586791978tmp surefire_0448450129687465168tmp"/>
+    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire6273338743287567352\surefirebooter5464191857296185207.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire6273338743287567352 2021-02-15T00-50-21_296-jvmRun1 surefire854821313540619190tmp surefire_03111932732531631326tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\test-classes;C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\classes;C:\Users\jeanbourquj\.m2\repository\junit\junit\4.13\junit-4.13.jar;C:\Users\jeanbourquj\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\jeanbourquj"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire4331478195459685755\surefirebooter2642998379037558489.jar;C:\\Users\\jeanbourquj\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.6\\org.jacoco.agent-0.8.6-runtime.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire6273338743287567352\surefirebooter5464191857296185207.jar;C:\\Users\\jeanbourquj\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.6\\org.jacoco.agent-0.8.6-runtime.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -61,7 +61,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testEqualsNullObj" classname="ch.jeanbourquj.cifom.DataTest" time="0.008"/>
+  <testcase name="testEqualsNullObj" classname="ch.jeanbourquj.cifom.DataTest" time="0.007"/>
   <testcase name="testEqualsHashCode" classname="ch.jeanbourquj.cifom.DataTest" time="0"/>
   <testcase name="testToString" classname="ch.jeanbourquj.cifom.DataTest" time="0.002"/>
   <testcase name="testSetGetValeur" classname="ch.jeanbourquj.cifom.DataTest" time="0"/>
