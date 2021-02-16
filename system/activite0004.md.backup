@@ -195,9 +195,9 @@ total 3
 _Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test drw-------`_
 
 ```
-jeanbourquj@lozan:~$ chmod go-rwx,u+rw ./test
-jeanbourquj@lozan:~$ ls -l
-total 33
+jeanbourquj@lozan:~/tmp/activite0004$ chmod go-rwx,u+rw ./test
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
 [...]
 drw------- 2 jeanbourquj domain users     4 fév  9 07:50 test
 [...]
@@ -236,6 +236,7 @@ jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/testdroit1.txt
 touch: cannot touch './test/testdroit1.txt': Permission denied
 
 ```
+
 
 #### 7.3)
 
@@ -470,6 +471,12 @@ rm: cannot remove './test/file7': No such file or directory
 ### 13)
 
 _Créer un sous-répertoire test_sec et y placer quelques fichiers._
+
+```
+jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/test_sec/file{00..05}
+jeanbourquj@lozan:~/tmp/activite0004$ ls ./test/test_sec/
+file00  file01  file02  file03  file04  file05
+```
 
 ### 14)
 

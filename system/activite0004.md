@@ -195,9 +195,9 @@ total 3
 _Positionnez-vous sur le répertoire « parent » de test et modifier les droits comme suit : `test drw-------`_
 
 ```
-jeanbourquj@lozan:~$ chmod go-rwx,u+rw ./test
-jeanbourquj@lozan:~$ ls -l
-total 33
+jeanbourquj@lozan:~/tmp/activite0004$ chmod go-rwx,u+rw ./test
+jeanbourquj@lozan:~/tmp/activite0004$ ls -l
+total 1
 [...]
 drw------- 2 jeanbourquj domain users     4 fév  9 07:50 test
 [...]
@@ -236,6 +236,7 @@ jeanbourquj@lozan:~/tmp/activite0004$ touch ./test/testdroit1.txt
 touch: cannot touch './test/testdroit1.txt': Permission denied
 
 ```
+
 
 #### 7.3)
 
