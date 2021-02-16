@@ -480,10 +480,98 @@ file00  file01  file02  file03  file04  file05
 
 ### 14)
 
-_Placer les bons codes de protection à votre répertoire test_sec et à ses fichiers afin de permettre aux membres de votre groupe de:_
+_Placer les bons codes de protection à votre répertoire test\_sec et à ses fichiers afin de permettre aux membres de votre groupe de:_
 
 1.	lire le contenu des fichiers
 2.	lister les fichiers sans pouvoir lire leur contenu
 3.	lire le contenu d’un fichier connu sans pouvoir faire la liste des fichiers
 4. modifier un fichier existant
 5. ajouter et effacer un fichier
+
+### Application des permissions
+
+_Identifier les droits d’accès
+Mettre les droits d’accès sur les dossiers et fichiers de l’arborescence ci-dessous. Les fichiers txt ne sont pas exécutables._
+
+1.	Le propriétaire pier possède tous les droits sur les dossiers et fichiers l’arborescence
+2.	Les utilisateurs, appartenant au même groupe que pier, peuvent uniquement:
+3.	lire le contenu, des dossiers et des fichiers, du dossier ./d1
+4.	ajouter de nouveaux fichiers/dossiers dans le dossier ./d2, les modifier et lire leur contenu.
+5.	Le reste des utilisateurs n’ont aucun droit dans l’arborescence de pier.
+
+```
+|
+├── home [dr-xr-xr-x]  
+│   │
+│   └── pier [d---------]  
+│       │
+│       ├── d1 [d---------]  
+│       │   │
+│       │   ├── f1.txt [----------]  
+│       │   │
+│       │   ├── f2.txt [----------]  
+│       │   │
+│       │   ├── f3.txt [----------]  
+│       │   │
+│       │   ├── f4.txt [----------] 
+│       │   │
+│       │   └── f5.txt [----------]  
+│       │   
+│       └── d2 [d---------]  
+│           │
+│           ├── f1.txt [----------]  
+│           │
+│           ├── f2.txt [----------]  
+│           │
+│           ├── f3.txt [----------]  
+│           │
+│           ├── f4.txt [----------]  
+│           │
+│           └── f5.txt [----------]  
+-----------------------------------------
+jeanbourquj@lozan:~$ mkdir ./pier/d{1..2} -p
+jeanbourquj@lozan:~$ touch ./pier/d{1..2}/f{1..5}.txt
+jeanbourquj@lozan:~$ tree pier
+pier
+├── d1
+│   ├── f1.txt
+│   ├── f2.txt
+│   ├── f3.txt
+│   ├── f4.txt
+│   └── f5.txt
+└── d2
+    ├── f1.txt
+    ├── f2.txt
+    ├── f3.txt
+    ├── f4.txt
+    └── f5.txt
+
+2 directories, 10 files
+
+-------------
+Application des droits par défaut.
+jeanbourquj@lozan:~$ chmod u=rx,g=rx,o=rx ./pier
+jeanbourquj@lozan:~$ chmod ugo= ./pier/d{1..2}
+jeanbourquj@lozan:~$ chmod ugo-rwx ./pier/d{1..2}/f{1..5}.txt
+```
+
+```
+Tous les droit pour l'utilisateur.
+jeanbourquj@lozan:~$ chmod u=rwx ./pier/ -R
+
+------------------------------
+
+Les membre du groupe peuvent lire les fichiers du répértoire d1
+jeanbourquj@lozan:~$ chmod g=rx ./pier/d1 -R
+
+
+-------------------------------------------
+Les membre du groupe peuvent lire, modifier et ajouter des fichier.
+jeanbourquj@lozan:~$ chmod g=rwx ./pier/d2 -R
+
+---------------------------------
+jeanbourquj@lozan:/home/S2/alexandrelre$ echo "Un test marrant" >> ./pier/d1/f1.txt
+-bash: ./pier/d1/f1.txt: Permission denied
+jeanbourquj@lozan:/home/S2/alexandrelre$ echo "Un test marrant" >> ./pier/d2/f1.txt
+jeanbourquj@lozan:/home/S2/alexandrelre$
+```
