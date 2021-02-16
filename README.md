@@ -6,4 +6,4 @@ Liens vers :
 *  [Projet Maven (Classe Data v0.01)](./programming/maven-project/maven-project.md)
 *  [Activité série 0002 Gestion de fichier](./system/system-activite0002.md)
 *  [Activité série 0003 Redirection et filtre](./system/system-activite0003.md)
-*  [Activité série 0004 Accès et droit](./system/system-activite0004.md)
+*  [Activité série 0004 Accès et droit](./system/activite0004.md)
