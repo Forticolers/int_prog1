@@ -50,6 +50,9 @@ public class FixArrayList {
      * @param list
      */
     public FixArrayList(final FixArrayList list) {
+        if(list == null){
+            throw new  RuntimeException("Liste passée en paramètre nulle");
+        }
         this.size = list.size;
         this.values = new Data[list.values.length];
         for(int i = 0; i < this.size; i++){

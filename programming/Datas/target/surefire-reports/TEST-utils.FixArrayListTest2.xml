@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.FixArrayListTest2" time="0.061" tests="30" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="utils.FixArrayListTest2" time="0.054" tests="30" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire4663388155182814933\surefirebooter5486656119370162917.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire4663388155182814933 2021-02-19T14-08-31_302-jvmRun1 surefire8801515919636171645tmp surefire_04052759521483163630tmp"/>
+    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire962511210407012500\surefirebooter5174465001019874963.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire962511210407012500 2021-02-19T14-10-16_633-jvmRun1 surefire6193413187948867681tmp surefire_04104174388912406962tmp"/>
     <property name="test" value="utils.FixArrayListTest2"/>
     <property name="surefire.test.class.path" value="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\test-classes;C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\classes;C:\Users\jeanbourquj\.m2\repository\junit\junit\4.13\junit-4.13.jar;C:\Users\jeanbourquj\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +32,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire4663388155182814933\surefirebooter5486656119370162917.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire962511210407012500\surefirebooter5174465001019874963.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -62,7 +62,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testAddListPlein2" classname="utils.FixArrayListTest2" time="0.007"/>
+  <testcase name="testAddListPlein2" classname="utils.FixArrayListTest2" time="0.006"/>
   <testcase name="testGetFirst" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testAdd" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testGet" classname="utils.FixArrayListTest2" time="0"/>
@@ -71,18 +71,18 @@
   <testcase name="testAddEnPosition" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testSize" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testAddEnMauvaisePosition" classname="utils.FixArrayListTest2" time="0"/>
-  <testcase name="testToString" classname="utils.FixArrayListTest2" time="0.005"/>
+  <testcase name="testToString" classname="utils.FixArrayListTest2" time="0.003"/>
   <testcase name="testGetEnMauvaisePosition" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testRemoveSurListVide" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testCreationListe" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testGetLast" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testAddListPlein" classname="utils.FixArrayListTest2" time="0"/>
-  <testcase name="testMauvaiseCreationListe" classname="utils.FixArrayListTest2" time="0.002"/>
+  <testcase name="testMauvaiseCreationListe" classname="utils.FixArrayListTest2" time="0.001"/>
   <testcase name="testEqualsObject" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testNotIsEmpty" classname="utils.FixArrayListTest2" time="0"/>
-  <testcase name="testEqualsNullObject" classname="utils.FixArrayListTest2" time="0"/>
+  <testcase name="testEqualsNullObject" classname="utils.FixArrayListTest2" time="0.001"/>
   <testcase name="testRemoveEnMauvaisePosition" classname="utils.FixArrayListTest2" time="0"/>
-  <testcase name="testEqualsSameObjet" classname="utils.FixArrayListTest2" time="0.001"/>
+  <testcase name="testEqualsSameObjet" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testGetFirstListVide" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testGetLastListVide" classname="utils.FixArrayListTest2" time="0"/>
   <testcase name="testRemoveEnPosition" classname="utils.FixArrayListTest2" time="0"/>
