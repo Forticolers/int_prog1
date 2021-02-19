@@ -60,13 +60,14 @@ public class ArrayList {
      * @param value
      */
     public void add(final Data value) {
-        Data[] tmp = this.values;
+       /* Data[] tmp = this.values;
         this.values = new Data[this.values.length + 1];
         for (int i = 0; i < this.size; i++) {
             this.values[i] = tmp[i];
         }
         values[size] = value;
-        size++;
+        size++;*/
+       add(this.size, value);
 
     }
 
