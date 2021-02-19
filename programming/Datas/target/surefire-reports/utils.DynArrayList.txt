@@ -1,0 +1,84 @@
+-------------------------------------------------------------------------------
+Test set: utils.DynArrayList
+-------------------------------------------------------------------------------
+Tests run: 30, Failures: 0, Errors: 20, Skipped: 0, Time elapsed: 0.064 s <<< FAILURE! - in utils.DynArrayList
+testGetFirst(utils.DynArrayList)  Time elapsed: 0.006 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testGetFirst(DynArrayList.java:177)
+
+testAdd(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testAdd(DynArrayList.java:57)
+
+testGet(utils.DynArrayList)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testGet(DynArrayList.java:214)
+
+testClear(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testClear(DynArrayList.java:261)
+
+testClone(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testClone(DynArrayList.java:277)
+
+testAddEnPosition(utils.DynArrayList)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testAddEnPosition(DynArrayList.java:86)
+
+testAddEnMauvaisePosition(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<java.lang.IndexOutOfBoundsException> but was<java.lang.RuntimeException>
+	at utils.DynArrayList.testAddEnMauvaisePosition(DynArrayList.java:103)
+
+testGetEnMauvaisePosition(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<java.lang.IndexOutOfBoundsException> but was<java.lang.RuntimeException>
+	at utils.DynArrayList.testGetEnMauvaisePosition(DynArrayList.java:228)
+
+testCreationListe(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous tree type: <any>
+	at utils.DynArrayList.testCreationListe(DynArrayList.java:43)
+
+testGetLast(utils.DynArrayList)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testGetLast(DynArrayList.java:195)
+
+testNotIsEmpty(utils.DynArrayList)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testNotIsEmpty(DynArrayList.java:363)
+
+testRemoveEnMauvaisePosition(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<java.lang.IndexOutOfBoundsException> but was<java.lang.RuntimeException>
+	at utils.DynArrayList.testRemoveEnMauvaisePosition(DynArrayList.java:164)
+
+testGetFirstListVide(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<java.lang.IndexOutOfBoundsException> but was<java.lang.RuntimeException>
+	at utils.DynArrayList.testGetFirstListVide(DynArrayList.java:188)
+
+testGetLastListVide(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<java.lang.IndexOutOfBoundsException> but was<java.lang.RuntimeException>
+	at utils.DynArrayList.testGetLastListVide(DynArrayList.java:207)
+
+testRemoveEnPosition(utils.DynArrayList)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testRemoveEnPosition(DynArrayList.java:147)
+
+testClone2(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testClone2(DynArrayList.java:302)
+
+testEquals(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testEquals(DynArrayList.java:327)
+
+testIsEmpty(utils.DynArrayList)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous tree type: <any>
+	at utils.DynArrayList.testIsEmpty(DynArrayList.java:356)
+
+testRemove(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testRemove(DynArrayList.java:130)
+
+testAddEnPosition2(utils.DynArrayList)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Uncompilable source code - Erroneous sym type: utils.DynArrayList.add
+	at utils.DynArrayList.testAddEnPosition2(DynArrayList.java:114)
+
