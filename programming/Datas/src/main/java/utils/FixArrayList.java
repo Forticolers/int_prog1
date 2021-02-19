@@ -31,7 +31,7 @@ public class FixArrayList {
     /**
      * FixArrayList constructor.
      *
-     * @param pmaxSize Used for now but will be upgraded to an array with no max
+     * @param taille Used for now but will be upgraded to an array with no max
      * size.
      */
     public FixArrayList(final int taille) {
@@ -45,9 +45,9 @@ public class FixArrayList {
     }
 
     /**
-     * FixArrayList clone constructor. Will be implemented in the future.
+     * Make a standard clone of the FixArrayList passed in parameters.
      *
-     * @param list
+     * @param list FixArrayList.
      */
     public FixArrayList(final FixArrayList list) {
         if(list == null){
