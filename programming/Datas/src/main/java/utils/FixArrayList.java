@@ -15,9 +15,8 @@ import java.util.Objects;
  */
 public class FixArrayList {
 
-    private Integer maxSize;
-    private Integer size;
-    private Data[] values;
+    private int size = -1;
+    private Data[] values = null;
 
     /**
      * Stirng value of empty array.
@@ -35,10 +34,14 @@ public class FixArrayList {
      * @param pmaxSize Used for now but will be upgraded to an array with no max
      * size.
      */
-    public FixArrayList(final Integer pmaxSize) {
-        this.maxSize = pmaxSize;
+    public FixArrayList(final int taille) {
+        if (taille < 0) {
+            throw new IndexOutOfBoundsException(
+                    "Erreur: Mauvaise valeur d'initialisation!");
+        }
+
         this.size = 0;
-        this.values = new Data[this.maxSize];
+        this.values = new Data[taille];
     }
 
     /**
@@ -47,7 +50,11 @@ public class FixArrayList {
      * @param list
      */
     public FixArrayList(final FixArrayList list) {
-        throw new UnsupportedOperationException();
+        this.size = list.size;
+        this.values = new Data[list.values.length];
+        for(int i = 0; i < this.size; i++){
+            this.values[i] = list.values[i];
+        }
     }
 
     /**
@@ -56,10 +63,12 @@ public class FixArrayList {
      * @param value
      */
     public void add(final Data value) {
-        if (this.size - 1 < this.maxSize) {
-            this.values[this.size] = value;
-            this.size += 1;
+        if (size == values.length) {
+            throw new IndexOutOfBoundsException(
+                    "Erreur: Ajout dans une liste plein!");
         }
+        values[size] = value;
+        size++;
     }
 
     /**
@@ -69,27 +78,26 @@ public class FixArrayList {
      * @param value
      */
     public void add(final int index, final Data value) {
-        if (this.size - 1 < this.maxSize) {
-            Data tmp;
-            for (int i = this.size() - 1; i >= index; i--) {
-                this.values[i + 1] = this.values[i];
-            }
-            this.values[index] = value;
-            this.size += 1;
+        if (size == values.length) {
+            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
         }
+
+        if (!((index >= 0) && (index <= size))) {
+            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
+        }
+
+        for (int i = size - 1; i >= index; i--) {
+            values[i + 1] = values[i];
+        }
+        values[index] = value;
+        size++;
     }
 
     /**
      * Remove last entry.
      */
     public void remove() {
-        if (this.isEmpty()) {
-            throw new RuntimeException(ARRAY_VIDE);
-        }
-        for (int i = 1; i < this.size; i++) {
-            this.values[i - 1] = this.values[i];
-        }
-        this.size -= 1;
+        remove(size - 1);
     }
 
     /**
@@ -98,16 +106,18 @@ public class FixArrayList {
      * @param index
      */
     public void remove(final int index) {
-        if (this.isEmpty()) {
-            throw new RuntimeException(ARRAY_VIDE);
+        if (size == 0) {
+            throw new IndexOutOfBoundsException(ARRAY_VIDE);
         }
-        if (index > this.size()) {
-            throw new RuntimeException(OUT_OF_BOUNDS);
+
+        if (!((index >= 0) && (index < size))) {
+            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
         }
-        for (int i = index; i < this.size - 1; i++) {
-            this.values[i] = this.values[i + 1];
+
+        for (int i = index; i < size; i++) {
+            values[i] = values[i + 1];
         }
-        this.size -= 1;
+        size--;
     }
 
     /**
@@ -136,7 +146,7 @@ public class FixArrayList {
      */
     public Data getFirst() {
         if (this.isEmpty()) {
-            throw new RuntimeException(ARRAY_VIDE);
+            throw new IndexOutOfBoundsException(ARRAY_VIDE);
         }
         return this.values[0];
     }
@@ -148,7 +158,7 @@ public class FixArrayList {
      */
     public Data getLast() {
         if (this.isEmpty()) {
-            throw new RuntimeException(ARRAY_VIDE);
+            throw new IndexOutOfBoundsException(ARRAY_VIDE);
         }
         return this.values[this.size - 1];
     }
@@ -160,10 +170,15 @@ public class FixArrayList {
      * @return Data
      */
     public Data get(final int index) {
-        if (index > this.size()) {
-            throw new RuntimeException("Index hors limite.");
+        if (size == 0) {
+            throw new IndexOutOfBoundsException(ARRAY_VIDE);
         }
-        return this.values[index];
+
+        if (!((index >= 0) && (index < size))) {
+            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
+        }
+
+        return values[index];
     }
 
     /**
@@ -189,20 +204,23 @@ public class FixArrayList {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof FixArrayList)) {
             return false;
         }
-        final FixArrayList other = (FixArrayList) obj;
-        if (!Objects.equals(this.maxSize, other.maxSize)) {
-            return false;
+
+        FixArrayList list = (FixArrayList) obj;
+
+        boolean sts = false;
+        if (this.size() == list.size()) {
+            sts = true;
+            int index = 0;
+            while ((index < this.size()) && sts) {
+                sts = this.get(index).equals(list.get(index));
+                index++;
+            }
         }
-        if (!Objects.equals(this.size, other.size)) {
-            return false;
-        }
-        if (!Arrays.deepEquals(this.values, other.values)) {
-            return false;
-        }
-        return true;
+
+        return sts;
     }
 
     /**
@@ -212,7 +230,6 @@ public class FixArrayList {
     @Override
     public int hashCode() {
         int hash = HASH_HASH;
-        hash = HASH_SEL * hash + Objects.hashCode(this.maxSize);
         hash = HASH_SEL * hash + Objects.hashCode(this.size);
         hash = HASH_SEL * hash + Arrays.deepHashCode(this.values);
         return hash;

@@ -105,12 +105,11 @@ public class FixArrayListTest {
         fixArray.add(n22);
         fixArray.add(n33);
         fixArray.add(n44);
-        fixArray.add(n55);
         Assert.assertFalse("ERREUR: La liste ne devrait pas être vide!", fixArray.isEmpty());
-        Assert.assertEquals(5, fixArray.size());
-        fixArray.remove();
         Assert.assertEquals(4, fixArray.size());
-        Assert.assertEquals(n22, fixArray.getFirst());
+        fixArray.remove();
+        Assert.assertEquals(3, fixArray.size());
+        Assert.assertEquals(n11, fixArray.getFirst());
     }
 
     @Test
@@ -151,16 +150,15 @@ public class FixArrayListTest {
         fixArray.add(n22);
         fixArray.add(n33);
         fixArray.add(n44);
-        fixArray.add(n55);
         Assert.assertFalse("ERREUR: La liste ne devrait pas être vide!", fixArray.isEmpty());
-        Assert.assertEquals(5, fixArray.size());
+        Assert.assertEquals(4, fixArray.size());
         fixArray.remove(3);
         Assert.assertFalse("ERREUR: La liste devrait être vide!", fixArray.isEmpty());
-        Assert.assertEquals(4, fixArray.size());
-        Assert.assertNotEquals(n44, fixArray.get(3));
+        Assert.assertEquals(3, fixArray.size());
+        Assert.assertNotEquals(n44, fixArray.getLast());
         fixArray.remove(0);
         Assert.assertFalse("ERREUR: La liste devrait être vide!", fixArray.isEmpty());
-        Assert.assertEquals(3, fixArray.size());
+        Assert.assertEquals(2, fixArray.size());
         Assert.assertNotEquals(n11, fixArray.get(0));
     }
 
