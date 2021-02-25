@@ -65,4 +65,4 @@ genealogieDB-> ;
 
 [Recursion in SQL Explained Visually](https://medium.com/swlh/recursion-in-sql-explained-graphically-679f6a0f143b)
 
-[Requêtes WITH (Common Table Expressions)](https://docs.postgresql.fr/10/queries-with.html)
+[Requêtes `WITH` (Common Table Expressions)](https://docs.postgresql.fr/10/queries-with.html)

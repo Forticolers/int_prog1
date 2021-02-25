@@ -61,6 +61,10 @@ genealogieDB-> ;
 (5 rows)
 ```
 
+### Spécificité
+
+
+
 ## Bibliographie
 
 [Recursion in SQL Explained Visually](https://medium.com/swlh/recursion-in-sql-explained-graphically-679f6a0f143b)
