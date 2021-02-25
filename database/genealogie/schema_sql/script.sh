@@ -1,7 +1,7 @@
 #!/bin/bash
 # 
 # auteur: Jeanbourquin Julien
-HOST=db.lxd
+HOST=localhost
 PORT=5432
 USER=genealogie
 PASSWORD=genealogiepass
