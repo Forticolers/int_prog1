@@ -1,0 +1,11 @@
+WITH R AS 
+(SELECT 1 AS n) 
+SELECT n + 1 FROM R
+;
+
+WITH RECURSIVE countUp AS 
+(SELECT 1 AS n 
+UNION ALL 
+SELECT n+1 FROM countUp WHERE n < 5)
+SELECT * FROM countUp
+;
