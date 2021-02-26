@@ -1,6 +1,7 @@
 package utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.utils.Pile;
+import ch.jeanbourquj.cifom.domain.Data;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

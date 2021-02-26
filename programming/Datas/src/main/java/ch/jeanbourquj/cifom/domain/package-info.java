@@ -4,6 +4,6 @@
  * and open the template in the editor.
  */
 /**
- * Package utils contains utilities to interact with data.
+ * this package contains the data class.
  */
-package utils;
+package ch.jeanbourquj.cifom.domain;

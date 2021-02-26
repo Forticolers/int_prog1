@@ -1,6 +1,8 @@
 package utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.utils.FixArrayList;
+import ch.jeanbourquj.cifom.utils.ArrayList;
+import ch.jeanbourquj.cifom.domain.Data;
 import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;

@@ -6,7 +6,8 @@
  */
 package utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.utils.QueueCirculaire;
+import ch.jeanbourquj.cifom.domain.Data;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;

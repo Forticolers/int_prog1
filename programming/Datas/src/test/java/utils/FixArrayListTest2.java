@@ -1,6 +1,7 @@
 package utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.utils.FixArrayList;
+import ch.jeanbourquj.cifom.domain.Data;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Before;

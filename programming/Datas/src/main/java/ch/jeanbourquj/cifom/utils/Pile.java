@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package ch.jeanbourquj.cifom.utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.domain.Data;
 
 /**
  *

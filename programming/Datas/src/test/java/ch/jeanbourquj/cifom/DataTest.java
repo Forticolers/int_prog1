@@ -1,5 +1,6 @@
 package ch.jeanbourquj.cifom;
 
+import ch.jeanbourquj.cifom.domain.Data;
 import java.util.logging.Logger;
 import org.junit.Assert;
 import org.junit.Before;

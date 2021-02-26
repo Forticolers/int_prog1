@@ -1,4 +1,4 @@
-package ch.jeanbourquj.cifom;
+package ch.jeanbourquj.cifom.domain;
 
 import java.util.Objects;
 

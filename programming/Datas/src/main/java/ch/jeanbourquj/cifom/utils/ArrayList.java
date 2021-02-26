@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package ch.jeanbourquj.cifom.utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.domain.Data;
 import java.util.Arrays;
 import java.util.Objects;
+import static ch.jeanbourquj.cifom.utils.FixArrayList.ARRAY_VIDE;
+import static ch.jeanbourquj.cifom.utils.FixArrayList.OUT_OF_BOUNDS;
 
 /**
  *
  * @author JeanbourquJ
  */
-public class FixArrayList {
+public class ArrayList {
 
     private int size = -1;
     private Data[] values = null;
@@ -30,18 +32,10 @@ public class FixArrayList {
 
     /**
      * FixArrayList constructor.
-     *
-     * @param taille Used for now but will be upgraded to an array with no max
-     * size.
      */
-    public FixArrayList(final int taille) {
-        if (taille < 0) {
-            throw new IndexOutOfBoundsException(
-                    "Erreur: Mauvaise valeur d'initialisation!");
-        }
-
+    public ArrayList() {
         this.size = 0;
-        this.values = new Data[taille];
+        this.values = new Data[0];
     }
 
     /**
@@ -49,13 +43,13 @@ public class FixArrayList {
      *
      * @param list FixArrayList.
      */
-    public FixArrayList(final FixArrayList list) {
-        if(list == null){
-            throw new  RuntimeException("Liste passée en paramètre est nulle");
+    public ArrayList(final ArrayList list) {
+        if (list == null) {
+            throw new RuntimeException("Liste passée en paramètre est nulle");
         }
         this.size = list.size;
         this.values = new Data[list.values.length];
-        for(int i = 0; i < this.size; i++){
+        for (int i = 0; i < this.size; i++) {
             this.values[i] = list.values[i];
         }
     }
@@ -66,12 +60,15 @@ public class FixArrayList {
      * @param value
      */
     public void add(final Data value) {
-        if (size == values.length) {
-            throw new IndexOutOfBoundsException(
-                    "Erreur: Ajout dans une liste plein!");
+       /* Data[] tmp = this.values;
+        this.values = new Data[this.values.length + 1];
+        for (int i = 0; i < this.size; i++) {
+            this.values[i] = tmp[i];
         }
         values[size] = value;
-        size++;
+        size++;*/
+       add(this.size, value);
+
     }
 
     /**
@@ -81,18 +78,20 @@ public class FixArrayList {
      * @param value
      */
     public void add(final int index, final Data value) {
-        if (size == values.length) {
-            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
-        }
-
         if (!((index >= 0) && (index <= size))) {
             throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
         }
+        Data[] tmp = this.values;
+        this.values = new Data[this.values.length + 1];
 
-        for (int i = size - 1; i >= index; i--) {
-            values[i + 1] = values[i];
+        for (int i = 0; i < index; i++) {
+            this.values[i] = tmp[i];
         }
         values[index] = value;
+
+        for (int j = index + 1; j < values.length; j++) {
+            this.values[j] = tmp[j - 1];
+        }
         size++;
     }
 
@@ -116,10 +115,16 @@ public class FixArrayList {
         if (!((index >= 0) && (index < size))) {
             throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);
         }
+        Data[] tmp = this.values;
+        this.values = new Data[this.values.length - 1];
 
-        for (int i = index; i < size; i++) {
-            values[i] = values[i + 1];
+        for (int i = 0; i < index; i++) {
+            this.values[i] = tmp[i];
         }
+        for (int j = index; j < values.length; j++) {
+            this.values[j] = tmp[j + 1];
+        }
+
         size--;
     }
 
@@ -207,11 +212,11 @@ public class FixArrayList {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof FixArrayList)) {
+        if (!(obj instanceof ArrayList)) {
             return false;
         }
 
-        FixArrayList list = (FixArrayList) obj;
+        ArrayList list = (ArrayList) obj;
 
         boolean sts = false;
         if (this.size() == list.size()) {

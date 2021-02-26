@@ -1,6 +1,6 @@
-package utils;
+package ch.jeanbourquj.cifom.utils;
 
-import ch.jeanbourquj.cifom.Data;
+import ch.jeanbourquj.cifom.domain.Data;
 
 /**
  * Permet de gérer la structure dynamique Queue/File.
