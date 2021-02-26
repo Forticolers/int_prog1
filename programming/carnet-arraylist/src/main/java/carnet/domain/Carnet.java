@@ -1,5 +1,7 @@
 package carnet.domain;
 
+import carnet.utils.ArrayList;
+import carnet.utils.List;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Random;
@@ -10,32 +12,32 @@ import java.util.Random;
  */
 public class Carnet {
 
-    Contact[] contacts;
-
+    List contacts;
     public static final int POSITION_INCONNU = -1;
     private final Random randomValue;
 
     public Carnet() {
-        this.contacts = new Contact[0];
+        this.contacts = new ArrayList();
         randomValue = new Random(Instant.now().getEpochSecond());
         
     }
 
-    public Contact[] getContacts() {
-        Contact[] retvalue = new Contact[this.getNombre()];
-        for(int i= 0; i< this.contacts.length; i+=1){
-            retvalue[i] = this.contacts[i];
+    public List getContacts() {
+        
+        List retValue = new ArrayList();
+        for(int i= 0; i< this.contacts.size(); i+=1){
+            retValue.add(i, this.contacts.get(i));
         }
         
-        return retvalue;
+        return retValue;
     }
 
     public int getNombre() {
-        return this.contacts.length;
+        return this.contacts.size();
     }
 
     public int getTaille() {
-        return this.contacts.length;
+        return this.contacts.size();
     }
 
     public Contact ajouter(Contact contact) throws CarnetPleinException {
@@ -43,12 +45,13 @@ public class Carnet {
         Contact retVal = new Contact(this.genererIdContactUnique());
         retVal.update(contact);
 
-        Contact[] nouveauContacts = new Contact[this.getNombre()+1];
-        for(int i= 0; i< this.contacts.length; i+=1){
-            nouveauContacts[i] = this.contacts[i];
+        List newContacts = new ArrayList();
+        for(int i= 0; i< this.contacts.size(); i+=1){
+            
+            newContacts.add(i, this.contacts.get(i));
         }
-        nouveauContacts[this.getNombre()] = retVal;
-        this.contacts = nouveauContacts;
+        newContacts.add(retVal);
+        this.contacts = newContacts;
 
         return retVal;
     }
@@ -70,23 +73,24 @@ public class Carnet {
             return;
         }
         
-        Contact[] nouveauContacts = new Contact[this.getNombre()-1];
-
+        List newContacts = new ArrayList();
         for (int indice = 0 ;
                 indice < position;
                 indice = indice + 1) {
 
-            nouveauContacts[indice] = this.contacts[indice];
+            
+            newContacts.add(indice, this.contacts.get(indice));
         }
         
         for (int indice = position + 1;
-                indice < this.contacts.length;
+                indice < this.contacts.size();
                 indice = indice + 1) {
 
-            nouveauContacts[indice - 1] = this.contacts[indice];
+            
+            newContacts.add(indice-1, this.contacts.get(indice));
         }
         
-        this.contacts = nouveauContacts;
+        this.contacts = newContacts;
     }
 
     public void trierParIdContact() {
@@ -99,7 +103,7 @@ public class Carnet {
         int indice = 0;
         boolean trouve = false;
         while (!trouve && (indice < this.getNombre())) {
-            trouve = this.contacts[indice].getIdentifiant().equals(id);
+            trouve = this.contacts.get(indice).getIdentifiant().equals(id);
             if (!trouve) {
                 indice = indice + 1;
             }
@@ -118,7 +122,7 @@ public class Carnet {
             return null;
         }
 
-        return this.contacts[pos];
+        return this.contacts.get(pos);
     }
 
     private Identifiant genererIdContactUnique() {
@@ -460,28 +464,35 @@ public class Carnet {
                 contact2.getIdentifiant().getId());
     }
 
-    private void permuterContact(Contact[] contacts, int pos1, int pos2) {
-        Contact tmp = contacts[pos1];
-        contacts[pos1] = contacts[pos2];
-        contacts[pos2] = tmp;
+    private void permuterContact(List contacts, int pos1, int pos2) {
+       /* Contact tmp = contacts.get(pos1);
+        contacts.add(pos1, contacts.get(pos2));
+        contacts.add(pos2, tmp);*/
 
+        List tmp = new ArrayList(contacts);
+        
+        contacts.remove(pos1);
+        contacts.add(pos1, tmp.get(pos2));
+        contacts.remove(pos2);
+        contacts.add(pos2, tmp.get(pos1));
     }
 
-    private void trierParId(Contact[] pContacts,
+    private void trierParId(List pContacts,
             int pLimGauche,
             int pLimDroite) {
+        List oldList = pContacts;
         int g;
         int d;
         Contact pivot;
 
         g = pLimGauche;
         d = pLimDroite;
-        pivot = pContacts[(g + d) / 2];
+        pivot = pContacts.get((g + d) / 2);
         do {
-            while (comparerId(pContacts[g], pivot) < 0) {
+            while (comparerId(pContacts.get(g), pivot) < 0) {
                 g = g + 1;
             }
-            while (comparerId(pContacts[d], pivot) > 0) {
+            while (comparerId(pContacts.get(d), pivot) > 0) {
                 d = d - 1;
             }
             if (g <= d) {

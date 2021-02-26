@@ -7,7 +7,7 @@ import carnet.domain.Identifiant;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
+import carnet.utils.*;
 import java.util.Scanner;
 
 /**
@@ -82,16 +82,16 @@ class Vue {
     public void afficherCarnet(Carnet carnet) {
         
         for (int indice = 0 ; indice < carnet.getNombre(); indice = indice +1) {
-            this.afficher(carnet.getContacts()[indice]);
+            this.afficher(carnet.getContacts().get(indice));
         }
     }
     
     public void afficherCarnetV2(Carnet carnet) {
         
-        Contact[] contacts = carnet.getContacts();
+        List contacts = carnet.getContacts();
         for (int indice = 0 ; indice < carnet.getNombre(); indice = indice +1) {
             
-            Contact contact = contacts[indice];
+            Contact contact = contacts.get(indice);
             this.afficher(contact);
         }
     }
