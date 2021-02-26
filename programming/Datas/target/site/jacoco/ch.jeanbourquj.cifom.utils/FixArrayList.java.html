@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FixArrayList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Datas</a> &gt; <a href="index.source.html" class="el_package">ch.jeanbourquj.cifom.utils</a> &gt; <span class="el_source">FixArrayList.java</span></div><h1>FixArrayList.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.jeanbourquj.cifom.utils;
+
+import ch.jeanbourquj.cifom.domain.Data;
+import java.util.Arrays;
+import java.util.Objects;
+
+/**
+ *
+ * @author JeanbourquJ
+ */
+public class FixArrayList {
+
+<span class="pc" id="L18">    private int size = -1;</span>
+<span class="pc" id="L19">    private Data[] values = null;</span>
+
+    /**
+     * Stirng value of empty array.
+     */
+    public static final String ARRAY_VIDE = &quot;L'array est pleine&quot;;
+
+    /**
+     * String value of out of bounds index.
+     */
+    public static final String OUT_OF_BOUNDS = &quot;Index hors limite.&quot;;
+
+    /**
+     * FixArrayList constructor.
+     *
+     * @param taille Used for now but will be upgraded to an array with no max
+     * size.
+     */
+<span class="fc" id="L37">    public FixArrayList(final int taille) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (taille &lt; 0) {</span>
+<span class="fc" id="L39">            throw new IndexOutOfBoundsException(</span>
+                    &quot;Erreur: Mauvaise valeur d'initialisation!&quot;);
+        }
+
+<span class="fc" id="L43">        this.size = 0;</span>
+<span class="fc" id="L44">        this.values = new Data[taille];</span>
+<span class="fc" id="L45">    }</span>
+
+    /**
+     * Make a standard clone of the FixArrayList passed in parameters.
+     *
+     * @param list FixArrayList.
+     */
+<span class="nc" id="L52">    public FixArrayList(final FixArrayList list) {</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(list == null){</span>
+<span class="nc" id="L54">            throw new  RuntimeException(&quot;Liste passée en paramètre est nulle&quot;);</span>
+        }
+<span class="nc" id="L56">        this.size = list.size;</span>
+<span class="nc" id="L57">        this.values = new Data[list.values.length];</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for(int i = 0; i &lt; this.size; i++){</span>
+<span class="nc" id="L59">            this.values[i] = list.values[i];</span>
+        }
+<span class="nc" id="L61">    }</span>
+
+    /**
+     * Add a value to the array.
+     *
+     * @param value
+     */
+    public void add(final Data value) {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (size == values.length) {</span>
+<span class="fc" id="L70">            throw new IndexOutOfBoundsException(</span>
+                    &quot;Erreur: Ajout dans une liste plein!&quot;);
+        }
+<span class="fc" id="L73">        values[size] = value;</span>
+<span class="fc" id="L74">        size++;</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Add value to specifix index to the array.
+     *
+     * @param index
+     * @param value
+     */
+    public void add(final int index, final Data value) {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (size == values.length) {</span>
+<span class="fc" id="L85">            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);</span>
+        }
+
+<span class="pc bpc" id="L88" title="2 of 4 branches missed.">        if (!((index &gt;= 0) &amp;&amp; (index &lt;= size))) {</span>
+<span class="nc" id="L89">            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);</span>
+        }
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (int i = size - 1; i &gt;= index; i--) {</span>
+<span class="fc" id="L93">            values[i + 1] = values[i];</span>
+        }
+<span class="fc" id="L95">        values[index] = value;</span>
+<span class="fc" id="L96">        size++;</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Remove last entry.
+     */
+    public void remove() {
+<span class="fc" id="L103">        remove(size - 1);</span>
+<span class="fc" id="L104">    }</span>
+
+    /**
+     * Remove at specific index.
+     *
+     * @param index
+     */
+    public void remove(final int index) {
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (size == 0) {</span>
+<span class="fc" id="L113">            throw new IndexOutOfBoundsException(ARRAY_VIDE);</span>
+        }
+
+<span class="pc bpc" id="L116" title="2 of 4 branches missed.">        if (!((index &gt;= 0) &amp;&amp; (index &lt; size))) {</span>
+<span class="nc" id="L117">            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);</span>
+        }
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (int i = index; i &lt; size; i++) {</span>
+<span class="fc" id="L121">            values[i] = values[i + 1];</span>
+        }
+<span class="fc" id="L123">        size--;</span>
+<span class="fc" id="L124">    }</span>
+
+    /**
+     * Return the size of the array (the number of objects in it).
+     *
+     * @return int
+     */
+    public int size() {
+<span class="fc" id="L132">        return this.size;</span>
+    }
+
+    /**
+     * Clear the whole array.
+     */
+    public void clear() {
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (int i = 0; i &lt; this.size; i++) {</span>
+<span class="fc" id="L140">            this.values[i] = null;</span>
+        }
+<span class="fc" id="L142">        this.size = 0;</span>
+<span class="fc" id="L143">    }</span>
+
+    /**
+     * Return first entry.
+     *
+     * @return Data
+     */
+    public Data getFirst() {
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L152">            throw new IndexOutOfBoundsException(ARRAY_VIDE);</span>
+        }
+<span class="fc" id="L154">        return this.values[0];</span>
+    }
+
+    /**
+     * Return last entry.
+     *
+     * @return Data
+     */
+    public Data getLast() {
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L164">            throw new IndexOutOfBoundsException(ARRAY_VIDE);</span>
+        }
+<span class="fc" id="L166">        return this.values[this.size - 1];</span>
+    }
+
+    /**
+     * Get data at specifix index.
+     *
+     * @param index
+     * @return Data
+     */
+    public Data get(final int index) {
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        if (size == 0) {</span>
+<span class="fc" id="L177">            throw new IndexOutOfBoundsException(ARRAY_VIDE);</span>
+        }
+
+<span class="pc bpc" id="L180" title="2 of 4 branches missed.">        if (!((index &gt;= 0) &amp;&amp; (index &lt; size))) {</span>
+<span class="nc" id="L181">            throw new IndexOutOfBoundsException(OUT_OF_BOUNDS);</span>
+        }
+
+<span class="fc" id="L184">        return values[index];</span>
+    }
+
+    /**
+     * Return true if empty.
+     *
+     * @return boolean
+     */
+    public boolean isEmpty() {
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        return this.size == 0;</span>
+    }
+
+    /**
+     * Returns true if obj is equals.
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(final Object obj) {
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L205">            return true;</span>
+        }
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L208">            return false;</span>
+        }
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">        if (!(obj instanceof FixArrayList)) {</span>
+<span class="nc" id="L211">            return false;</span>
+        }
+
+<span class="fc" id="L214">        FixArrayList list = (FixArrayList) obj;</span>
+
+<span class="fc" id="L216">        boolean sts = false;</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">        if (this.size() == list.size()) {</span>
+<span class="fc" id="L218">            sts = true;</span>
+<span class="fc" id="L219">            int index = 0;</span>
+<span class="pc bpc" id="L220" title="1 of 4 branches missed.">            while ((index &lt; this.size()) &amp;&amp; sts) {</span>
+<span class="fc" id="L221">                sts = this.get(index).equals(list.get(index));</span>
+<span class="fc" id="L222">                index++;</span>
+            }
+        }
+
+<span class="fc" id="L226">        return sts;</span>
+    }
+
+    /**
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L235">        int hash = HASH_HASH;</span>
+<span class="nc" id="L236">        hash = HASH_SEL * hash + Objects.hashCode(this.size);</span>
+<span class="nc" id="L237">        hash = HASH_SEL * hash + Arrays.deepHashCode(this.values);</span>
+<span class="nc" id="L238">        return hash;</span>
+    }
+    /**
+     *
+     */
+    public static final int HASH_HASH = 5;
+    /**
+     *
+     */
+    public static final int HASH_SEL = 83;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

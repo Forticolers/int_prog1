@@ -8,8 +8,6 @@ package ch.jeanbourquj.cifom.utils;
 import ch.jeanbourquj.cifom.domain.Data;
 import java.util.Arrays;
 import java.util.Objects;
-import static ch.jeanbourquj.cifom.utils.FixArrayList.ARRAY_VIDE;
-import static ch.jeanbourquj.cifom.utils.FixArrayList.OUT_OF_BOUNDS;
 
 /**
  *

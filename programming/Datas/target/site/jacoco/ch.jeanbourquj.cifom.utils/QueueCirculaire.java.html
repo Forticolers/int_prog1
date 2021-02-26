@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QueueCirculaire.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Datas</a> &gt; <a href="index.source.html" class="el_package">ch.jeanbourquj.cifom.utils</a> &gt; <span class="el_source">QueueCirculaire.java</span></div><h1>QueueCirculaire.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.jeanbourquj.cifom.utils;
+
+import ch.jeanbourquj.cifom.domain.Data;
+
+/**
+ *
+ * @author JeanbourquJ
+ */
+public class QueueCirculaire {
+
+    private Integer tailleMax;
+    private Integer number;
+    private Integer tete;
+    private Integer fin;
+    private Data[] valeurs;
+
+    /**
+     *
+     */
+    public static final String PILE_PLEINE = &quot;Pile pleine!&quot;;
+
+    /**
+     *
+     */
+    public static final String PILE_VIDE = &quot;Pile vide!&quot;;
+
+    /**
+     *
+     * @param tailleQueue
+     */
+<span class="fc" id="L36">    public QueueCirculaire(final int tailleQueue) {</span>
+<span class="fc" id="L37">        this.tailleMax = tailleQueue;</span>
+<span class="fc" id="L38">        this.number = 0;</span>
+<span class="fc" id="L39">        this.tete = -1;</span>
+<span class="fc" id="L40">        this.fin = -1;</span>
+<span class="fc" id="L41">        this.valeurs = new Data[this.tailleMax];</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     *
+     * @param data
+     * @throws RuntimeException
+     */
+    public void ajouter(final Data data) throws RuntimeException {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (this.etrePlein()) {</span>
+<span class="fc" id="L51">            throw new RuntimeException(PILE_PLEINE);</span>
+        }
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (this.number == 0) {</span>
+<span class="fc" id="L54">            this.tete = 0;</span>
+<span class="fc" id="L55">            this.fin = 0;</span>
+        } else {
+<span class="fc" id="L57">            this.fin += 1;</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">            if (this.fin &gt;= this.tailleMax) {</span>
+<span class="nc" id="L59">                this.fin = 0;</span>
+            }
+        }
+<span class="fc" id="L62">        this.number += 1;</span>
+<span class="fc" id="L63">        this.valeurs[this.fin] = data;</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     *
+     */
+    public void retirer() {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (!this.etreVide()) {</span>
+<span class="fc" id="L71">            this.number -= 1;</span>
+<span class="fc" id="L72">            this.tete += 1;</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            if (this.tete &gt;= this.tailleMax) {</span>
+<span class="nc" id="L74">                this.tete = 0;</span>
+            }
+        }
+<span class="fc" id="L77">    }</span>
+
+    /**
+     *
+     * @return @throws RuntimeException
+     */
+    public Data retournerValeur() throws RuntimeException {
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L85">            throw new RuntimeException(PILE_VIDE);</span>
+        }
+<span class="fc" id="L87">        return this.valeurs[this.tete];</span>
+    }
+
+    /**
+     *
+     * @return TRUE si la queue est pleine.
+     */
+    public boolean etrePlein() {
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        return this.number == this.tailleMax;</span>
+    }
+
+    /**
+     *
+     * @return TRUE si la queue est vide.
+     */
+    public boolean etreVide() {
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        return this.number == 0;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

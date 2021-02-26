@@ -52,7 +52,7 @@ public class Pile {
      *
      * @param taillePile
      */
-    Pile(final int taillePile) {
+    public Pile(final int taillePile) {
         this.tailleMax = taillePile;
         this.sommet = -1;
         this.valeurs = new Data[this.tailleMax];
