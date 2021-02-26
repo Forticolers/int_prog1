@@ -1,11 +1,6 @@
 package carnet.domain;
 
-import carnet.domain.Adresse;
-import carnet.domain.Contact;
-import carnet.domain.Carnet;
-import carnet.domain.ContactInconnuException;
-import carnet.domain.Identifiant;
-import carnet.domain.CarnetPleinException;
+import carnet.utils.List;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import org.junit.Assert;
@@ -61,10 +56,11 @@ public class CarnetTest {
 
     @Test
     public void testGetContacts() {
-        Contact[] contacts = carnetRef.getContacts();
+        List contacts = carnetRef.getContacts();
 
-        for (Contact c : contacts) {
-            Assert.assertTrue(c instanceof Contact);
+        
+        for(int i = 0; i< contacts.size();i++){
+            Assert.assertTrue(contacts.get(i) instanceof Contact);
         }
     }
 
@@ -145,7 +141,8 @@ public class CarnetTest {
         carnetRef.trierParIdContact();
 
         Contact ancien = null;
-        for (Contact c : carnetRef.getContacts()) {
+        for(int i = 0; i < carnetRef.getNombre(); i++) {
+            Contact c = carnetRef.getContacts().get(i);
             if (ancien != null && c != null) {
                 LOG.info(String.format("a: %s, n:%s", ancien, c));
                 Assert.assertTrue(ancien.getIdentifiant().getId()
