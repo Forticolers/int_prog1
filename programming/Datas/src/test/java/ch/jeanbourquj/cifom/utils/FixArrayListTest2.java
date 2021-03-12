@@ -1,14 +1,10 @@
-package utils;
+package ch.jeanbourquj.cifom.utils;
 
 import ch.jeanbourquj.cifom.utils.FixArrayList;
-import ch.jeanbourquj.cifom.utils.ArrayList;
 import ch.jeanbourquj.cifom.domain.Data;
 import java.util.logging.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -16,36 +12,24 @@ import org.junit.Test;
  *
  * @author dominique huguenin (dominique.huguenin at rpn.ch)
  */
-public class ArrayListTest {
+public class FixArrayListTest2 {
 
     
     private int tailleRef;
-    private ArrayList listRef;
+    private FixArrayList listRef;
     private Data[] elementsRef;
-    private static final Logger LOG = Logger.getLogger(ArrayListTest.class.getName());
+    private static final Logger LOG = Logger.getLogger(FixArrayListTest2.class.getName());
 
-    public ArrayListTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
+    public FixArrayListTest2() {
     }
 
     @Before
     public void setUp() {
-        
-        listRef = new ArrayList();
+        tailleRef = 5;
+        listRef = new FixArrayList(tailleRef);
         elementsRef = new Data[]{new Data(10),
             new Data(20),
             new Data(30)};
-    }
-
-    @After
-    public void tearDown() throws Exception {
     }
 
     /**
@@ -294,7 +278,7 @@ public class ArrayListTest {
             listRef.add(elementsRef[i]);
         }
 
-        ArrayList clone = new ArrayList(listRef);
+        FixArrayList clone = new FixArrayList(listRef);
 
         Assert.assertEquals("Erreur:La Liste devrait contenir 3 éléments!",
                 3, clone.size());
@@ -319,7 +303,7 @@ public class ArrayListTest {
             listRef.add(elementsRef[i]);
         }
 
-        ArrayList clone = new ArrayList(listRef);
+        FixArrayList clone = new FixArrayList(listRef);
 
         
         Data data_111 = new Data(111);
@@ -337,7 +321,7 @@ public class ArrayListTest {
     
     @Test
     public void testEquals() throws Exception {
-        ArrayList arrayList = new ArrayList();
+        FixArrayList arrayList = new FixArrayList(5);
 
         for (int i = 0; i < 3; i++) {
             arrayList.add(elementsRef[i]);

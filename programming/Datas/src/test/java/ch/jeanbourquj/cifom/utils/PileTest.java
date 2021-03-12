@@ -1,4 +1,4 @@
-package utils;
+package ch.jeanbourquj.cifom.utils;
 
 import ch.jeanbourquj.cifom.utils.Pile;
 import ch.jeanbourquj.cifom.domain.Data;

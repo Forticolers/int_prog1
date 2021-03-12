@@ -27,6 +27,10 @@ public class SingleDoubleEntryLinkedList implements List {
      *
      */
     private Node first = null;
+    /**
+     *
+     */
+    private Node last = null;
 
     /**
      *
@@ -40,7 +44,12 @@ public class SingleDoubleEntryLinkedList implements List {
      * @param l
      */
     public SingleDoubleEntryLinkedList(final List l) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (l == null) {
+            throw new RuntimeException("Liste passée en paramètre est nulle");
+        }
+        for (int i = 0; i < l.size(); i++) {
+            this.add(l.get(i));
+        }
     }
 
     /**
@@ -53,7 +62,10 @@ public class SingleDoubleEntryLinkedList implements List {
     }
 
     private Node getLastNode() {
-        return this.getNode(this.size() - 1);
+        if (this.isEmpty()) {
+            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);
+        }
+        return this.last;
     }
 
     private Node getNode(final int index) {
@@ -86,6 +98,12 @@ public class SingleDoubleEntryLinkedList implements List {
         if (this.isEmpty() || (index == 0)) {
             newNode.setNext(first);
             first = newNode;
+            last = newNode;
+        } else if (index == this.size()) {
+            Node node = this.getLastNode();
+            newNode.setNext(node.getNext());
+            node.setNext(newNode);
+            this.last = newNode;
         } else {
             Node node = this.getNode(index - 1);
             newNode.setNext(node.getNext());
@@ -106,6 +124,7 @@ public class SingleDoubleEntryLinkedList implements List {
                     this.first = tmp;
                 } else {
                     this.first = null;
+                    this.last = null;
                 }
             }
         }
@@ -173,15 +192,28 @@ public class SingleDoubleEntryLinkedList implements List {
         }
         if (this.first.next != null) {
             Node next = this.getNode(index).getNext();
+            Node previous;
             if (index != 0) {
-                Node previous = this.getNode(index - 1);
+                previous = this.getNode(index - 1);
 
                 previous.next = next;
+                if (index == this.size()) {
+                    this.last = previous;
+                }
+            } else if (index == this.size()) {
+                previous = this.getNode(index - 1);
+
+                previous.next = next;
+                this.last = previous;
             } else {
                 this.first = next;
+                if (index == this.size()) {
+                    this.last = next;
+                }
             }
         } else {
             this.first = null;
+            this.last = null;
         }
     }
 
@@ -290,6 +322,7 @@ public class SingleDoubleEntryLinkedList implements List {
         Node(final Node n) {
             this(n.getValue(), n.getNext());
         }
+
         /**
          *
          * @return Node.
@@ -297,6 +330,7 @@ public class SingleDoubleEntryLinkedList implements List {
         Node getNext() {
             return this.next;
         }
+
         /**
          *
          * @param nNext
@@ -304,6 +338,7 @@ public class SingleDoubleEntryLinkedList implements List {
         void setNext(final Node nNext) {
             this.next = nNext;
         }
+
         /**
          *
          * @return Data.
@@ -311,6 +346,7 @@ public class SingleDoubleEntryLinkedList implements List {
         Data getValue() {
             return this.value;
         }
+
         /**
          *
          * @param nValue
@@ -318,6 +354,7 @@ public class SingleDoubleEntryLinkedList implements List {
         void setValue(final Data nValue) {
             this.value = nValue;
         }
+
         /**
          *
          * @return
@@ -328,6 +365,7 @@ public class SingleDoubleEntryLinkedList implements List {
             hash = MAGIC_NUM79 * hash + Objects.hashCode(this.value);
             return hash;
         }
+
         /**
          *
          * @param obj
@@ -344,13 +382,14 @@ public class SingleDoubleEntryLinkedList implements List {
             if (getClass() != obj.getClass()) {
                 return false;
             }
-            final SingleDoubleEntryLinkedList.Node other =
-                    (SingleDoubleEntryLinkedList.Node) obj;
+            final SingleDoubleEntryLinkedList.Node other
+                    = (SingleDoubleEntryLinkedList.Node) obj;
             if (!Objects.equals(this.value, other.value)) {
                 return false;
             }
             return true;
         }
+
         /**
          *
          * @return
