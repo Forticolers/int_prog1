@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: ch.jeanbourquj.cifom.utils.SingleLinkedListTest
 -------------------------------------------------------------------------------
-Tests run: 23, Failures: 0, Errors: 2, Skipped: 2, Time elapsed: 0.068 s <<< FAILURE! - in ch.jeanbourquj.cifom.utils.SingleLinkedListTest
-testClone(ch.jeanbourquj.cifom.utils.SingleLinkedListTest)  Time elapsed: 0.006 s  <<< ERROR!
+Tests run: 23, Failures: 0, Errors: 2, Skipped: 2, Time elapsed: 32.127 s <<< FAILURE! - in ch.jeanbourquj.cifom.utils.SingleLinkedListTest
+testClone(ch.jeanbourquj.cifom.utils.SingleLinkedListTest)  Time elapsed: 0.016 s  <<< ERROR!
 java.lang.UnsupportedOperationException: Not supported yet.
 	at ch.jeanbourquj.cifom.utils.SingleLinkedListTest.testClone(SingleLinkedListTest.java:272)
 

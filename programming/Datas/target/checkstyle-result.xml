@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\domain\Data.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\domain\package-info.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\ArrayList.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\FixArrayList.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\List.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\package-info.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\Pile.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\Queue.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\QueueCirculaire.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\SingleDoubleEntryLinkedList.java">
+</file>
+<file name="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\src\main\java\ch\jeanbourquj\cifom\utils\SingleLinkedList.java">
+</file>
+</checkstyle>

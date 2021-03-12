@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author JeanbourquJ
  */
-public class SingleLinkedList implements List {
+public class SingleDoubleEntryLinkedList implements List {
 
     /**
      *
@@ -31,7 +31,7 @@ public class SingleLinkedList implements List {
     /**
      *
      */
-    public SingleLinkedList() {
+    public SingleDoubleEntryLinkedList() {
 
     }
 
@@ -39,7 +39,7 @@ public class SingleLinkedList implements List {
      *
      * @param l
      */
-    public SingleLinkedList(final List l) {
+    public SingleDoubleEntryLinkedList(final List l) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -344,7 +344,8 @@ public class SingleLinkedList implements List {
             if (getClass() != obj.getClass()) {
                 return false;
             }
-            final SingleLinkedList.Node other = (SingleLinkedList.Node) obj;
+            final SingleDoubleEntryLinkedList.Node other =
+                    (SingleDoubleEntryLinkedList.Node) obj;
             if (!Objects.equals(this.value, other.value)) {
                 return false;
             }

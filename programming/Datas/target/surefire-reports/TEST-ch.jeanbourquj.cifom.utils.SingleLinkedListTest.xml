@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.068" tests="23" errors="2" skipped="2" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="32.127" tests="23" errors="2" skipped="2" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
+    <property name="jpda.address" value="55728"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="java.specification.version" value="1.8"/>
@@ -12,13 +13,14 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
-    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="user.timezone" value=""/>
+    <property name="forkMode" value="once"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="os.name" value="Windows 10"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire470949691983558650\surefirebooter4295449176403859337.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire470949691983558650 2021-03-12T12-07-01_400-jvmRun1 surefire9202161402245807838tmp surefire_08953505809644472215tmp"/>
+    <property name="sun.java.command" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire8656891313005268058\surefirebooter2030517568215914520.jar C:\Users\jeanbourquj\AppData\Local\Temp\surefire8656891313005268058 2021-03-12T13-41-00_269-jvmRun1 surefire3906596560198335463tmp surefire_02981533373473981250tmp"/>
     <property name="test" value="ch.jeanbourquj.cifom.utils.SingleLinkedListTest"/>
     <property name="surefire.test.class.path" value="C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\test-classes;C:\Users\jeanbourquj\Desktop\GIT_REPO\int_prog1\programming\Datas\target\classes;C:\Users\jeanbourquj\.m2\repository\junit\junit\4.13\junit-4.13.jar;C:\Users\jeanbourquj\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -32,7 +34,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire470949691983558650\surefirebooter4295449176403859337.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\JEANBO~1\AppData\Local\Temp\surefire8656891313005268058\surefirebooter2030517568215914520.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -44,7 +46,8 @@
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar;C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="jpda.listen" value="true"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="localRepository" value="C:\Users\jeanbourquj\.m2\repository"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\JEANBO~1\AppData\Local\Temp\"/>
@@ -61,19 +64,20 @@
     <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
+    <property name="maven.surefire.debug" value="-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=55728"/>
   </properties>
   <testcase name="testGetFirst" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.004"/>
   <testcase name="testAdd" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testGet" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
-  <testcase name="testClear" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.001"/>
-  <testcase name="testClone" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.006">
+  <testcase name="testClear" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="31.997"/>
+  <testcase name="testClone" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.016">
     <error message="Not supported yet." type="java.lang.UnsupportedOperationException">java.lang.UnsupportedOperationException: Not supported yet.
 	at ch.jeanbourquj.cifom.utils.SingleLinkedListTest.testClone(SingleLinkedListTest.java:272)
 </error>
   </testcase>
   <testcase name="testAddEnPosition" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testSize" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
-  <testcase name="testToString" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.004"/>
+  <testcase name="testToString" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.007"/>
   <testcase name="testRemovePosition0" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testCreationListe" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testGetLast" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
@@ -87,7 +91,7 @@
   <testcase name="testRemove0" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testGetFirstListVide" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testGetLastListVide" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
-  <testcase name="testRemoveEnPosition" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0.001"/>
+  <testcase name="testRemoveEnPosition" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0"/>
   <testcase name="testClone2" classname="ch.jeanbourquj.cifom.utils.SingleLinkedListTest" time="0">
     <error message="Not supported yet." type="java.lang.UnsupportedOperationException">java.lang.UnsupportedOperationException: Not supported yet.
 	at ch.jeanbourquj.cifom.utils.SingleLinkedListTest.testClone2(SingleLinkedListTest.java:296)
