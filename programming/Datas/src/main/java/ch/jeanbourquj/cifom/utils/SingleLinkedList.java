@@ -69,17 +69,30 @@ public class SingleLinkedList implements List {
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!isEmpty()) {
+            while (this.first != null) {
+                if (this.first.next != null) {
+                    Node tmp = first.next;
+                    this.first = null;
+                    this.first = tmp;
+                } else {
+                    this.first = null;
+                }
+            }
+        }
     }
 
     @Override
     public Data get(int index) {
-         return this.getNode(index).getValue();
+        return this.getNode(index).getValue();
     }
 
     @Override
     public Data getFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.isEmpty()) {
+            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);
+        }
+        return this.first.getValue();
     }
 
     @Override
@@ -94,12 +107,31 @@ public class SingleLinkedList implements List {
 
     @Override
     public void remove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.remove(this.size() - 1);
     }
 
     @Override
     public void remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.isEmpty()) {
+            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);
+        }
+        if (index >= this.size()) {
+            throw new IndexOutOfBoundsException(INDEX_HORS_LIMITE);
+        }
+        if (this.first.next != null) {
+
+            Node current = this.getNode(index);
+            Node next = current.getNext();
+            if (index != 0) {
+                Node previous = this.getNode(index - 1);
+
+                previous.next = next;
+            } else {
+                this.first = next;
+            }
+        } else {
+            this.first = null;
+        }
     }
 
     @Override
@@ -127,7 +159,8 @@ public class SingleLinkedList implements List {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj
+    ) {
         if (this == obj) {
             return true;
         }
