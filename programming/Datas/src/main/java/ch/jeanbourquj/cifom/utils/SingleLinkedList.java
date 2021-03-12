@@ -40,7 +40,13 @@ public class SingleLinkedList implements List {
      * @param l
      */
     public SingleLinkedList(final List l) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (l == null) {
+            throw new RuntimeException("Liste passée en paramètre est nulle");
+        }
+        SingleLinkedList newList = (SingleLinkedList) l;
+        for (int i = 0; i < newList.size(); i++) {
+            this.add(i, newList.get(i));
+        }
     }
 
     /**
@@ -290,6 +296,7 @@ public class SingleLinkedList implements List {
         Node(final Node n) {
             this(n.getValue(), n.getNext());
         }
+
         /**
          *
          * @return Node.
@@ -297,6 +304,7 @@ public class SingleLinkedList implements List {
         Node getNext() {
             return this.next;
         }
+
         /**
          *
          * @param nNext
@@ -304,6 +312,7 @@ public class SingleLinkedList implements List {
         void setNext(final Node nNext) {
             this.next = nNext;
         }
+
         /**
          *
          * @return Data.
@@ -311,6 +320,7 @@ public class SingleLinkedList implements List {
         Data getValue() {
             return this.value;
         }
+
         /**
          *
          * @param nValue
@@ -318,6 +328,7 @@ public class SingleLinkedList implements List {
         void setValue(final Data nValue) {
             this.value = nValue;
         }
+
         /**
          *
          * @return
@@ -328,6 +339,7 @@ public class SingleLinkedList implements List {
             hash = MAGIC_NUM79 * hash + Objects.hashCode(this.value);
             return hash;
         }
+
         /**
          *
          * @param obj
@@ -350,6 +362,7 @@ public class SingleLinkedList implements List {
             }
             return true;
         }
+
         /**
          *
          * @return
