@@ -7,14 +7,14 @@ import java.util.Objects;
  *
  * @author JeanbourquJ
  */
-public class SingleLinkedList implements List {
+public class SingleLinkedList_exemple implements List {
 
     private Node first = null;
 
-    public SingleLinkedList() {
+    public SingleLinkedList_exemple() {
     }
 
-    public SingleLinkedList(List l) {
+    public SingleLinkedList_exemple(List l) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -60,13 +60,13 @@ public class SingleLinkedList implements List {
     }
 
     @Override
-    public void clear() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Data get(int index) {
+        return this.getNode(index).getValue();
     }
 
     @Override
-    public Data get(int index) {
-        return this.getNode(index).getValue();
+    public void clear() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
