@@ -1,0 +1,64 @@
+-------------------------------------------------------------------------------
+Test set: ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest
+-------------------------------------------------------------------------------
+Tests run: 23, Failures: 0, Errors: 15, Skipped: 2, Time elapsed: 0.093 s <<< FAILURE! - in ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest
+testGetFirst(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.007 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testGetFirst(SingleDoubleEntryLinkedListTest.java:192)
+
+testAdd(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testAdd(SingleDoubleEntryLinkedListTest.java:73)
+
+testGet(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testGet(SingleDoubleEntryLinkedListTest.java:229)
+
+testClear(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testClear(SingleDoubleEntryLinkedListTest.java:253)
+
+testClone(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testClone(SingleDoubleEntryLinkedListTest.java:269)
+
+testAddEnPosition(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testAddEnPosition(SingleDoubleEntryLinkedListTest.java:96)
+
+testToString(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testToString(SingleDoubleEntryLinkedListTest.java:243)
+
+testRemovePosition0(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testRemovePosition0(SingleDoubleEntryLinkedListTest.java:145)
+
+testGetLast(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testGetLast(SingleDoubleEntryLinkedListTest.java:210)
+
+testNotIsEmpty(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testNotIsEmpty(SingleDoubleEntryLinkedListTest.java:325)
+
+testRemove0(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testRemove0(SingleDoubleEntryLinkedListTest.java:162)
+
+testRemoveEnPosition(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testRemoveEnPosition(SingleDoubleEntryLinkedListTest.java:175)
+
+testClone2(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testClone2(SingleDoubleEntryLinkedListTest.java:293)
+
+testEquals(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testEquals(SingleDoubleEntryLinkedListTest.java:310)
+
+testRemove(ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException
+	at ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest.testRemove(SingleDoubleEntryLinkedListTest.java:128)
+

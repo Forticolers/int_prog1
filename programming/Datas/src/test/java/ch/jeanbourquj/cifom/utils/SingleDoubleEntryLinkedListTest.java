@@ -1,7 +1,10 @@
-package utils;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.jeanbourquj.cifom.utils;
 
-import ch.jeanbourquj.cifom.utils.FixArrayList;
-import ch.jeanbourquj.cifom.utils.ArrayList;
 import ch.jeanbourquj.cifom.domain.Data;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -9,43 +12,38 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
- * @author dominique huguenin (dominique.huguenin at rpn.ch)
+ * @author JeanbourquJ
  */
-public class ArrayListTest {
+public class SingleDoubleEntryLinkedListTest {
 
-    
-    private int tailleRef;
-    private ArrayList listRef;
+    private static final Logger LOG
+            = Logger.getLogger(SingleLinkedListTest.class.getName());
+    private List listRef;
     private Data[] elementsRef;
-    private static final Logger LOG = Logger.getLogger(ArrayListTest.class.getName());
 
-    public ArrayListTest() {
+    public SingleDoubleEntryLinkedListTest() {
     }
 
     @BeforeClass
-    public static void setUpClass() throws Exception {
+    public static void setUpClass() {
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception {
+    public static void tearDownClass() {
     }
 
     @Before
     public void setUp() {
-        
-        listRef = new ArrayList();
+         listRef = new SingleDoubleEntryLinkedList();
         elementsRef = new Data[]{new Data(10),
             new Data(20),
             new Data(30)};
-    }
-
-    @After
-    public void tearDown() throws Exception {
     }
 
     /**
@@ -61,9 +59,10 @@ public class ArrayListTest {
                 0, listRef.size());
     }
 
+    @Ignore
     @Test(expected = IndexOutOfBoundsException.class)
     public void testMauvaiseCreationListe() throws Exception {
-        FixArrayList arrayList = new FixArrayList(-1);
+        List list = new SingleLinkedList();
         Assert.fail("Erreur:La création devrait générer une exception!");
     }
 
@@ -80,22 +79,16 @@ public class ArrayListTest {
 
     }
 
+    @Ignore
     @Test(expected = IndexOutOfBoundsException.class)
     public void testAddListPlein() throws Exception {
-        FixArrayList arrayList = new FixArrayList(0);
+        List arrayList = new SingleLinkedList();
+
+        arrayList.add(elementsRef[0]);
 
         arrayList.add(elementsRef[1]);
         Assert.fail("Erreur:La Liste devrait être plein!");
     }
-    
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testAddListPlein2() throws Exception {
-        FixArrayList arrayList = new FixArrayList(0);
-
-        arrayList.add(0,elementsRef[1]);
-        Assert.fail("Erreur:La Liste devrait être plein!");
-    }
-    
 
     @Test
     public void testAddEnPosition() throws Exception {
@@ -113,25 +106,13 @@ public class ArrayListTest {
         Assert.assertEquals(elementsRef[1], listRef.get(position + 1));
 
     }
-    
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testAddEnMauvaisePosition() throws Exception {
-
-        listRef.add(elementsRef[0]);
-        listRef.add(elementsRef[1]);
-
-        int position = -1;
-        listRef.add(position, elementsRef[2]);
-
-    }
-    
 
     @Test
     public void testAddEnPosition2() throws Exception {
         listRef.add(0, elementsRef[0]);
         listRef.add(1, elementsRef[1]);
 
-        int position = 2;
+        int position = 1;
         listRef.add(position, elementsRef[2]);
 
         Assert.assertEquals("Erreur:La Liste devrait contenir 3 élément!",
@@ -159,6 +140,36 @@ public class ArrayListTest {
     }
 
     @Test
+    public void testRemovePosition0() throws Exception {
+        for (int i = 0; i < 3; i++) {
+            listRef.add(elementsRef[i]);
+        }
+
+        int size = listRef.size();
+
+        listRef.remove(0);
+
+        Assert.assertEquals(
+                size - 1, listRef.size());
+
+        Assert.assertEquals(elementsRef[1], listRef.getFirst());
+        Assert.assertEquals(elementsRef[2], listRef.getLast());
+
+    }
+
+    @Test
+    public void testRemove0() throws Exception {
+        listRef.add(elementsRef[0]);
+
+        int size = listRef.size();
+
+        listRef.remove();
+
+        Assert.assertEquals(
+                size - 1, listRef.size());
+    }
+
+    @Test
     public void testRemoveEnPosition() throws Exception {
         for (int i = 0; i < 3; i++) {
             listRef.add(elementsRef[i]);
@@ -174,19 +185,6 @@ public class ArrayListTest {
 
         Assert.assertEquals(elementsRef[2], listRef.get(position));
     }
-    
-    @Test(expected= IndexOutOfBoundsException.class)
-    public void testRemoveEnMauvaisePosition() throws Exception {
-        for (int i = 0; i < 3; i++) {
-            listRef.add(elementsRef[i]);
-        }
-
-        int size = listRef.size();
-
-        int position = -1;
-        listRef.remove(position);
-    }
-    
 
     @Test
     public void testGetFirst() throws Exception {
@@ -238,36 +236,13 @@ public class ArrayListTest {
         Assert.assertEquals(elementsRef[position], listRef.get(position));
 
     }
-    
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testGetEnMauvaisePosition() throws Exception {
-        for (int i = 0; i < 3; i++) {
-            listRef.add(elementsRef[i]);
-        }
-        int position = -1;
-        listRef.get(position);
-
-    }
-    
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testGetSurListVide() throws Exception {
-        FixArrayList list = new FixArrayList(10);
-        int position = 0;
-        list.get(position);
-
-    }
-    
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testRemoveSurListVide() throws Exception {
-        FixArrayList list = new FixArrayList(10);
-        int position = 0;
-        list.remove(position);
-
-    }
-    
 
     @Test
     public void testToString() throws Exception {
+        for (int i = 0; i < 3; i++) {
+            listRef.add(elementsRef[i]);
+        }
+
         LOG.info(listRef.toString());
 
     }
@@ -294,7 +269,7 @@ public class ArrayListTest {
             listRef.add(elementsRef[i]);
         }
 
-        ArrayList clone = new ArrayList(listRef);
+        List clone = new SingleDoubleEntryLinkedList(listRef);
 
         Assert.assertEquals("Erreur:La Liste devrait contenir 3 éléments!",
                 3, clone.size());
@@ -305,39 +280,30 @@ public class ArrayListTest {
         for (int i = 0; i < clone.size(); i++) {
             Assert.assertEquals(listRef.get(i), clone.get(i));
             Assert.assertSame(listRef.get(i), clone.get(i));
-            
         }
-        
+
         clone.add(new Data(55));
-        Assert.assertEquals(listRef.size()+1, clone.size());
-        
+        Assert.assertEquals(listRef.size() + 1, clone.size());
+
     }
-    
+
     @Test
     public void testClone2() throws Exception {
         for (int i = 0; i < 3; i++) {
             listRef.add(elementsRef[i]);
         }
 
-        ArrayList clone = new ArrayList(listRef);
+        List clone = new SingleDoubleEntryLinkedList(listRef);
 
-        
-        Data data_111 = new Data(111);
-        Data data_222 = new Data(222);        
-        
-        listRef.add(data_111);
-        clone.add(data_222);
-        
-        Assert.assertNotEquals(data_222, listRef.getLast());
-        Assert.assertEquals(data_111, listRef.getLast());
-        Assert.assertEquals(data_222, clone.getLast());
-
+        clone.remove();
+        Assert.assertEquals(elementsRef[2], listRef.get(2));
+        Assert.assertEquals(elementsRef[1], clone.get(1));
+        Assert.assertEquals(elementsRef[1], clone.getLast());
     }
-    
-    
+
     @Test
     public void testEquals() throws Exception {
-        ArrayList arrayList = new ArrayList();
+        List arrayList = new SingleLinkedList();
 
         for (int i = 0; i < 3; i++) {
             arrayList.add(elementsRef[i]);
@@ -345,28 +311,7 @@ public class ArrayListTest {
         }
 
         Assert.assertEquals(listRef, arrayList);
-        Assert.assertEquals(listRef.hashCode(), arrayList.hashCode());
     }
-    
-    @Test
-    public void testEqualsSameObjet() throws Exception {
-        Assert.assertTrue(listRef.equals(listRef));
-    }
-    
-    @Test
-    public void testEqualsNullObject() throws Exception {
-        FixArrayList arrayList = null;
-
-        Assert.assertNotEquals(listRef, arrayList);
-    }
-    
-    @Test
-    public void testEqualsObject() throws Exception {
-        Object object = new Object();
-
-        Assert.assertNotEquals(listRef, object);
-    }
-    
 
     @Test
     public void testIsEmpty() throws Exception {
@@ -383,5 +328,4 @@ public class ArrayListTest {
         Assert.assertFalse("Erreur:La liste est le vide!",
                 listRef.isEmpty());
     }
-   
 }

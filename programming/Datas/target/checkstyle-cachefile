@@ -1,0 +1,15 @@
+#Fri Mar 12 14:26:38 CET 2021
+module-resource*?\:checkstyle-suppressions.xml=6193EC72DCDBBCFF5C2AAB8A8B9698A90F8A9B39
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\QueueCirculaire.java=1614334754524
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\FixArrayList.java=1615555566352
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\domain\\Data.java=1614334746902
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\List.java=1615555520765
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\ArrayList.java=1614334901279
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\domain\\package-info.java=1614334746850
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\Queue.java=1614334754562
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\SingleDoubleEntryLinkedList.java=1615555364736
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\Pile.java=1614334965960
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\SingleLinkedList.java=1615555260419
+C\:\\Users\\jeanbourquj\\Desktop\\GIT_REPO\\int_prog1\\programming\\Datas\\src\\main\\java\\ch\\jeanbourquj\\cifom\\utils\\package-info.java=1614334754576
+module-resource*?\:checkstyle-xpath-suppressions.xml=15943B6F48E02A3A40098FE8A2DC9379E67F2DC3
+configuration*?=F70906D0A09D798A6C72BC98ED727D36C1EB3C98

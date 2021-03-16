@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package ch.jeanbourquj.cifom.utils;
 
 import ch.jeanbourquj.cifom.utils.FixArrayList;
 import ch.jeanbourquj.cifom.domain.Data;

@@ -1,19 +1,29 @@
-package utils;
 
-import ch.jeanbourquj.cifom.utils.Queue;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.jeanbourquj.cifom.utils;
+
+import ch.jeanbourquj.cifom.utils.QueueCirculaire;
 import ch.jeanbourquj.cifom.domain.Data;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author dominique huguenin (dominique.huguenin at rpn.ch)
  */
-public class QueueTest {
+public class QueueCirculaireTest {
 
     private int tailleQueueRef;
-    private Queue queueRef;
+    private QueueCirculaire queueRef;
     private Data n11;
     private Data n22;
     private Data n33;
@@ -21,10 +31,11 @@ public class QueueTest {
     private Data n55;
     private Data n66;
 
+
     /**
      *
      */
-    public QueueTest() {
+    public QueueCirculaireTest() {
     }
 
     /**
@@ -33,7 +44,7 @@ public class QueueTest {
     @Before
     public void setUp() {
         tailleQueueRef = 5;
-        queueRef = new Queue(tailleQueueRef);
+        queueRef = new QueueCirculaire(tailleQueueRef);
 
         n11 = new Data(11);
         n22 = new Data(22);
@@ -44,10 +55,6 @@ public class QueueTest {
 
     }
 
-    /**
-     *
-     * @throws Exception
-     */
     @Test
     public void testCreationQueue() throws Exception {
         Assert.assertTrue("Erreur:La queue devrait etre vide!",
@@ -160,5 +167,4 @@ public class QueueTest {
                 queueRef.etreVide());
 
     }
-
 }

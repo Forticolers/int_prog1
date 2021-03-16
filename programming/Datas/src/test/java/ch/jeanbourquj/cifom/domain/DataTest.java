@@ -1,4 +1,4 @@
-package ch.jeanbourquj.cifom;
+package ch.jeanbourquj.cifom.domain;
 
 import ch.jeanbourquj.cifom.domain.Data;
 import java.util.logging.Logger;
