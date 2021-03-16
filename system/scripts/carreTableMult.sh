@@ -14,7 +14,7 @@ printf "\n\t"
 
 for D in $(seq $carre)
 do
-	printf -- "-------";
+	printf "%s" "-----";
 done
 
 printf "\n"
