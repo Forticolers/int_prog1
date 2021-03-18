@@ -69,3 +69,43 @@ where p.parents_couples_uuid in (select uuid from couple_de_uuid)
 
 ```
 
+### 5)
+
+_Afficher la liste des descendants de 'elsbeth'_
+
+```sql
+WITH RECURSIVE personnes_en_couple(couples_uuid, personnes_uuid) AS (
+        SELECT uuid, partenaire1_personnes_uuid personnes_uuid
+            FROM couples
+            WHERE partenaire1_personnes_uuid IS NOT NULL
+        UNION 
+        SELECT uuid, partenaire2_personnes_uuid personnes_uuid
+            FROM couples
+            WHERE partenaire2_personnes_uuid IS NOT NULL
+),
+enfants(parent_personnes_uuid, uuid, prenom, date_naissance) AS(
+    SELECT parents.uuid, enfants.uuid, enfants.prenom, enfants.date_naissance
+    FROM personnes enfants
+        INNER JOIN personnes_en_couple couples ON couples.couples_uuid = enfants.parents_couples_uuid
+        INNER JOIN personnes parents ON parents.uuid = couples.personnes_uuid
+),
+descendants(parent_personnes_uuid, uuid, prenom, date_naissance) AS(
+    SELECT parents.uuid, enfants.uuid, enfants.prenom, enfants.date_naissance
+        FROM enfants
+            INNER JOIN personnes parents ON parents.uuid = enfants.parent_personnes_uuid
+        WHERE parents.prenom = 'elsbeth'
+    UNION
+    SELECT parents.uuid, enfants.uuid, enfants.prenom, enfants.date_naissance
+        FROM enfants
+            INNER JOIN personnes parents ON parents.uuid = enfants.parent_personnes_uuid
+            INNER JOIN descendants ON descendants.uuid = parents.uuid
+)
+SELECT descendants.*
+FROM descendants
+;                                
+
+```
+
+### 6)
+
+_Afficher les descendants de 'elsbeth' avec le niveau de parenté_
