@@ -9,7 +9,7 @@ import ch.jeanbourquj.cifom.domain.Data;
 import java.util.Objects;
 
 /**
- *
+ * A rather unsignificative change.
  * @author JeanbourquJ
  */
 public class SingleDoubleEntryLinkedList implements List {
