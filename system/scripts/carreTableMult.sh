@@ -7,14 +7,14 @@ fi
 printf "\t"
 for Z in $(seq $carre)
 do
-	printf "%1s $Z"
+	printf "%5s" "$Z"
 done
 
 printf "\n\t"
 
 for D in $(seq $carre)
 do
-	printf -- "-------";
+	printf "%s" "-----";
 done
 
 printf "\n"
