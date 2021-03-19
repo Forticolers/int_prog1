@@ -131,9 +131,9 @@ public class LinkedList implements List {
         } else {
             Node node = this.getNode(index - 1);
             newNode.setNext(node.getNext());
-            if (node != null) {
-                newNode.setPrevious(node);
-            }
+
+            newNode.setPrevious(node);
+
             node.setNext(newNode);
         }
         size++;
