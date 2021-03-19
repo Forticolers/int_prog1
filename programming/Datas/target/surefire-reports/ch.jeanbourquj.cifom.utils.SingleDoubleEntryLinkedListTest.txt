@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest
 -------------------------------------------------------------------------------
-Tests run: 23, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 2.906 s - in ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest
+Tests run: 23, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.061 s - in ch.jeanbourquj.cifom.utils.SingleDoubleEntryLinkedListTest

@@ -1,5 +1,5 @@
 #!/bin/bash
-function printUsage {
+function printUsage (){
 	printf "Help: Create Java project structure\n"
 	printf "\t$0 [--type=(maven|bash)] --projet=<nomProjet>\n"
 	printf "\t--type=maven par défaut.\n"
