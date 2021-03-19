@@ -5,7 +5,7 @@
  */
 package ch.jeanbourquj.cifom.utils;
 
-import ch.jeanbourquj.cifom.domain.Data;
+
 import java.util.Objects;
 
 /**
@@ -54,7 +54,7 @@ public class SingleLinkedList implements List {
      * @param value
      */
     @Override
-    public void add(final Data value) {
+    public void add(final Object value) {
         this.add(this.size(), value);
     }
 
@@ -87,7 +87,7 @@ public class SingleLinkedList implements List {
      * @param value
      */
     @Override
-    public void add(final int index, final Data value) {
+    public void add(final int index, final Object value) {
         Node newNode = new Node(value, null);
         if (this.isEmpty() || (index == 0)) {
             newNode.setNext(first);
@@ -123,7 +123,7 @@ public class SingleLinkedList implements List {
      * @return
      */
     @Override
-    public Data get(final int index) {
+    public Object get(final int index) {
         return this.getNode(index).getValue();
     }
 
@@ -132,7 +132,7 @@ public class SingleLinkedList implements List {
      * @return
      */
     @Override
-    public Data getFirst() {
+    public Object getFirst() {
         if (this.isEmpty()) {
             throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);
         }
@@ -144,7 +144,7 @@ public class SingleLinkedList implements List {
      * @return
      */
     @Override
-    public Data getLast() {
+    public Object getLast() {
         return this.getLastNode().getValue();
     }
 
@@ -273,7 +273,7 @@ public class SingleLinkedList implements List {
         /**
          *
          */
-        private Data value;
+        private Object value;
         /**
          *
          */
@@ -284,7 +284,7 @@ public class SingleLinkedList implements List {
          * @param nValue
          * @param nNext
          */
-        Node(final Data nValue, final Node nNext) {
+        Node(final Object nValue, final Node nNext) {
             this.value = nValue;
             this.next = nNext;
         }
@@ -315,9 +315,9 @@ public class SingleLinkedList implements List {
 
         /**
          *
-         * @return Data.
+         * @return Object.
          */
-        Data getValue() {
+        Object getValue() {
             return this.value;
         }
 
@@ -325,7 +325,7 @@ public class SingleLinkedList implements List {
          *
          * @param nValue
          */
-        void setValue(final Data nValue) {
+        void setValue(final Object nValue) {
             this.value = nValue;
         }
 

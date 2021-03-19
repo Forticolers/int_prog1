@@ -303,7 +303,7 @@ public class SingleDoubleEntryLinkedListTest {
 
     @Test
     public void testEquals() throws Exception {
-        List arrayList = new SingleLinkedList();
+        List arrayList = new SingleDoubleEntryLinkedList();
 
         for (int i = 0; i < 3; i++) {
             arrayList.add(elementsRef[i]);

@@ -6,12 +6,13 @@
 package ch.jeanbourquj.cifom.utils;
 
 import ch.jeanbourquj.cifom.domain.Data;
+import java.lang.annotation.Annotation;
 
 /**
  *
  * @author JeanbourquJ
  */
-public class QueueCirculaire {
+public class QueueCirculaire{
 
     private Integer tailleMax;
     private Integer number;

@@ -11,13 +11,13 @@ public interface List {
      *
      * @param value
      */
-    void add(Data value);
+    void add(Object value);
     /**
      *
      * @param index
      * @param value
      */
-    void add(int index, Data value);
+    void add(int index, Object value);
     /**
      *
      */
@@ -27,17 +27,17 @@ public interface List {
      * @param index
      * @return Data.
      */
-    Data get(int index);
+    Object get(int index);
     /**
      *
      * @return Data.
      */
-    Data getFirst();
+    Object getFirst();
     /**
      *
      * @return Data.
      */
-    Data getLast();
+    Object getLast();
     /**
      *
      * @return boolean.
