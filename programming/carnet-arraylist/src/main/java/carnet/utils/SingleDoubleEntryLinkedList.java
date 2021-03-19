@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.jeanbourquj.cifom.utils;
+package carnet.utils;
 
-import ch.jeanbourquj.cifom.domain.Data;
+import carnet.domain.Contact;
 import java.util.Objects;
 
 /**
@@ -57,7 +57,7 @@ public class SingleDoubleEntryLinkedList implements List {
      * @param value
      */
     @Override
-    public void add(final Data value) {
+    public void add(final Contact value) {
         this.add(this.size(), value);
     }
 
@@ -96,7 +96,7 @@ public class SingleDoubleEntryLinkedList implements List {
      * @param value
      */
     @Override
-    public void add(final int index, final Data value) {
+    public void add(final int index, final Contact value) {
         Node newNode = new Node(value, null);
         if (this.isEmpty() || (index == 0)) {
             newNode.setNext(first);
@@ -139,7 +139,7 @@ public class SingleDoubleEntryLinkedList implements List {
      * @return
      */
     @Override
-    public Data get(final int index) {
+    public Contact get(final int index) {
         return this.getNode(index).getValue();
     }
 
@@ -148,7 +148,7 @@ public class SingleDoubleEntryLinkedList implements List {
      * @return
      */
     @Override
-    public Data getFirst() {
+    public Contact getFirst() {
         if (this.isEmpty()) {
             throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);
         }
@@ -160,7 +160,7 @@ public class SingleDoubleEntryLinkedList implements List {
      * @return
      */
     @Override
-    public Data getLast() {
+    public Contact getLast() {
         return this.getLastNode().getValue();
     }
 
@@ -302,7 +302,7 @@ public class SingleDoubleEntryLinkedList implements List {
         /**
          *
          */
-        private Data value;
+        private Contact value;
         /**
          *
          */
@@ -313,7 +313,7 @@ public class SingleDoubleEntryLinkedList implements List {
          * @param nValue
          * @param nNext
          */
-        Node(final Data nValue, final Node nNext) {
+        Node(final Contact nValue, final Node nNext) {
             this.value = nValue;
             this.next = nNext;
         }
@@ -344,9 +344,9 @@ public class SingleDoubleEntryLinkedList implements List {
 
         /**
          *
-         * @return Data.
+         * @return Contact.
          */
-        Data getValue() {
+        Contact getValue() {
             return this.value;
         }
 
@@ -354,7 +354,7 @@ public class SingleDoubleEntryLinkedList implements List {
          *
          * @param nValue
          */
-        void setValue(final Data nValue) {
+        void setValue(final Contact nValue) {
             this.value = nValue;
         }
 

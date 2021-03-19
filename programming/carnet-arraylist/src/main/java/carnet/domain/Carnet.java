@@ -2,6 +2,7 @@ package carnet.domain;
 
 import carnet.utils.ArrayList;
 import carnet.utils.List;
+import carnet.utils.SingleDoubleEntryLinkedList;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Random;
@@ -17,7 +18,7 @@ public class Carnet {
     private final Random randomValue;
 
     public Carnet() {
-        this.contacts = new ArrayList();
+        this.contacts = new SingleDoubleEntryLinkedList();
         randomValue = new Random(Instant.now().getEpochSecond());
         
     }
