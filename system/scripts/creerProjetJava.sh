@@ -57,12 +57,12 @@ function main {
     createProject "$PROJECT" "$TYPE"
 }
 function createProject {
-	PROJ_NAME="$1"
-	PROJECT_DIRECTORY="$1"
+	PROJ_NAME="$(echo "$1"| sed 's/[[:space:]]//g')"
+	PROJECT_DIRECTORY="$(echo "$1"| sed 's/[[:space:]]//g')"
 	API_PACKAGE="$(echo "$PROJ_NAME" | sed 's/[[:space:]]//g')"
 	SOURCE_DIRECTORIES="$PROJECT_DIRECTORY/src/$API_PACKAGE"
 	JAVA_FILE="$SOURCE_DIRECTORIES/Main.java"
-	JAVA_FILE_REL="./src/$API_PACKAGE/Main.java"
+	JAVA_FILE_REL="$PROJECT_DIRECTORY/src/$API_PACKAGE/Main.java"
     AUTHOR="Jeanbourquin Julien"
 	BUILD_SCRIPT="$PROJ_NAME/build.sh"
 	CLEAN_SCRIPT="$PROJ_NAME/clean.sh"
@@ -102,13 +102,18 @@ function createMainFile {
 		echo "Create main file $JAVA_FILE"
 
 		cat <<-HELLOWORLDFUNC > "$JAVA_FILE"
-			package $(echo "$PROJ_NAME" | sed 's/[[:space:]]//g');
-			
-			public class Main {
-			    public static void main(String[] args){
-			        System.out.println("Hello World !");
-			    }
-			}			
+package $(echo "$PROJ_NAME" | sed 's/[[:space:]]//g');
+
+/**
+*
+* @author $AUTHOR
+*/
+
+public class Main {
+    public static void main(String[] args){
+        System.out.println("Hello World !");
+    }
+}			
 		HELLOWORLDFUNC
 	fi
 }
@@ -121,8 +126,8 @@ function createBashFiles {
 		# auteur : $AUTHOR
 		#
 
-		BUILD_PATH="./build"
-		SRC_PATH="./src"
+		BUILD_PATH="$PROJECT_DIRECTORY/build"
+		SRC_PATH="$PROJECT_DIRECTORY/src"
 
 		CLASS_DEST="\$BUILD_PATH/classes"
 		CLASS_PATH="\$CLASS_DEST"
@@ -157,8 +162,8 @@ function createBashFiles {
 		#
 		# auteur : $AUTHOR
 		#
-		if [ -d "./build" ]; then
-		  rm -r "./build"
+		if [ -d "$PROJECT_DIRECTORY/build" ]; then
+		  rm -r "$PROJECT_DIRECTORY/build"
 		fi
 	ENDOFSCRIPT
 	chmod u+x "$CLEAN_SCRIPT"
@@ -170,7 +175,7 @@ function createBashFiles {
 		#
 		# auteur : $AUTHOR
 		#
-		CLASS_PATH="./build/lib/$API_PACKAGE.jar"
+		CLASS_PATH="$PROJECT_DIRECTORY/build/lib/$API_PACKAGE.jar"
 		java -classpath \$CLASS_PATH "$API_PACKAGE.Main"
 	ENDOFSCRIPT
 	chmod u+x "$RUN_SCRIPT"
