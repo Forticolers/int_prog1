@@ -6,12 +6,13 @@
 package ch.jeanbourquj.cifom.utils;
 
 import ch.jeanbourquj.cifom.domain.Data;
+import java.lang.annotation.Annotation;
 
 /**
  *
  * @author JeanbourquJ
  */
-public class QueueCirculaire {
+public class QueueCirculaire{
 
     private Integer tailleMax;
     private Integer number;
@@ -33,13 +34,13 @@ public class QueueCirculaire {
      *
      * @param tailleQueue
      */
-<span class="fc" id="L36">    public QueueCirculaire(final int tailleQueue) {</span>
-<span class="fc" id="L37">        this.tailleMax = tailleQueue;</span>
-<span class="fc" id="L38">        this.number = 0;</span>
-<span class="fc" id="L39">        this.tete = -1;</span>
-<span class="fc" id="L40">        this.fin = -1;</span>
-<span class="fc" id="L41">        this.valeurs = new Data[this.tailleMax];</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L37">    public QueueCirculaire(final int tailleQueue) {</span>
+<span class="fc" id="L38">        this.tailleMax = tailleQueue;</span>
+<span class="fc" id="L39">        this.number = 0;</span>
+<span class="fc" id="L40">        this.tete = -1;</span>
+<span class="fc" id="L41">        this.fin = -1;</span>
+<span class="fc" id="L42">        this.valeurs = new Data[this.tailleMax];</span>
+<span class="fc" id="L43">    }</span>
 
     /**
      *
@@ -47,44 +48,44 @@ public class QueueCirculaire {
      * @throws RuntimeException
      */
     public void ajouter(final Data data) throws RuntimeException {
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (this.etrePlein()) {</span>
-<span class="fc" id="L51">            throw new RuntimeException(PILE_PLEINE);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (this.etrePlein()) {</span>
+<span class="fc" id="L52">            throw new RuntimeException(PILE_PLEINE);</span>
         }
-<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (this.number == 0) {</span>
-<span class="fc" id="L54">            this.tete = 0;</span>
-<span class="fc" id="L55">            this.fin = 0;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (this.number == 0) {</span>
+<span class="fc" id="L55">            this.tete = 0;</span>
+<span class="fc" id="L56">            this.fin = 0;</span>
         } else {
-<span class="fc" id="L57">            this.fin += 1;</span>
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">            if (this.fin &gt;= this.tailleMax) {</span>
-<span class="nc" id="L59">                this.fin = 0;</span>
+<span class="fc" id="L58">            this.fin += 1;</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">            if (this.fin &gt;= this.tailleMax) {</span>
+<span class="nc" id="L60">                this.fin = 0;</span>
             }
         }
-<span class="fc" id="L62">        this.number += 1;</span>
-<span class="fc" id="L63">        this.valeurs[this.fin] = data;</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L63">        this.number += 1;</span>
+<span class="fc" id="L64">        this.valeurs[this.fin] = data;</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      *
      */
     public void retirer() {
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (!this.etreVide()) {</span>
-<span class="fc" id="L71">            this.number -= 1;</span>
-<span class="fc" id="L72">            this.tete += 1;</span>
-<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            if (this.tete &gt;= this.tailleMax) {</span>
-<span class="nc" id="L74">                this.tete = 0;</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (!this.etreVide()) {</span>
+<span class="fc" id="L72">            this.number -= 1;</span>
+<span class="fc" id="L73">            this.tete += 1;</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">            if (this.tete &gt;= this.tailleMax) {</span>
+<span class="nc" id="L75">                this.tete = 0;</span>
             }
         }
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L78">    }</span>
 
     /**
      *
      * @return @throws RuntimeException
      */
     public Data retournerValeur() throws RuntimeException {
-<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
-<span class="nc" id="L85">            throw new RuntimeException(PILE_VIDE);</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (this.etreVide()) {</span>
+<span class="nc" id="L86">            throw new RuntimeException(PILE_VIDE);</span>
         }
-<span class="fc" id="L87">        return this.valeurs[this.tete];</span>
+<span class="fc" id="L88">        return this.valeurs[this.tete];</span>
     }
 
     /**
@@ -92,7 +93,7 @@ public class QueueCirculaire {
      * @return TRUE si la queue est pleine.
      */
     public boolean etrePlein() {
-<span class="fc bfc" id="L95" title="All 2 branches covered.">        return this.number == this.tailleMax;</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        return this.number == this.tailleMax;</span>
     }
 
     /**
@@ -100,7 +101,7 @@ public class QueueCirculaire {
      * @return TRUE si la queue est vide.
      */
     public boolean etreVide() {
-<span class="fc bfc" id="L103" title="All 2 branches covered.">        return this.number == 0;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        return this.number == 0;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

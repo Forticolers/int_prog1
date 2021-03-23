@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SingleDoubleEntryLinkedList_prof.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Datas</a> &gt; <a href="index.source.html" class="el_package">ch.jeanbourquj.cifom.utils</a> &gt; <span class="el_source">SingleDoubleEntryLinkedList_prof.java</span></div><h1>SingleDoubleEntryLinkedList_prof.java</h1><pre class="source lang-java linenums">package ch.jeanbourquj.cifom.utils;
+
+
+import ch.jeanbourquj.cifom.domain.Data;
+import java.util.Objects;
+
+/**
+ *
+ * @author dominique huguenin (dominique.huguenin at rpn.ch)
+ */
+public class SingleDoubleEntryLinkedList_prof implements List {
+
+<span class="nc" id="L13">    private Node first = null;</span>
+<span class="nc" id="L14">    private Node last = null;</span>
+<span class="nc" id="L15">    private int size = 0;</span>
+
+<span class="nc" id="L17">    public SingleDoubleEntryLinkedList_prof() {</span>
+<span class="nc" id="L18">    }</span>
+
+    public SingleDoubleEntryLinkedList_prof(List l) {
+<span class="nc" id="L21">        this();</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        if (!l.isEmpty()) {</span>
+<span class="nc" id="L23">            Node node = new Node(l.getFirst(), null);</span>
+<span class="nc" id="L24">            this.first = node;</span>
+<span class="nc" id="L25">            size += 1;</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">            for (int i = 1; i &lt; l.size(); i += 1) {</span>
+<span class="nc" id="L27">                Node next = new Node(l.get(i), null);</span>
+<span class="nc" id="L28">                node.setNext(next);</span>
+<span class="nc" id="L29">                node = next;</span>
+<span class="nc" id="L30">                size += 1;</span>
+            }
+<span class="nc" id="L32">            last = node;</span>
+        }
+<span class="nc" id="L34">    }</span>
+
+    private Node getNode(int index) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (isEmpty()) {</span>
+<span class="nc" id="L38">            throw new IndexOutOfBoundsException(&quot;Erreur: Liste vide!&quot;);</span>
+        }
+<span class="nc bnc" id="L40" title="All 4 branches missed.">        if (index &lt; 0 || size &lt;= index) {</span>
+<span class="nc" id="L41">            throw new IndexOutOfBoundsException(&quot;Index est host limite!&quot;);</span>
+        }
+
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (index == 0) {</span>
+<span class="nc" id="L45">            return first;</span>
+        }
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (index == size - 1) {</span>
+<span class="nc" id="L49">            return last;</span>
+        }
+
+<span class="nc" id="L52">        Node node = first;</span>
+<span class="nc" id="L53">        int pos = 0;</span>
+<span class="nc bnc" id="L54" title="All 4 branches missed.">        while ((node.getNext() != null) &amp;&amp; (pos &lt; index)) {</span>
+<span class="nc" id="L55">            node = node.getNext();</span>
+<span class="nc" id="L56">            pos++;</span>
+        }
+<span class="nc" id="L58">        return node;</span>
+    }
+
+    private void addFirst(Object value) {
+<span class="nc" id="L62">        first = new Node(value, first);</span>
+<span class="nc" id="L63">        size++;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (this.size() == 1) {</span>
+<span class="nc" id="L65">            last = first;</span>
+        }
+<span class="nc" id="L67">    }</span>
+
+    @Override
+    public void add(Object value) {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (isEmpty()) {</span>
+<span class="nc" id="L72">            this.addFirst(value);</span>
+        } else {
+<span class="nc" id="L74">            Node node = new Node(value, null);</span>
+<span class="nc" id="L75">            last.setNext(node);</span>
+<span class="nc" id="L76">            last = node;</span>
+<span class="nc" id="L77">            size++;</span>
+        }
+<span class="nc" id="L79">    }</span>
+
+    @Override
+    public void add(int index, Object value) {
+<span class="nc" id="L83">        Node newNode = new Node(value, null);</span>
+<span class="nc bnc" id="L84" title="All 4 branches missed.">        if (this.isEmpty() || (index == 0)) {</span>
+<span class="nc" id="L85">            newNode.setNext(first);</span>
+<span class="nc" id="L86">            first = newNode;</span>
+        } else {
+<span class="nc" id="L88">            Node node = this.getNode(index - 1);</span>
+<span class="nc" id="L89">            newNode.setNext(node.getNext());</span>
+<span class="nc" id="L90">            node.setNext(newNode);</span>
+        }
+<span class="nc" id="L92">        size++;</span>
+<span class="nc" id="L93">    }</span>
+
+    @Override
+    public void clear() {
+<span class="nc" id="L97">        first = null;</span>
+<span class="nc" id="L98">        last = null;</span>
+<span class="nc" id="L99">        size = 0;</span>
+<span class="nc" id="L100">    }</span>
+
+    @Override
+    public Object get(int index) {
+<span class="nc" id="L104">        return this.getNode(index).getValue();</span>
+
+    }
+
+    @Override
+    public Object getFirst() {
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (isEmpty()) {</span>
+<span class="nc" id="L111">            throw new IndexOutOfBoundsException(&quot;Erreur: Liste vide!&quot;);</span>
+        }
+
+<span class="nc" id="L114">        return first.getValue();</span>
+    }
+
+    @Override
+    public Object getLast() {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (isEmpty()) {</span>
+<span class="nc" id="L120">            throw new IndexOutOfBoundsException(&quot;Erreur: Liste vide!&quot;);</span>
+        }
+
+<span class="nc" id="L123">        return last.getValue();</span>
+    }
+
+    @Override
+    public boolean isEmpty() {
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        return first == null;</span>
+    }
+
+    @Override
+    public void remove() {
+<span class="nc" id="L133">        this.remove(this.size() - 1);</span>
+<span class="nc" id="L134">    }</span>
+
+    @Override
+    public void remove(int index) {
+<span class="nc" id="L138">        Node node = this.getNode(index);</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (index == 0) {</span>
+<span class="nc" id="L140">            this.first = node.getNext();</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">            if (this.first == null</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">                    || this.first.getNext() == null) {</span>
+<span class="nc" id="L143">                this.last = this.first;</span>
+            }
+        } else {
+<span class="nc" id="L146">            Node precedent = this.getNode(index - 1);</span>
+<span class="nc" id="L147">            precedent.setNext(node.getNext());</span>
+
+<span class="nc bnc" id="L149" title="All 2 branches missed.">            if (precedent.getNext() == null) {</span>
+<span class="nc" id="L150">                this.last = precedent;</span>
+            }
+        }
+<span class="nc" id="L153">        size--;</span>
+<span class="nc" id="L154">    }</span>
+
+    @Override
+    public int size() {
+<span class="nc" id="L158">        return size;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L163">        return &quot;SingleDoubleEntryLinkedList{&quot; + &quot;first=&quot; + first</span>
+                + &quot;, size=&quot; + size + '}';
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L169">        int hash = 7;</span>
+<span class="nc" id="L170">        hash = 79 * hash + Objects.hashCode(this.first);</span>
+<span class="nc" id="L171">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L177">            return true;</span>
+        }
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L180">            return false;</span>
+        }
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        if (!(obj instanceof List)) {</span>
+<span class="nc" id="L183">            return false;</span>
+        }
+<span class="nc" id="L185">        final List list = (List) obj;</span>
+
+<span class="nc" id="L187">        boolean sts = false;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        if (this.size() == list.size()) {</span>
+<span class="nc" id="L189">            sts = true;</span>
+<span class="nc" id="L190">            int index = 0;</span>
+<span class="nc bnc" id="L191" title="All 4 branches missed.">            while ((index &lt; this.size()) &amp;&amp; (sts == true)) {</span>
+<span class="nc" id="L192">                sts = this.get(index).equals(list.get(index));</span>
+<span class="nc" id="L193">                index++;</span>
+            }
+        }
+
+<span class="nc" id="L197">        return sts;</span>
+    }
+
+    private class Node {
+
+        private Object value;
+        private Node next;
+
+<span class="nc" id="L205">        Node(Object value, Node next) {</span>
+<span class="nc" id="L206">            this.value = value;</span>
+<span class="nc" id="L207">            this.next = next;</span>
+<span class="nc" id="L208">        }</span>
+
+        Node(Node n) {
+<span class="nc" id="L211">            this(n.getValue(), n.getNext());</span>
+<span class="nc" id="L212">        }</span>
+
+        Node getNext() {
+<span class="nc" id="L215">            return this.next;</span>
+        }
+
+        void setNext(Node next) {
+<span class="nc" id="L219">            this.next = next;</span>
+<span class="nc" id="L220">        }</span>
+
+        Object getValue() {
+<span class="nc" id="L223">            return value;</span>
+        }
+
+        void setValue(Object value) {
+<span class="nc" id="L227">            this.value = value;</span>
+<span class="nc" id="L228">        }</span>
+
+        @Override
+        public int hashCode() {
+<span class="nc" id="L232">            int hash = 7;</span>
+<span class="nc" id="L233">            hash = 79 * hash + Objects.hashCode(this.value);</span>
+<span class="nc" id="L234">            return hash;</span>
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (this == obj) {</span>
+<span class="nc" id="L240">                return true;</span>
+            }
+<span class="nc bnc" id="L242" title="All 2 branches missed.">            if (obj == null) {</span>
+<span class="nc" id="L243">                return false;</span>
+            }
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L246">                return false;</span>
+            }
+<span class="nc" id="L248">            final Node other = (Node) obj;</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">            if (!Objects.equals(this.value, other.value)) {</span>
+<span class="nc" id="L250">                return false;</span>
+            }
+<span class="nc" id="L252">            return true;</span>
+        }
+
+        @Override
+        public String toString() {
+<span class="nc" id="L257">            return &quot;Node{&quot; + &quot;value=&quot; + value + &quot;, next=&quot; + next + '}';</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
