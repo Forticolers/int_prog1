@@ -3,6 +3,7 @@ function printUsage {
 	printf "Help: Create Java project structure\n"
 	printf "\t$0 [--type=(maven|bash)] --projet=<nomProjet>\n"
 	printf "\t--type=maven par défaut.\n"
+    printf "\tNote:If the name contains spaces, they'll be removed.\n"
 }
 function isSourced {
     if [ $1 == 'exit' ];
