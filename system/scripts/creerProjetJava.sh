@@ -62,6 +62,7 @@ function createProject {
 	PROJECT_DIRECTORY="$(echo "$1"| sed 's/[[:space:]]//g')"
 	API_PACKAGE="$(echo "$PROJ_NAME" | sed 's/[[:space:]]//g')"
 	SOURCE_DIRECTORIES="$PROJECT_DIRECTORY/src/$API_PACKAGE"
+    TEST_DIRECTORIES="$PROJECT_DIRECTORY/src/test"
 	JAVA_FILE="$SOURCE_DIRECTORIES/Main.java"
 	JAVA_FILE_REL="$PROJECT_DIRECTORY/src/$API_PACKAGE/Main.java"
     AUTHOR="Jeanbourquin Julien"
@@ -94,6 +95,10 @@ function createDirectories {
 
 	if [ ! -d "$SOURCE_DIRECTORIES" ]; then
 		mkdir -p "$SOURCE_DIRECTORIES"
+	fi
+
+    if [ ! -d "$TEST_DIRECTORIES" ]; then
+		mkdir -p "$TEST_DIRECTORIES"
 	fi
 }
 
