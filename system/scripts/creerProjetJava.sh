@@ -97,9 +97,9 @@ function createDirectories {
 		mkdir -p "$SOURCE_DIRECTORIES"
 	fi
 
-    if [ ! -d "$TEST_DIRECTORIES" ]; then
-		mkdir -p "$TEST_DIRECTORIES"
-	fi
+   # if [ ! -d "$TEST_DIRECTORIES" ]; then
+   #	mkdir -p "$TEST_DIRECTORIES"
+   #fi
 }
 
 function createMainFile {
