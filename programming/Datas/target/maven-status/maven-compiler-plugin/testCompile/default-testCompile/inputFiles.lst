@@ -1,7 +1,10 @@
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/utils/ArrayListTest.java
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/utils/FixArrayListTest.java
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/utils/PileTest.java
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/utils/FixArrayListTest2.java
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/utils/QueueTest.java
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/DataTest.java
-/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/utils/QueueCirculaireTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/QueueCirculaireTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/SingleDoubleEntryLinkedListTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/FixArrayListTest2.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/FixArrayListTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/domain/DataTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/PileTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/LinkedListTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/ArrayListTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/QueueTest.java
+/home/jeanbourquj/GIT_REPO/int_prog1/programming/Datas/src/test/java/ch/jeanbourquj/cifom/utils/SingleLinkedListTest.java

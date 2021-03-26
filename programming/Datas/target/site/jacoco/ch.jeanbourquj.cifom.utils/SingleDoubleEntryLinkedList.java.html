@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SingleDoubleEntryLinkedList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Datas</a> &gt; <a href="index.source.html" class="el_package">ch.jeanbourquj.cifom.utils</a> &gt; <span class="el_source">SingleDoubleEntryLinkedList.java</span></div><h1>SingleDoubleEntryLinkedList.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ch.jeanbourquj.cifom.utils;
+
+import java.util.Objects;
+
+/**
+ * A rather unsignificative change.
+ * @author JeanbourquJ
+ */
+public class SingleDoubleEntryLinkedList implements List {
+
+    /**
+     *
+     */
+    public static final String ERREUR_LISTE_VIDE = &quot;Erreur: Liste vide!&quot;;
+
+    /**
+     *
+     */
+    public static final String INDEX_HORS_LIMITE = &quot;Index est hors limite!&quot;;
+    /**
+     *
+     */
+<span class="fc" id="L28">    private Node first = null;</span>
+    /**
+     *
+     */
+<span class="fc" id="L32">    private Node last = null;</span>
+
+    /**
+     *
+     */
+<span class="fc" id="L37">    public SingleDoubleEntryLinkedList() {</span>
+
+<span class="fc" id="L39">    }</span>
+
+    /**
+     *
+     * @param l
+     */
+<span class="fc" id="L45">    public SingleDoubleEntryLinkedList(final List l) {</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (l == null) {</span>
+<span class="nc" id="L47">            throw new RuntimeException(&quot;Liste passée en paramètre est nulle&quot;);</span>
+        }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (int i = 0; i &lt; l.size(); i++) {</span>
+<span class="fc" id="L50">            this.add(l.get(i));</span>
+        }
+<span class="fc" id="L52">    }</span>
+
+    /**
+     *
+     * @param value
+     */
+    @Override
+    public void add(final Object value) {
+<span class="fc" id="L60">        this.add(this.size(), value);</span>
+<span class="fc" id="L61">    }</span>
+
+    private Node getLastNode() {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (this.isEmpty()) {</span>
+<span class="fc" id="L65">            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);</span>
+        }
+<span class="fc" id="L67">        return this.last;</span>
+    }
+
+    private Node getNode(final int index) {
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (isEmpty()) {</span>
+<span class="nc" id="L72">            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);</span>
+        }
+<span class="fc" id="L74">        Node node = first;</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (node != null) {</span>
+<span class="fc" id="L76">            int pos = 0;</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">            if(index == this.size()-1){</span>
+<span class="fc" id="L78">                return this.last;</span>
+            }
+<span class="pc bpc" id="L80" title="1 of 4 branches missed.">            while ((node.getNext() != null) &amp;&amp; (pos &lt; index)) {</span>
+<span class="fc" id="L81">                node = node.getNext();</span>
+<span class="fc" id="L82">                pos++;</span>
+            }
+            
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">            if (pos != index) {</span>
+<span class="nc" id="L86">                throw new IndexOutOfBoundsException(INDEX_HORS_LIMITE);</span>
+            }
+        }
+<span class="fc" id="L89">        return node;</span>
+    }
+
+    /**
+     *
+     * @param index
+     * @param value
+     */
+    @Override
+    public void add(final int index, final Object value) {
+<span class="fc" id="L99">        Node newNode = new Node(value, null);</span>
+<span class="pc bpc" id="L100" title="1 of 4 branches missed.">        if (this.isEmpty() || (index == 0)) {</span>
+<span class="fc" id="L101">            newNode.setNext(first);</span>
+<span class="fc" id="L102">            first = newNode;</span>
+<span class="fc" id="L103">            last = newNode;</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        } else if (index == this.size()) {</span>
+<span class="fc" id="L105">            Node node = this.getLastNode();</span>
+<span class="fc" id="L106">            newNode.setNext(node.getNext());</span>
+<span class="fc" id="L107">            node.setNext(newNode);</span>
+<span class="fc" id="L108">            this.last = newNode;</span>
+<span class="fc" id="L109">        } else {</span>
+<span class="fc" id="L110">            Node node = this.getNode(index - 1);</span>
+<span class="fc" id="L111">            newNode.setNext(node.getNext());</span>
+<span class="fc" id="L112">            node.setNext(newNode);</span>
+        }
+<span class="fc" id="L114">    }</span>
+
+    /**
+     *
+     */
+    @Override
+    public void clear() {
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        if (!isEmpty()) {</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">            while (this.first != null) {</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">                if (this.first.next != null) {</span>
+<span class="fc" id="L124">                    Node tmp = first.next;</span>
+<span class="fc" id="L125">                    this.first = null;</span>
+<span class="fc" id="L126">                    this.first = tmp;</span>
+<span class="fc" id="L127">                } else {</span>
+<span class="fc" id="L128">                    this.first = null;</span>
+<span class="fc" id="L129">                    this.last = null;</span>
+                }
+            }
+        }
+<span class="fc" id="L133">    }</span>
+
+    /**
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public Object get(final int index) {
+<span class="fc" id="L142">        return this.getNode(index).getValue();</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Object getFirst() {
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (this.isEmpty()) {</span>
+<span class="fc" id="L152">            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);</span>
+        }
+<span class="fc" id="L154">        return this.first.getValue();</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Object getLast() {
+<span class="fc" id="L163">        return this.getLastNode().getValue();</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public boolean isEmpty() {
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        return first == null;</span>
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void remove() {
+<span class="fc" id="L180">        this.remove(this.size() - 1);</span>
+<span class="fc" id="L181">    }</span>
+
+    /**
+     *
+     * @param index
+     */
+    @Override
+    public void remove(final int index) {
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        if (this.isEmpty()) {</span>
+<span class="nc" id="L190">            throw new IndexOutOfBoundsException(ERREUR_LISTE_VIDE);</span>
+        }
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if (index &gt;= this.size()) {</span>
+<span class="nc" id="L193">            throw new IndexOutOfBoundsException(INDEX_HORS_LIMITE);</span>
+        }
+<span class="fc bfc" id="L195" title="All 2 branches covered.">        if (this.first.next != null) {</span>
+<span class="fc" id="L196">            Node next = this.getNode(index).getNext();</span>
+            Node previous;
+<span class="fc bfc" id="L198" title="All 2 branches covered.">            if (index != 0) {</span>
+<span class="fc" id="L199">                previous = this.getNode(index - 1);</span>
+
+<span class="fc" id="L201">                previous.next = next;</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">                if (index == this.size()) {</span>
+<span class="fc" id="L203">                    this.last = previous;</span>
+                }
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">            } else if (index == this.size()) {</span>
+<span class="nc" id="L206">                previous = this.getNode(index - 1);</span>
+
+<span class="nc" id="L208">                previous.next = next;</span>
+<span class="nc" id="L209">                this.last = previous;</span>
+            } else {
+<span class="fc" id="L211">                this.first = next;</span>
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">                if (index == this.size()) {</span>
+<span class="nc" id="L213">                    this.last = next;</span>
+                }
+            }
+<span class="fc" id="L216">        } else {</span>
+<span class="fc" id="L217">            this.first = null;</span>
+<span class="fc" id="L218">            this.last = null;</span>
+        }
+<span class="fc" id="L220">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int size() {
+<span class="fc" id="L228">        int size = 0;</span>
+
+<span class="fc" id="L230">        Node node = first;</span>
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        while (node != null) {</span>
+<span class="fc" id="L232">            size++;</span>
+<span class="fc" id="L233">            node = node.getNext();</span>
+        }
+<span class="fc" id="L235">        return size;</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L244">        return &quot;SingleLinkedList{&quot; + &quot;first=&quot; + first + '}';</span>
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode() {
+<span class="nc" id="L253">        int hash = MAGIC_NUM7;</span>
+<span class="nc" id="L254">        hash = MAGIC_NUM79 * hash + Objects.hashCode(this.first);</span>
+<span class="nc" id="L255">        return hash;</span>
+    }
+
+    /**
+     *
+     */
+    public static final int MAGIC_NUM7 = 7;
+
+    /**
+     *
+     */
+    public static final int MAGIC_NUM79 = 79;
+
+    /**
+     *
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(final Object obj) {
+<span class="pc bpc" id="L275" title="1 of 2 branches missed.">        if (this == obj) {</span>
+<span class="nc" id="L276">            return true;</span>
+        }
+<span class="pc bpc" id="L278" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L279">            return false;</span>
+        }
+<span class="pc bpc" id="L281" title="1 of 2 branches missed.">        if (!(obj instanceof List)) {</span>
+<span class="nc" id="L282">            return false;</span>
+        }
+<span class="fc" id="L284">        final List list = (List) obj;</span>
+
+<span class="fc" id="L286">        boolean sts = false;</span>
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">        if (this.size() == list.size()) {</span>
+<span class="fc" id="L288">            sts = true;</span>
+<span class="fc" id="L289">            int index = 0;</span>
+<span class="pc bpc" id="L290" title="1 of 4 branches missed.">            while ((index &lt; this.size()) &amp;&amp; (sts)) {</span>
+<span class="fc" id="L291">                sts = this.get(index).equals(list.get(index));</span>
+<span class="fc" id="L292">                index++;</span>
+            }
+        }
+
+<span class="fc" id="L296">        return sts;</span>
+    }
+
+    private static class Node {
+
+        /**
+         *
+         */
+        private Object value;
+        /**
+         *
+         */
+        private Node next;
+
+        /**
+         *
+         * @param nValue
+         * @param nNext
+         */
+<span class="fc" id="L315">        Node(final Object nValue, final Node nNext) {</span>
+<span class="fc" id="L316">            this.value = nValue;</span>
+<span class="fc" id="L317">            this.next = nNext;</span>
+<span class="fc" id="L318">        }</span>
+
+        /**
+         *
+         * @param n
+         */
+        Node(final Node n) {
+<span class="nc" id="L325">            this(n.getValue(), n.getNext());</span>
+<span class="nc" id="L326">        }</span>
+
+        /**
+         *
+         * @return Node.
+         */
+        Node getNext() {
+<span class="fc" id="L333">            return this.next;</span>
+        }
+
+        /**
+         *
+         * @param nNext
+         */
+        void setNext(final Node nNext) {
+<span class="fc" id="L341">            this.next = nNext;</span>
+<span class="fc" id="L342">        }</span>
+
+        /**
+         *
+         * @return Object.
+         */
+        Object getValue() {
+<span class="fc" id="L349">            return this.value;</span>
+        }
+
+        /**
+         *
+         * @param nValue
+         */
+        void setValue(final Object nValue) {
+<span class="nc" id="L357">            this.value = nValue;</span>
+<span class="nc" id="L358">        }</span>
+
+        /**
+         *
+         * @return
+         */
+        @Override
+        public int hashCode() {
+<span class="nc" id="L366">            int hash = MAGIC_NUM7;</span>
+<span class="nc" id="L367">            hash = MAGIC_NUM79 * hash + Objects.hashCode(this.value);</span>
+<span class="nc" id="L368">            return hash;</span>
+        }
+
+        /**
+         *
+         * @param obj
+         * @return
+         */
+        @Override
+        public boolean equals(final Object obj) {
+<span class="nc bnc" id="L378" title="All 2 branches missed.">            if (this == obj) {</span>
+<span class="nc" id="L379">                return true;</span>
+            }
+<span class="nc bnc" id="L381" title="All 2 branches missed.">            if (obj == null) {</span>
+<span class="nc" id="L382">                return false;</span>
+            }
+<span class="nc bnc" id="L384" title="All 2 branches missed.">            if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L385">                return false;</span>
+            }
+<span class="nc" id="L387">            final SingleDoubleEntryLinkedList.Node other</span>
+                    = (SingleDoubleEntryLinkedList.Node) obj;
+<span class="nc bnc" id="L389" title="All 2 branches missed.">            if (!Objects.equals(this.value, other.value)) {</span>
+<span class="nc" id="L390">                return false;</span>
+            }
+<span class="nc" id="L392">            return true;</span>
+        }
+
+        /**
+         *
+         * @return
+         */
+        @Override
+        public String toString() {
+<span class="fc" id="L401">            return &quot;Node{&quot; + &quot;value=&quot; + value + &quot;, next=&quot; + next + '}';</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

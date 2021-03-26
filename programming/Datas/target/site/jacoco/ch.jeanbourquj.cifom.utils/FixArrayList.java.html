@@ -50,12 +50,12 @@ public class FixArrayList {
      * @param list FixArrayList.
      */
 <span class="nc" id="L52">    public FixArrayList(final FixArrayList list) {</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(list == null){</span>
-<span class="nc" id="L54">            throw new  RuntimeException(&quot;Liste passée en paramètre est nulle&quot;);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (list == null) {</span>
+<span class="nc" id="L54">            throw new RuntimeException(&quot;Liste passée en paramètre est nulle&quot;);</span>
         }
 <span class="nc" id="L56">        this.size = list.size;</span>
 <span class="nc" id="L57">        this.values = new Data[list.values.length];</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">        for(int i = 0; i &lt; this.size; i++){</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (int i = 0; i &lt; this.size; i++) {</span>
 <span class="nc" id="L59">            this.values[i] = list.values[i];</span>
         }
 <span class="nc" id="L61">    }</span>
