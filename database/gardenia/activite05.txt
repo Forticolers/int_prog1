@@ -1,0 +1,111 @@
+DROP INDEX
+ count  |  level  
+--------+---------
+      2 | INFO
+ 109938 | SEVERE
+  27446 | WARNING
+(3 rows)
+
+                                                                                                           QUERY PLAN                                                                                                           
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=267463.10..267463.86 rows=3 width=13)
+   Output: count(*), level
+   Group Key: e.level
+   ->  Gather Merge  (cost=267463.10..267463.80 rows=6 width=13)
+         Output: level, (PARTIAL count(*))
+         Workers Planned: 2
+         ->  Sort  (cost=266463.08..266463.09 rows=3 width=13)
+               Output: level, (PARTIAL count(*))
+               Sort Key: e.level
+               ->  Partial HashAggregate  (cost=266463.03..266463.06 rows=3 width=13)
+                     Output: level, PARTIAL count(*)
+                     Group Key: e.level
+                     ->  Parallel Seq Scan on public.evenements e  (cost=0.00..266205.01 rows=51604 width=5)
+                           Output: uuid, version, date, level, message, etre_quittance, peripheriques_uuid, date_creation, user_creation, date_modification, user_modification, date_suppression, user_suppression, taches_uuid
+                           Filter: ((NOT e.etre_quittance) AND (e.level <> 'CONFIG'::text))
+ JIT:
+   Functions: 8
+   Options: Inlining false, Optimization false, Expressions true, Deforming true
+(18 rows)
+
+                                                                                                           QUERY PLAN                                                                                                           
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=267463.10..267463.86 rows=3 width=13) (actual time=879.443..881.116 rows=3 loops=1)
+   Output: count(*), level
+   Group Key: e.level
+   ->  Gather Merge  (cost=267463.10..267463.80 rows=6 width=13) (actual time=879.433..881.103 rows=8 loops=1)
+         Output: level, (PARTIAL count(*))
+         Workers Planned: 2
+         Workers Launched: 2
+         ->  Sort  (cost=266463.08..266463.09 rows=3 width=13) (actual time=846.804..846.807 rows=3 loops=3)
+               Output: level, (PARTIAL count(*))
+               Sort Key: e.level
+               Sort Method: quicksort  Memory: 25kB
+               Worker 0:  actual time=820.039..820.041 rows=3 loops=1
+                 Sort Method: quicksort  Memory: 25kB
+                 JIT:
+                   Functions: 8
+                   Options: Inlining false, Optimization false, Expressions true, Deforming true
+                   Timing: Generation 1.336 ms, Inlining 0.000 ms, Optimization 0.582 ms, Emission 8.450 ms, Total 10.368 ms
+               Worker 1:  actual time=842.108..842.110 rows=2 loops=1
+                 Sort Method: quicksort  Memory: 25kB
+                 JIT:
+                   Functions: 8
+                   Options: Inlining false, Optimization false, Expressions true, Deforming true
+                   Timing: Generation 0.842 ms, Inlining 0.000 ms, Optimization 0.620 ms, Emission 8.951 ms, Total 10.413 ms
+               ->  Partial HashAggregate  (cost=266463.03..266463.06 rows=3 width=13) (actual time=846.761..846.763 rows=3 loops=3)
+                     Output: level, PARTIAL count(*)
+                     Group Key: e.level
+                     Batches: 1  Memory Usage: 24kB
+                     Worker 0:  actual time=819.986..819.988 rows=3 loops=1
+                       Batches: 1  Memory Usage: 24kB
+                     Worker 1:  actual time=842.041..842.043 rows=2 loops=1
+                       Batches: 1  Memory Usage: 24kB
+                     ->  Parallel Seq Scan on public.evenements e  (cost=0.00..266205.01 rows=51604 width=5) (actual time=9.379..821.073 rows=45795 loops=3)
+                           Output: uuid, version, date, level, message, etre_quittance, peripheriques_uuid, date_creation, user_creation, date_modification, user_modification, date_suppression, user_suppression, taches_uuid
+                           Filter: ((NOT e.etre_quittance) AND (e.level <> 'CONFIG'::text))
+                           Rows Removed by Filter: 2154013
+                           Worker 0:  actual time=9.434..795.785 rows=42556 loops=1
+                           Worker 1:  actual time=10.058..816.848 rows=44792 loops=1
+ Planning Time: 0.084 ms
+ JIT:
+   Functions: 27
+   Options: Inlining false, Optimization false, Expressions true, Deforming true
+   Timing: Generation 3.428 ms, Inlining 0.000 ms, Optimization 1.612 ms, Emission 25.011 ms, Total 30.051 ms
+ Execution Time: 882.474 ms
+(43 rows)
+
+CREATE INDEX
+ count  |  level  
+--------+---------
+ 109938 | SEVERE
+  27446 | WARNING
+      2 | INFO
+(3 rows)
+
+                                                                                                  QUERY PLAN                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=55023.92..55023.95 rows=3 width=13)
+   Output: count(*), level
+   Group Key: e.level
+   ->  Index Scan using idx_etre_quittancee on public.evenements e  (cost=0.43..54404.67 rows=123849 width=5)
+         Output: uuid, version, date, level, message, etre_quittance, peripheriques_uuid, date_creation, user_creation, date_modification, user_modification, date_suppression, user_suppression, taches_uuid
+         Index Cond: (e.etre_quittance = false)
+         Filter: (e.level <> 'CONFIG'::text)
+(7 rows)
+
+                                                                                                  QUERY PLAN                                                                                                  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=55023.92..55023.95 rows=3 width=13) (actual time=839.774..839.781 rows=3 loops=1)
+   Output: count(*), level
+   Group Key: e.level
+   Batches: 1  Memory Usage: 24kB
+   ->  Index Scan using idx_etre_quittancee on public.evenements e  (cost=0.43..54404.67 rows=123849 width=5) (actual time=0.100..703.350 rows=137386 loops=1)
+         Output: uuid, version, date, level, message, etre_quittance, peripheriques_uuid, date_creation, user_creation, date_modification, user_modification, date_suppression, user_suppression, taches_uuid
+         Index Cond: (e.etre_quittance = false)
+         Filter: (e.level <> 'CONFIG'::text)
+         Rows Removed by Filter: 31
+ Planning Time: 0.111 ms
+ Execution Time: 839.824 ms
+(11 rows)
+

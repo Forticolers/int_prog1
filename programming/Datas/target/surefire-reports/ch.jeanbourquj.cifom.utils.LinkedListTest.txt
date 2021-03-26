@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: ch.jeanbourquj.cifom.utils.LinkedListTest
 -------------------------------------------------------------------------------
-Tests run: 23, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.133 s - in ch.jeanbourquj.cifom.utils.LinkedListTest
+Tests run: 23, Failures: 1, Errors: 0, Skipped: 2, Time elapsed: 0.195 s <<< FAILURE! - in ch.jeanbourquj.cifom.utils.LinkedListTest
+testEquals(ch.jeanbourquj.cifom.utils.LinkedListTest)  Time elapsed: 0.009 s  <<< FAILURE!
+java.lang.AssertionError: expected: ch.jeanbourquj.cifom.utils.LinkedList<ch.jeanbourquj.cifom.utils.LinkedList@ccd9c6> but was: ch.jeanbourquj.cifom.utils.LinkedList<ch.jeanbourquj.cifom.utils.LinkedList@ccd9c6>
+	at ch.jeanbourquj.cifom.utils.LinkedListTest.testEquals(LinkedListTest.java:305)
+

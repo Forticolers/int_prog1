@@ -1,0 +1,8 @@
+--
+-- script psql de lancement du script
+--
+-- auteur : Dominique Huguenin (dominique.huguenin AT rpn.ch)
+--
+\i activite05.sql
+
+\q

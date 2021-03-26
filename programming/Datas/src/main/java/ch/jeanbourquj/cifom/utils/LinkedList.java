@@ -69,7 +69,19 @@ public class LinkedList implements List {
      * @param l
      */
     public LinkedList(List l) {
-
+        this();
+        if (!l.isEmpty()) {
+            Node node = new Node(l.getFirst(), null, null);
+            this.first = node;
+            size += 1;
+            for (int i = 1; i < l.size(); i += 1) {
+                Node next = new Node(l.get(i), node, null);
+                node.setNext(next);
+                node = next;
+                size += 1;
+            }
+            last = node;
+        }
     }
 
     private Node getNode(int index) {

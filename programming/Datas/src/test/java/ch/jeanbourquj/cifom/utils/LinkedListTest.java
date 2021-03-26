@@ -261,7 +261,7 @@ public class LinkedListTest {
             listRef.add(elementsRef[i]);
         }
 
-        List clone = new SingleDoubleEntryLinkedList(listRef);
+        List clone = new LinkedList(listRef);
 
         Assert.assertEquals("Erreur:La Liste devrait contenir 3 éléments!",
                 3, clone.size());
@@ -285,7 +285,7 @@ public class LinkedListTest {
             listRef.add(elementsRef[i]);
         }
 
-        List clone = new SingleDoubleEntryLinkedList(listRef);
+        List clone = new LinkedList(listRef);
 
         clone.remove();
         Assert.assertEquals(elementsRef[2], listRef.get(2));
