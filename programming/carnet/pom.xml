@@ -5,6 +5,7 @@
     <artifactId>carnet</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
+    <name>carnet</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -55,7 +56,7 @@
                         <archive>
                             <manifest>
                                 <addClasspath>true</addClasspath>        
-                                <mainClass>${artifactId}.Main</mainClass>
+                                <mainClass>${groupId}.${artifactId}.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
@@ -116,5 +117,5 @@
             </plugin>
         </plugins>
     </reporting>
-    <name>carnet</name>
+    
 </project>
