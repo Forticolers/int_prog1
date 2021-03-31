@@ -24,30 +24,24 @@ import java.util.logging.Logger;
  * @author JeanbourquJ
  */
 public class ContactReader {
-
     private String pathFile;
     private File file;
     private Carnet carnet;
-
     public ContactReader(String vPathFile) {
         this.pathFile = vPathFile;
         file = new File(this.pathFile);
         if (!new File(this.pathFile).exists()) {
             try {
                 file.createNewFile();
-                
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
-
     }
-
     private void read() {
         this.carnet = new Carnet();
         try (BufferedReader reader
                 = new BufferedReader(new FileReader(this.file))) {
-
             Adresse adresse;
             Identifiant id;
             Contact contact;
@@ -61,10 +55,8 @@ public class ContactReader {
                 String localite = reader.readLine();
                 String npa = reader.readLine();
                 String rue = reader.readLine();
-
                 LocalDate dateNaissance = LocalDate.parse(dateString);
                 contact.setNom(nom);
-
                 contact.setDateNaissance(dateNaissance);
                 adresse = new Adresse();
                 adresse.setLocalite(localite);
@@ -80,7 +72,6 @@ public class ContactReader {
             System.out.println("Fin de la lecture du fichier");
         }
     }
-
     public Carnet readFile() {
         read();
         return this.carnet;

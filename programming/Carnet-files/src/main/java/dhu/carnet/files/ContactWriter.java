@@ -32,13 +32,11 @@ public class ContactWriter {
     public void writeInFile() {
         this.writeInFile(true);
     }
-
     private void write() {
         try (PrintWriter writer 
                 = new PrintWriter(new FileWriter(this.file), true)) {
             System.out.println("\nEnregistrement des contacts");
             for (Contact contact : this.contacts) {
-
                 writer.println(contact.getIdentifiant().getId());
                 writer.println(contact.getNom());
                 writer.println(contact.getDateNaissance());
@@ -52,7 +50,6 @@ public class ContactWriter {
             System.out.println("Fin de l'enregistrement des contacts");
         }
     }
-
     public void writeInFile(boolean bOverWrite) {
         if (!file.exists()) {
             write();
