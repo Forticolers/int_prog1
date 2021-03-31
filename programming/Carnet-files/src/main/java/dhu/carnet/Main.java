@@ -20,7 +20,7 @@ public class Main {
             console.execute();
             }catch(Exception ex){
                 System.out.printf("If you want to use parameters, the first one should be the file path (if it's in a folder you must create the corresponding folders).\nAnd the second one if wether or not you want to read data from Carnet.getInstanceDemo() or from the file.");
-                RuntimeException(ex);
+                throw new RuntimeException(ex);
             }
         }
     }
