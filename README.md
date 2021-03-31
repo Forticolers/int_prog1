@@ -2,7 +2,7 @@
 
 #### TODO :
 
-[ ] Mettre à jours les liens ici.
+- [ ] Mettre à jours les liens ici.
 
 ### Liens vers :
 
