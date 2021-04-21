@@ -342,4 +342,59 @@ or other application using the libvirt API.
 
 ## Clones
 
---todo
+#### Clone KVM --> KVM
+
+Pour cloner une machine localement, on peut simplement utiliser `virt-clone` .
+
+```bash
+#Clone of vm1 to vm2 with file ./vm2disk.img as storage file.
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ virt-clone --original vm1 -n vm2 -f ./vm2disk.img
+```
+
+En revanche pour cloner sur une machine distante, il faut copier manuellement les fichiers sources et de configuration de la machine virtuelle.
+
+```bash
+#Copie du fichier xml de la vm
+#NOTE: Modifier le fichier xml afin qu'il corresponde au besoin (modifier le nom, supprimer uuid et mac addresse, etc)
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ virsh -c qemu:///system dumpxml vm1 > ./vm3.xml
+
+#Copie du fichier de stockage de la vm
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ scp vm1disk.img ubuntu@hoteDistant:~/vm3disk.img
+
+#Inscrire la machine dans virsh
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ virsh -c qemu+ssh://ubuntu@hoteDistant/system define
+```
+
+#### Clone KVM --> LVM
+
+Pour créer un volume logique de 4 Gigabit il faut utiliser `lvcreate` .
+
+```bash
+#NOTE: Attention au manipulation en root
+root@MC0-0315-JJU:/home/jeanbourquj/virtualisation/virtdisk# lvcreate -n vm3 -L 4G MC0-0315-JJU-VG
+```
+
+Ensuite pour copier les données du fichier `.img` on peut utiliser la commande `dd`
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ sudo dd if=./vm1disk.img of=/dev/MC0-0315-JJU-VG/vm3
+8388608+0 enregistrements lus
+8388608+0 enregistrements écrits
+4294967296 octets (4.3 GB, 4.0 GiB) copiés, 252.645 s, 17.0 MB/s
+```
+
+Inscrire la nouvelle machine dans virsh: 
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ virsh -c qemu:///system define ./vm3.xml
+```
+
+##### Augmenter la taille d'un disque LVM
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvextend -L +2G /dev/MC0-0315-JJU-VG/vm3
+
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvs | grep vm3
+  vm3  MC0-0315-JJU-VG -wi-ao----   6.00g                                                    
+```
+
