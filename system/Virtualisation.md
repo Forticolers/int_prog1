@@ -699,3 +699,5 @@ tmpfs               48M       0   48M   0% /run/user/1000
 
 ```
 
+##### Augmenter la taille d'une machine virtuelle utilisant lvm
+
