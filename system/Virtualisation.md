@@ -827,9 +827,6 @@ ubuntu@vmLvm3:~$ pvcreate /dev/sda3
   /run/lock/lvm/P_global:aux: open failed: Permission non accordée
 ubuntu@vmLvm3:~$ sudo pvcreate /dev/sda3
   Physical volume "/dev/sda3" successfully created.
-ubuntu@vmLvm3:~$ pvs
-  WARNING: Running as a non-root user. Functionality may be unavailable.
-  /run/lock/lvm/P_global:aux: open failed: Permission non accordée
 ubuntu@vmLvm3:~$ sudo pvs
   PV         VG      Fmt  Attr PSize  PFree 
   /dev/sda3          lvm2 ---   2.00g  2.00g
@@ -878,6 +875,24 @@ jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvcreate -L 2GB -s -n vm3-s1
 
 > Note : `-s` permet la création d'une Snapshots
 
+###### Augmenter la taille d'une snapshot.
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvextend -L +1G /dev/MC0-0315-JJU-VG/vm3-s1
+  Size of logical volume MC0-0315-JJU-VG/vm3-s1 changed from 2.00 GiB (512 extents) to 3.00 GiB (768 extents).
+  Logical volume MC0-0315-JJU-VG/vm3-s1 successfully resized.
+```
+
+> Note : Au besoin, on peut augmenter la taille automatiquement, en changeant la configuration du fichier `/etc/lvm/lvm.conf` 
+>
+> ```bash
+>         snapshot_autoextend_threshold = 75
+>         snapshot_autoextend_percent = 20
+> ```
+>
+> * `snapshot_autoextend_threshold` est par défaut configuré à 100, en le mettant à 75, les Snapshots vont augmenter de 20% lorsqu'elle atteindront 75% de leur taille.
+> * `snapshot_autoextend_percent` correspond à l'augmentation de taille configurée.
+
 ###### Appliquer une snapshot.
 
 ```bash
@@ -896,5 +911,218 @@ jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvconvert --merge /dev/MC0-0
   MC0-0315-JJU-VG/vm3: Merged: 99.95%
   MC0-0315-JJU-VG/vm3: Merged: 100.00%
 
+```
+
+> Note : le volume logique `vm3-s1` se fait supprimé par `lvconvert --merge`
+
+##### Ajout de disque à une vm
+
+###### Création d'un nouveau disque
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo qemu-img create -f raw vol1VmLvm3.img 4G
+[sudo] Mot de passe de jeanbourquj : 
+Formatting 'vol1VmLvm3.img', fmt=raw size=4294967296
+```
+
+###### Attacher le disque à la vm
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ virsh attach-disk vmLvm3 --source ~/virtualisation/virtdisk/vol1VmLvm3.img --target sdb --persistent
+Disk attached successfully
+
+```
+
+###### Partitionner le disque sur la machine virtuel.
+
+```bash
+ubuntu@vmLvm3:~$ sudo fdisk /dev/sdb
+
+Bienvenue dans fdisk (util-linux 2.34).
+Les modifications resteront en mémoire jusqu'à écriture.
+Soyez prudent avant d'utiliser la commande d'écriture.
+
+Le périphérique ne contient pas de table de partitions reconnue.
+Création d'une nouvelle étiquette pour disque de type DOS avec identifiant de disque 0x32b65410.
+
+Commande (m pour l'aide) : n
+Type de partition
+   p   primaire (0 primaire, 0 étendue, 4 libre)
+   e   étendue (conteneur pour partitions logiques)
+Sélectionnez (p par défaut) : p
+Numéro de partition (1-4, 1 par défaut) : 1
+Premier secteur (2048-8388607, 2048 par défaut) : 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-8388607, 8388607 par défaut) : 
+
+Une nouvelle partition 1 de type « Linux » et de taille 4 GiB a été créée.
+
+Commande (m pour l'aide) : p
+Disque /dev/sdb : 4 GiB, 4294967296 octets, 8388608 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x32b65410
+
+Périphérique Amorçage Début     Fin Secteurs Taille Id Type
+/dev/sdb1              2048 8388607  8386560     4G 83 Linux
+
+Commande (m pour l'aide) : w
+La table de partitions a été altérée.
+Appel d'ioctl() pour relire la table de partitions.
+Synchronisation des disques.
+
+```
+
+###### Formater au format ext4
+
+```bash
+ubuntu@vmLvm3:~$ sudo mkfs.ext4 /dev/sdb1
+mke2fs 1.45.5 (07-Jan-2020)
+Rejet des blocs de périphérique : complété                            
+En train de créer un système de fichiers avec 1048320 4k blocs et 262144 i-noeuds.
+UUID de système de fichiers=74489e2f-fa57-4394-b29e-d7b689c97755
+Superblocs de secours stockés sur les blocs : 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736
+
+Allocation des tables de groupe : complété                            
+Écriture des tables d'i-noeuds : complété                            
+Création du journal (16384 blocs) : complété
+Écriture des superblocs et de l'information de comptabilité du système de
+fichiers : complété
+
+```
+
+###### Création d'un point de montage
+
+```bash
+ubuntu@vmLvm3:~$ sudo mkdir /disk2/
+ubuntu@vmLvm3:~$ sudo mount /dev/sdb1 /disk2/
+ubuntu@vmLvm3:~$ sudo vim /etc/fstab
+---- Modification dans le document /etc/fstab pour un montage au démarrage(++ signifie nouvelle ligne)
+
+[...]
+/dev/sdb1       /disk2  ext4                            0       0
+~
+
+```
+
+##### Création d'un nouveau volume logique
+
+###### Ajout de la partition
+
+```bash
+ubuntu@vmLvm3:~$ sudo fdisk -l
+Disque /dev/sda : 13 GiB, 13958643712 octets, 27262976 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x8ea0f371
+
+Périphérique Amorçage   Début      Fin Secteurs Taille Id Type
+/dev/sda1    *           2048  1050623  1048576   512M  b W95 FAT32
+/dev/sda2             1052670 10483711  9431042   4.5G  5 Étendue
+/dev/sda5             1052672 10483711  9431040   4.5G 8e LVM Linux
+
+
+
+
+Disque /dev/mapper/vgvmLvm-root : 3.53 GiB, 3774873600 octets, 7372800 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+
+
+Disque /dev/mapper/vgvmLvm-swap_1 : 976 MiB, 1023410176 octets, 1998848 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+ubuntu@vmLvm3:~$ sudo lvcreate -L 2G -n data vgvmLvm
+  Volume group "vgvmLvm" has insufficient free space (7 extents): 512 required.
+ubuntu@vmLvm3:~$ sudo fdisk /dev/sda
+
+Bienvenue dans fdisk (util-linux 2.34).
+Les modifications resteront en mémoire jusqu'à écriture.
+Soyez prudent avant d'utiliser la commande d'écriture.
+
+
+Commande (m pour l'aide) : p
+Disque /dev/sda : 13 GiB, 13958643712 octets, 27262976 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x8ea0f371
+
+Périphérique Amorçage   Début      Fin Secteurs Taille Id Type
+/dev/sda1    *           2048  1050623  1048576   512M  b W95 FAT32
+/dev/sda2             1052670 10483711  9431042   4.5G  5 Étendue
+/dev/sda5             1052672 10483711  9431040   4.5G 8e LVM Linux
+
+Commande (m pour l'aide) : n
+Type de partition
+   p   primaire (1 primaire, 1 étendue, 2 libre)
+   l   logique (numéroté à partir de 5)
+Sélectionnez (p par défaut) : p
+Numéro de partition (3,4, 3 par défaut) : 3
+Premier secteur (10483712-27262975, 10483712 par défaut) : 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (10483712-27262975, 27262975 par défaut) : 
+
+Une nouvelle partition 3 de type « Linux » et de taille 8 GiB a été créée.
+
+Commande (m pour l'aide) : t
+Numéro de partition (1-3,5, 5 par défaut) : 3
+Code Hexa (taper L pour afficher tous les codes) : 8e
+
+Type de partition « Linux » modifié en « Linux LVM ».
+
+Commande (m pour l'aide) : w
+La table de partitions a été altérée.
+Synchronisation des disques.
+
+
+```
+
+###### Création du volume logique
+
+```bash
+ubuntu@vmLvm3:~$ sudo vgextend /dev/vgvmLvm /dev/sda3
+  Volume group "vgvmLvm" successfully extended
+ubuntu@vmLvm3:~$ sudo lvcreate -L 2G -n data vgvmLvm
+  Logical volume "data" created.
+
+```
+
+###### Formatage en `ext4`
+
+```bash
+ubuntu@vmLvm3:/$ sudo mkfs.ext4 /dev/vgvmLvm/data
+mke2fs 1.45.5 (07-Jan-2020)
+Rejet des blocs de périphérique : complété                            
+En train de créer un système de fichiers avec 524288 4k blocs et 131072 i-noeuds.
+UUID de système de fichiers=9b370346-917a-456f-8877-ac33707f46fc
+Superblocs de secours stockés sur les blocs : 
+	32768, 98304, 163840, 229376, 294912
+
+Allocation des tables de groupe : complété                            
+Écriture des tables d'i-noeuds : complété                            
+Création du journal (16384 blocs) : complété
+Écriture des superblocs et de l'information de comptabilité du système de
+fichiers : complété
+
+```
+
+###### Point de montage
+
+```bash
+ubuntu@vmLvm3:/$ sudo mount /dev/vgvmLvm/data /mnt
+ubuntu@vmLvm3:/$ sudo vim /etc/fstab
+
+--- Ajout de la ligne suivante dans le document /etc/fstab
+/dev/vgvmLvm/data       /mnt    ext4    0       0
 ```
 
