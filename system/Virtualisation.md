@@ -1126,3 +1126,20 @@ ubuntu@vmLvm3:/$ sudo vim /etc/fstab
 /dev/vgvmLvm/data       /mnt    ext4    0       0
 ```
 
+###### Verification
+
+```bash
+ubuntu@vmLvm3:/mnt$ df -h
+Sys. de fichiers         Taille Utilisé Dispo Uti% Monté sur
+udev                       951M       0  951M   0% /dev
+tmpfs                      199M    748K  199M   1% /run
+/dev/mapper/vgvmLvm-root   3.4G    2.2G  1.1G  68% /
+tmpfs                      994M       0  994M   0% /dev/shm
+tmpfs                      5.0M       0  5.0M   0% /run/lock
+tmpfs                      994M       0  994M   0% /sys/fs/cgroup
+/dev/sda1                  511M    4.0K  511M   1% /boot/efi
+tmpfs                      199M       0  199M   0% /run/user/1000
+/dev/mapper/vgvmLvm-data   2.0G    6.0M  1.8G   1% /mnt
+
+```
+
