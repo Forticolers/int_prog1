@@ -342,4 +342,360 @@ or other application using the libvirt API.
 
 ## Clones
 
---todo
+#### Clone KVM --> KVM
+
+Pour cloner une machine localement, on peut simplement utiliser `virt-clone` .
+
+```bash
+#Clone of vm1 to vm2 with file ./vm2disk.img as storage file.
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ virt-clone --original vm1 -n vm2 -f ./vm2disk.img
+```
+
+En revanche pour cloner sur une machine distante, il faut copier manuellement les fichiers sources et de configuration de la machine virtuelle.
+
+```bash
+#Copie du fichier xml de la vm
+#NOTE: Modifier le fichier xml afin qu'il corresponde au besoin (modifier le nom, supprimer uuid et mac addresse, etc)
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ virsh -c qemu:///system dumpxml vm1 > ./vm3.xml
+
+#Copie du fichier de stockage de la vm
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ scp vm1disk.img ubuntu@hoteDistant:~/vm3disk.img
+
+#Inscrire la machine dans virsh
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ virsh -c qemu+ssh://ubuntu@hoteDistant/system define
+```
+
+#### Clone KVM --> LVM
+
+Pour créer un volume logique de 4 Gigabit il faut utiliser `lvcreate` .
+
+```bash
+#NOTE: Attention au manipulation en root
+root@MC0-0315-JJU:/home/jeanbourquj/virtualisation/virtdisk# lvcreate -n vm3 -L 4G MC0-0315-JJU-VG
+```
+
+Ensuite pour copier les données du fichier `.img` on peut utiliser la commande `dd`
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/virtdisk$ sudo dd if=./vm1disk.img of=/dev/MC0-0315-JJU-VG/vm3
+8388608+0 enregistrements lus
+8388608+0 enregistrements écrits
+4294967296 octets (4.3 GB, 4.0 GiB) copiés, 252.645 s, 17.0 MB/s
+```
+
+Inscrire la nouvelle machine dans virsh: 
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ virsh -c qemu:///system define ./vm3.xml
+```
+
+### Augmentation de la taille des stockages
+
+##### Augmenter la taille d'un volume logique contenant une machine virtuelle
+
+```
+---- État initial
+.---------------------------------.--------------.
+| LV - /dev/MC0-0315-JJU-VG/vm3   | 4G           | Hote
++---------------------------------+--------------+
+| /dev/vda     4GB                |              | disque Guest
++---------+-------------------------------------.+
+|/dev/vda1                        | /dev/vda2    | partition
+| primaire                        | étendue 3.5G |
+|                                 +--------------+
+|								  | /dev/vda5    |
+|								  | logique 3.5G |
++-----------+----------------------------------- +
+| /boot/efi | /                   .              |
+`-----------+------------------------------------'
+
+---- État final
+.---------------------------------.--------------+----------.
+| LV - /dev/MC0-0315-JJU-VG/vm3   | 4G           | +2G      |   Hote
++---------------------------------+--------------+----------+
+| /dev/vda     4GB                |              | +2G      |   Disque Guest
++---------+-------------------------------------.+----------+
+|/dev/vda1                        | /dev/vda2    | +2G		|   Partition
+| primaire                        | étendue 3.5G |          |
+|                                 +--------------+----------+
+|								  | /dev/vda5    | +2G      | 
+|								  | logique 3.5G |			|
++-----------+----------------------------------- +----------+
+| /boot/efi | /                   .              |          |
+`-----------+------------------------------------+----------'
+```
+
+
+
+###### Utilisation de l'espace disque par le système d'exploitation
+
+```bash
+ubuntu@vm3:~$ df -h
+Sys. de fichiers Taille Utilisé Dispo Uti% Monté sur
+udev               196M       0  196M   0% /dev
+tmpfs               48M    732K   48M   2% /run
+/dev/vda5          3.4G    2.9G  335M  90% /
+tmpfs              239M       0  239M   0% /dev/shm
+tmpfs              5.0M       0  5.0M   0% /run/lock
+tmpfs              239M       0  239M   0% /sys/fs/cgroup
+/dev/vda1          511M    4.0K  511M   1% /boot/efi
+tmpfs               48M       0   48M   0% /run/user/1000
+```
+
+###### Liste des disques et partitions
+
+```bash
+ubuntu@vm3:~$ sudo fdisk -l
+[sudo] Mot de passe de ubuntu : 
+Disque /dev/vda : 6 GiB, 6442450944 octets, 12582912 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x910a7e6a
+
+Périphérique Amorçage   Début     Fin Secteurs Taille Id Type
+/dev/vda1    *           2048 1050623  1048576   512M  b W95 FAT32
+/dev/vda2             1052670 8386559  7333890   3.5G  5 Étendue
+/dev/vda5             1052672 8386559  7333888   3.5G 83 Linux
+
+```
+
+###### Emplacement de la swap
+
+```bash
+ubuntu@vm3:~$ swapon -s
+Nom de fichier				Type		Taille	Utilisé	Priorité
+/swapfile                              	file    	166480	0	-2
+```
+
+###### Utilisation de la mémoire
+
+```bash
+ubuntu@vm3:~$ free -h
+              total       utilisé      libre     partagé tamp/cache   disponible
+Mem:          477Mi        98Mi       199Mi       0.0Ki       179Mi       359Mi
+Partition d'échange:       162Mi          0B       162Mi	
+```
+
+###### Agrandir de 2G le volume logique
+
+Si la machine est en marche, i faut d'abord l'arrêter.
+
+```bash
+jeanbourquj@MC0-0315-JJU:~$ sudo lvresize -L +2G /dev/MC0-0315-JJU-VG/vm3
+  Size of logical volume MC0-0315-JJU-VG/vm3 changed from 6.00 GiB (1536 extents) to 8.00 GiB (2048 extents).
+  Logical volume MC0-0315-JJU-VG/vm3 successfully resized.
+                                                   
+```
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvs | grep vm3
+  vm3  MC0-0315-JJU-VG -wi-ao----   8.00g   
+```
+
+```bash
+jeanbourquj@MC0-0315-JJU:~$ sudo lvdisplay /dev/MC0-0315-JJU-VG/vm3
+[sudo] Mot de passe de jeanbourquj : 
+  --- Logical volume ---
+  LV Path                /dev/MC0-0315-JJU-VG/vm3
+  LV Name                vm3
+  VG Name                MC0-0315-JJU-VG
+  LV UUID                LOFaEG-6f0b-9s5Q-u31S-Aljj-ikaN-lxtsVO
+  LV Write Access        read/write
+  LV Creation host, time MC0-0315-JJU, 2021-03-30 11:11:24 +0200
+  LV Status              available
+  # open                 1
+  LV Size                8.00 GiB
+  Current LE             2048
+  Segments               2
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:3
+
+```
+
+###### Nouvel taille de disque
+
+```bash
+ubuntu@vm3:~$ sudo fdisk -l
+Disque /dev/vda : 8 GiB, 8589934592 octets, 16777216 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x910a7e6a
+
+Périphérique Amorçage   Début     Fin Secteurs Taille Id Type
+/dev/vda1    *           2048 1050623  1048576   512M  b W95 FAT32
+/dev/vda2             1052670 8386559  7333890   3.5G  5 Étendue
+/dev/vda5             1052672 8386559  7333888   3.5G 83 Linux
+
+```
+
+##### Utilisation de l'outil `fdisk`
+
+###### État du disque
+
+```bash
+ubuntu@vm3:~$ sudo fdisk /dev/vda
+
+Bienvenue dans fdisk (util-linux 2.34).
+Les modifications resteront en mémoire jusqu'à écriture.
+Soyez prudent avant d'utiliser la commande d'écriture.
+
+Commande (m pour l'aide) : p
+Disque /dev/vda : 8 GiB, 8589934592 octets, 16777216 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x910a7e6a
+
+Périphérique Amorçage   Début     Fin Secteurs Taille Id Type
+/dev/vda1    *           2048 1050623  1048576   512M  b W95 FAT32
+/dev/vda2             1052670 8386559  7333890   3.5G  5 Étendue
+/dev/vda5             1052672 8386559  7333888   3.5G 83 Linux
+
+
+```
+
+###### Suppression de la partition étendue 2
+
+```bash
+Commande (m pour l'aide) : d
+Numéro de partition (1,2,5, 5 par défaut) : 5
+
+La partition 5 a été supprimée.
+
+Commande (m pour l'aide) : d
+Numéro de partition (1,2, 2 par défaut) : 2
+
+La partition 2 a été supprimée.
+
+Commande (m pour l'aide) : p
+Disque /dev/vda : 6 GiB, 6442450944 octets, 12582912 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x910a7e6a
+
+Périphérique Amorçage Début     Fin Secteurs Taille Id Type
+/dev/vda1    *         2048 1050623  1048576   512M  b W95 FAT32
+```
+
+###### Recréation de la partition primaire
+
+```bash
+Commande (m pour l'aide) : n
+Type de partition
+   p   primaire (1 primaire, 0 étendue, 3 libre)
+   e   étendue (conteneur pour partitions logiques)
+Sélectionnez (p par défaut) : e
+Numéro de partition (2-4, 2 par défaut) : 2
+Premier secteur (1050624-12582911, 1050624 par défaut) : 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (1050624-12582911, 12582911 par défaut) : 
+
+Une nouvelle partition 2 de type « Extended » et de taille 5.5 GiB a été créée.
+
+Commande (m pour l'aide) : n
+Tout l’espace des partitions primaires est utilisé.
+Ajout de la partition logique 5
+Premier secteur (1052672-12582911, 1052672 par défaut) : 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (1052672-12582911, 12582911 par défaut) : 
+
+Une nouvelle partition 5 de type « Linux » et de taille 5.5 GiB a été créée.
+La partition #5 contient une signature ext4.
+
+Voulez-vous supprimer la signature ? [O]ui/[N]on : n
+------------------------------------
+Commande (m pour l'aide) : p
+
+Disque /dev/vda : 6 GiB, 6442450944 octets, 12582912 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x910a7e6a
+
+Périphérique Amorçage   Début      Fin Secteurs Taille Id Type
+/dev/vda1    *           2048  1050623  1048576   512M  b W95 FAT32
+/dev/vda2             1050624 12582911 11532288   5.5G  5 Étendue
+/dev/vda5             1052672 12582911 11530240   5.5G 83 Linux
+
+```
+
+###### Ajouter un "Flag" d’amorçage
+
+Si par hasard le flag d'amorçage avait disparut, ou que la partition recréer contenait le flag, recréer le.
+
+Attention, si la partition est déjà flaggé, cela va retire le flag.
+
+```bash
+Commande (m pour l'aide) : a
+Numéro de partition (1,2, 2 par défaut) : 1
+
+L’indicateur d’amorçage de la partition 2 est maintenant activé.
+
+Commande (m pour l'aide) : p
+Disque /dev/vda : 6 GiB, 6442450944 octets, 12582912 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x910a7e6a
+
+Périphérique Amorçage   Début      Fin Secteurs Taille Id Type
+/dev/vda1    *           2048  1050623  1048576   512M  b W95 FAT32
+/dev/vda2             1050624 12582911 11532288   5.5G  5 Étendue
+/dev/vda5             1052672 12582911 11530240   5.5G 83 Linux
+
+```
+
+###### Écrire les modifications
+
+```bash
+Commande (m pour l'aide) : w
+La table de partitions a été altérée.
+Failed to add partition 2 to system: Périphérique ou ressource occupé
+
+The kernel still uses the old partitions. The new table will be used at the next reboot. 
+Synchronisation des disques.
+
+```
+
+###### Augmentation de la taille du système de fichier EXT
+
+```bash
+ubuntu@vm3:~$ df -h
+Sys. de fichiers Taille Utilisé Dispo Uti% Monté sur
+udev               196M       0  196M   0% /dev
+tmpfs               48M    752K   48M   2% /run
+/dev/vda5          3.4G    2.9G  365M  89% /
+tmpfs              239M       0  239M   0% /dev/shm
+tmpfs              5.0M       0  5.0M   0% /run/lock
+tmpfs              239M       0  239M   0% /sys/fs/cgroup
+/dev/vda1          511M    4.0K  511M   1% /boot/efi
+tmpfs               48M       0   48M   0% /run/user/1000
+
+ubuntu@vm3:~$ sudo resize2fs /dev/vda5
+resize2fs 1.45.5 (07-Jan-2020)
+Le système de fichiers de /dev/vda5 est monté sur / ; le changement de taille doit être effectué en ligne
+old_desc_blocks = 1, new_desc_blocks = 1
+Le système de fichiers sur /dev/vda5 a maintenant une taille de 1441280 blocs (4k).
+
+ubuntu@vm3:~$ df -h
+Sys. de fichiers Taille Utilisé Dispo Uti% Monté sur
+udev               196M       0  196M   0% /dev
+tmpfs               48M    752K   48M   2% /run
+/dev/vda5          5.4G    2.9G  2.3G  56% /
+tmpfs              239M       0  239M   0% /dev/shm
+tmpfs              5.0M       0  5.0M   0% /run/lock
+tmpfs              239M       0  239M   0% /sys/fs/cgroup
+/dev/vda1          511M    4.0K  511M   1% /boot/efi
+tmpfs               48M       0   48M   0% /run/user/1000
+
+```
+
