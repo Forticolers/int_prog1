@@ -701,3 +701,168 @@ tmpfs               48M       0   48M   0% /run/user/1000
 
 ##### Augmenter la taille d'une machine virtuelle utilisant lvm
 
+###### Agrandissement de la taille du fichier.
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/GIT_REPO/int_prog1$ sudo lvresize -L +2G /dev/MC0-0315-JJU-VG/vmLvm3
+  Size of logical volume MC0-0315-JJU-VG/vmLvm3 changed from 5.00 GiB (1280 extents) to 7.00 GiB (1792 extents).
+  Logical volume MC0-0315-JJU-VG/vmLvm3 successfully resized.
+
+```
+
+###### Création d'une nouvelle partition.
+
+```bash
+ubuntu@vmLvm3:~$ sudo fdisk /dev/sda
+
+Bienvenue dans fdisk (util-linux 2.34).
+Les modifications resteront en mémoire jusqu'à écriture.
+Soyez prudent avant d'utiliser la commande d'écriture.
+
+
+Commande (m pour l'aide) : p
+Disque /dev/sda : 7 GiB, 7516192768 octets, 14680064 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x8ea0f371
+
+Périphérique Amorçage   Début      Fin Secteurs Taille Id Type
+/dev/sda1    *           2048  1050623  1048576   512M  b W95 FAT32
+/dev/sda2             1052670 10483711  9431042   4.5G  5 Étendue
+/dev/sda5             1052672 10483711  9431040   4.5G 8e LVM Linux
+
+Commande (m pour l'aide) : n
+Type de partition
+   p   primaire (1 primaire, 1 étendue, 2 libre)
+   l   logique (numéroté à partir de 5)
+Sélectionnez (p par défaut) : p
+Numéro de partition (3,4, 3 par défaut) : 3
+Premier secteur (10483712-14680063, 10483712 par défaut) : 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (10483712-14680063, 14680063 par défaut) : +2G
+
+Une nouvelle partition 3 de type « Linux » et de taille 2 GiB a été créée.
+
+Commande (m pour l'aide) : p
+Disque /dev/sda : 7 GiB, 7516192768 octets, 14680064 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x8ea0f371
+
+Périphérique Amorçage    Début      Fin Secteurs Taille Id Type
+/dev/sda1    *            2048  1050623  1048576   512M  b W95 FAT32
+/dev/sda2              1052670 10483711  9431042   4.5G  5 Étendue
+/dev/sda3             10483712 14678015  4194304     2G 83 Linux
+/dev/sda5              1052672 10483711  9431040   4.5G 8e LVM Linux
+
+Les entrées de la table de partitions ne sont pas dans l'ordre du disque.
+
+Commande (m pour l'aide) : t
+Numéro de partition (1-3,5, 5 par défaut) : 3
+Code Hexa (taper L pour afficher tous les codes) : 8e
+
+Type de partition « Linux » modifié en « Linux LVM ».
+
+Commande (m pour l'aide) : p
+Disque /dev/sda : 7 GiB, 7516192768 octets, 14680064 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x8ea0f371
+
+Périphérique Amorçage    Début      Fin Secteurs Taille Id Type
+/dev/sda1    *            2048  1050623  1048576   512M  b W95 FAT32
+/dev/sda2              1052670 10483711  9431042   4.5G  5 Étendue
+/dev/sda3             10483712 14678015  4194304     2G 8e LVM Linux
+/dev/sda5              1052672 10483711  9431040   4.5G 8e LVM Linux
+
+Les entrées de la table de partitions ne sont pas dans l'ordre du disque.
+-- Redémarrer la machine
+
+```
+
+###### Création d'un PV (Physical volume)
+
+```bash
+ubuntu@vmLvm3:~$ sudo fdisk -l
+[sudo] Mot de passe de ubuntu : 
+Disque /dev/sda : 7 GiB, 7516192768 octets, 14680064 secteurs
+Disk model: QEMU HARDDISK   
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+Type d'étiquette de disque : dos
+Identifiant de disque : 0x8ea0f371
+
+Périphérique Amorçage    Début      Fin Secteurs Taille Id Type
+/dev/sda1    *            2048  1050623  1048576   512M  b W95 FAT32
+/dev/sda2              1052670 10483711  9431042   4.5G  5 Étendue
+/dev/sda3             10483712 14678015  4194304     2G 8e LVM Linux
+/dev/sda5              1052672 10483711  9431040   4.5G 8e LVM Linux
+
+Les entrées de la table de partitions ne sont pas dans l'ordre du disque.
+
+
+
+
+Disque /dev/mapper/vgvmLvm-root : 3.53 GiB, 3774873600 octets, 7372800 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+
+
+Disque /dev/mapper/vgvmLvm-swap_1 : 976 MiB, 1023410176 octets, 1998848 secteurs
+Unités : secteur de 1 × 512 = 512 octets
+Taille de secteur (logique / physique) : 512 octets / 512 octets
+taille d'E/S (minimale / optimale) : 512 octets / 512 octets
+ubuntu@vmLvm3:~$ pvcreate /dev/sda3
+  WARNING: Running as a non-root user. Functionality may be unavailable.
+  /run/lock/lvm/P_global:aux: open failed: Permission non accordée
+ubuntu@vmLvm3:~$ sudo pvcreate /dev/sda3
+  Physical volume "/dev/sda3" successfully created.
+ubuntu@vmLvm3:~$ pvs
+  WARNING: Running as a non-root user. Functionality may be unavailable.
+  /run/lock/lvm/P_global:aux: open failed: Permission non accordée
+ubuntu@vmLvm3:~$ sudo pvs
+  PV         VG      Fmt  Attr PSize  PFree 
+  /dev/sda3          lvm2 ---   2.00g  2.00g
+  /dev/sda5  vgvmLvm lvm2 a--  <4.50g 28.00m
+	
+```
+
+###### Ajouter ce PV dans la VG
+
+```bash
+ubuntu@vmLvm3:~$ sudo vgextend vgvmLvm /dev/sda3
+  Volume group "vgvmLvm" successfully extended
+ubuntu@vmLvm3:~$ sudo vgs
+  VG      #PV #LV #SN Attr   VSize VFree
+  vgvmLvm   2   2   0 wz--n- 6.49g 2.02g
+ubuntu@vmLvm3:~$ sudo pvs
+  PV         VG      Fmt  Attr PSize  PFree 
+  /dev/sda3  vgvmLvm lvm2 a--  <2.00g <2.00g
+  /dev/sda5  vgvmLvm lvm2 a--  <4.50g 28.00m
+
+```
+
+###### Agrandissement de la partition root.
+
+```bash
+ubuntu@vmLvm3:~$ sudo lvextend -l +518 /dev/vgvmLvm/root
+  Size of logical volume vgvmLvm/root changed from <3.52 GiB (900 extents) to <5.54 GiB (1418 extents).
+  Logical volume vgvmLvm/root successfully resized.
+ubuntu@vmLvm3:~$ sudo resize2fs /dev/vgvmLvm/root
+resize2fs 1.45.5 (07-Jan-2020)
+Le système de fichiers de /dev/vgvmLvm/root est monté sur / ; le changement de taille doit être effectué en ligne
+old_desc_blocks = 1, new_desc_blocks = 1
+Le système de fichiers sur /dev/vgvmLvm/root a maintenant une taille de 1452032 blocs (4k).
+
+```
+
