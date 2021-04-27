@@ -866,3 +866,35 @@ Le système de fichiers sur /dev/vgvmLvm/root a maintenant une taille de 1452032
 
 ```
 
+##### Snapshots
+
+###### Réaliser une snapshot
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvcreate -L 2GB -s -n vm3-s1 /dev/MC0-0315-JJU-VG/vm3
+  Logical volume "vm3-s1" created.
+
+```
+
+> Note : `-s` permet la création d'une Snapshots
+
+###### Appliquer une snapshot.
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation/vms$ sudo lvconvert --merge /dev/MC0-0315-JJU-VG/vm3-s1
+  Merging of volume MC0-0315-JJU-VG/vm3-s1 started.
+  MC0-0315-JJU-VG/vm3: Merged: 95.26%
+  MC0-0315-JJU-VG/vm3: Merged: 97.48%
+  MC0-0315-JJU-VG/vm3: Merged: 97.76%
+  MC0-0315-JJU-VG/vm3: Merged: 98.06%
+  MC0-0315-JJU-VG/vm3: Merged: 98.31%
+  MC0-0315-JJU-VG/vm3: Merged: 98.83%
+  MC0-0315-JJU-VG/vm3: Merged: 99.24%
+  MC0-0315-JJU-VG/vm3: Merged: 99.34%
+  MC0-0315-JJU-VG/vm3: Merged: 99.42%
+  MC0-0315-JJU-VG/vm3: Merged: 99.83%
+  MC0-0315-JJU-VG/vm3: Merged: 99.95%
+  MC0-0315-JJU-VG/vm3: Merged: 100.00%
+
+```
+
