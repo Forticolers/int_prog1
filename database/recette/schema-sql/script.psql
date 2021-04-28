@@ -11,4 +11,6 @@
 \set ECHO all
 \i 004-requetes.sql
 
+\i 005-audit.sql
+
 \q

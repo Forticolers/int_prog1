@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.3">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>462</x>
-      <y>497</y>
+      <x>266</x>
+      <y>378</y>
       <w>273</w>
-      <h>133</h>
+      <h>168</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Table&gt;&gt;
 recettes
@@ -17,6 +17,10 @@ recettes
 detail: TEXT {string}
 préparation: TEXT {string}
 nombre_personnes: INTEGER {positiveInteger} = 4
+&lt;&lt;AAU&gt;&gt; ajUser : VARCHAR {word}
+&lt;&lt;AAI&gt;&gt; ajDate : TIMESTAMP {dateTime}
+&lt;&lt;AMU&gt;&gt; moUser : VARCHAR {word}
+&lt;&lt;AMI&gt;&gt; moMode : TIMESTAMP {dateTime}
 --
 &lt;&lt;PK&gt;&gt;PK_recettes(uuid)
 &lt;&lt;U-1&gt;&gt;NID1_recettes_nom(nom)
@@ -27,10 +31,10 @@ nombre_personnes: INTEGER {positiveInteger} = 4
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>819</x>
-      <y>497</y>
+      <x>623</x>
+      <y>378</y>
       <w>315</w>
-      <h>133</h>
+      <h>196</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Table&gt;&gt;
 ingredients
@@ -39,6 +43,10 @@ ingredients
 &lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom : TEXT {string}
 detail: TEXT{string}
 &lt;&lt;FK-1&gt;&gt;&lt;&lt;U-2&gt;&gt;recette_uuid:UUID {aid}
+&lt;&lt;AAU&gt;&gt; ajUser : VARCHAR {word}
+&lt;&lt;AAI&gt;&gt; ajDate : TIMESTAMP {dateTime}
+&lt;&lt;AMU&gt;&gt; moUser : VARCHAR {word}
+&lt;&lt;AMI&gt;&gt; moMode : TIMESTAMP {dateTime}
 --
 &lt;&lt;PK&gt;&gt;PK_ingredients(uuid)
 &lt;&lt;FK-1&gt;&gt;FK1_ingredients_recettes(recette_uuid)
@@ -50,23 +58,23 @@ detail: TEXT{string}
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>644</x>
-      <y>623</y>
-      <w>98</w>
-      <h>175</h>
+      <x>448</x>
+      <y>539</y>
+      <w>91</w>
+      <h>196</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1..1
 m2=1..n
 &lt;&lt;FK-1&gt;&gt;
 {deletecascade}</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;220.0;120.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;110.0;260.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>728</x>
-      <y>721</y>
+      <x>525</x>
+      <y>665</y>
       <w>343</w>
       <h>266</h>
     </coordinates>
@@ -98,22 +106,22 @@ commentaire: TEXT {string}
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>819</x>
-      <y>623</y>
-      <w>98</w>
+      <x>616</x>
+      <y>567</y>
+      <w>105</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1..1
 m2=0..n
 &lt;&lt;FK-2&gt;&gt;</panel_attributes>
-    <additional_attributes>100.0;10.0;100.0;90.0;10.0;90.0;10.0;140.0</additional_attributes>
+    <additional_attributes>110.0;10.0;110.0;60.0;10.0;60.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>196</x>
-      <y>119</y>
+      <x>0</x>
+      <y>0</y>
       <w>259</w>
       <h>28</h>
     </coordinates>
@@ -124,8 +132,8 @@ Dominique Huguenin (dominqiue.huguenin AT rpn.ch)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>637</x>
-      <y>455</y>
+      <x>441</x>
+      <y>336</y>
       <w>280</w>
       <h>56</h>
     </coordinates>
@@ -138,10 +146,10 @@ m2=0..1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>175</y>
+      <x>434</x>
+      <y>56</y>
       <w>287</w>
-      <h>217</h>
+      <h>196</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Table&gt;&gt;
 medias
@@ -151,6 +159,10 @@ medias
 detail: TEXT {string}
 type: TEXT {string {type mime}}
 data: BYTEA {BLOG}
+&lt;&lt;AAU&gt;&gt; ajUser : VARCHAR {word}
+&lt;&lt;AAI&gt;&gt; ajDate : TIMESTAMP {dateTime}
+&lt;&lt;AMU&gt;&gt; moUser : VARCHAR {word}
+&lt;&lt;AMI&gt;&gt; moMode : TIMESTAMP {dateTime}
 --
 &lt;&lt;PK&gt;&gt;PK_medias(uuid)
 &lt;&lt;U-1&gt;&gt;NID1_medias_nom(nom)</panel_attributes>
@@ -159,8 +171,8 @@ data: BYTEA {BLOG}
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>196</y>
+      <x>714</x>
+      <y>77</y>
       <w>210</w>
       <h>77</h>
     </coordinates>
@@ -173,16 +185,20 @@ m2=0..n
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1162</x>
-      <y>721</y>
+      <x>966</x>
+      <y>602</y>
       <w>203</w>
-      <h>133</h>
+      <h>154</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Table&gt;&gt;
 unites
 --
 &lt;&lt;PK&gt;&gt;uuid:UUID {aid}
 &lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;code:TEXT {string}
+&lt;&lt;AAU&gt;&gt; ajUser : VARCHAR {word}
+&lt;&lt;AAI&gt;&gt; ajDate : TIMESTAMP {dateTime}
+&lt;&lt;AMU&gt;&gt; moUser : VARCHAR {word}
+&lt;&lt;AMI&gt;&gt; moMode : TIMESTAMP {dateTime}
 --
 &lt;&lt;PK&gt;&gt;PK_unites(uuid)
 &lt;&lt;U&gt;&gt;NID1_unites_code(code)</panel_attributes>
@@ -191,22 +207,22 @@ unites
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1064</x>
-      <y>777</y>
-      <w>112</w>
-      <h>35</h>
+      <x>861</x>
+      <y>665</y>
+      <w>119</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=0..1
 m2=0..n
 &lt;&lt;FK-3&gt;&gt;</panel_attributes>
-    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>150.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>980</x>
-      <y>259</y>
+      <x>784</x>
+      <y>140</y>
       <w>315</w>
       <h>133</h>
     </coordinates>
@@ -224,8 +240,8 @@ medias_ingredients
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>980</x>
-      <y>385</y>
+      <x>784</x>
+      <y>266</y>
       <w>133</w>
       <h>126</h>
     </coordinates>
@@ -239,8 +255,8 @@ m2=1..1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
-      <y>252</y>
+      <x>0</x>
+      <y>133</y>
       <w>315</w>
       <h>133</h>
     </coordinates>
@@ -258,8 +274,8 @@ medias_recettes
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>378</y>
+      <x>140</x>
+      <y>259</y>
       <w>224</w>
       <h>133</h>
     </coordinates>
@@ -273,8 +289,8 @@ m2=1..1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>336</x>
-      <y>189</y>
+      <x>140</x>
+      <y>70</y>
       <w>308</w>
       <h>77</h>
     </coordinates>
