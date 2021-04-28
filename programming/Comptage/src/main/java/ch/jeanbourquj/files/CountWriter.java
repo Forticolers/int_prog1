@@ -7,16 +7,26 @@ package ch.jeanbourquj.files;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
  * @author JeanbourquJ
  */
-public class fileWriter implements Closeable{
+public class CountWriter implements Closeable {
+
+    private final PrintWriter writer;
+
+    public CountWriter(PrintWriter pw) {
+        this.writer = pw;
+    }
 
     @Override
     public void close() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(writer != null){
+            writer.close();
+        }
     }
+
     
 }
