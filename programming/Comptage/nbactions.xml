@@ -26,6 +26,7 @@
             <actionName>CUSTOM-mvn all</actionName>
             <displayName>mvn all</displayName>
             <goals>
+                <goal>clean</goal>
                 <goal>validate</goal>
                 <goal>compile</goal>
                 <goal>test</goal>

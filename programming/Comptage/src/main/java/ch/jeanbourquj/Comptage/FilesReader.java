@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.jeanbourquj.files;
+package ch.jeanbourquj.Comptage.files;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -13,11 +13,11 @@ import java.io.IOException;
  *
  * @author JeanbourquJ
  */
-public class CountReader implements Closeable {
+public class FilesReader implements Closeable {
 
     private final BufferedReader reader;
 
-    public CountReader(BufferedReader br) {
+    public FilesReader(BufferedReader br) {
         this.reader = br;
     }
 
@@ -28,14 +28,20 @@ public class CountReader implements Closeable {
         }
     }
 
-    public String readAll() throws IOException {
-        String fileData = null;
+    public String readNextLine() throws IOException {
         String currentLine = reader.readLine();
-        while (currentLine != null) {
-            fileData += currentLine;
-            
-            currentLine = reader.readLine();
+        return currentLine;
+    }
+
+    public char readNextChar() throws IOException {
+        int charInt = reader.read();
+        char currChar;
+        if (charInt != -1) {
+            currChar = (char) charInt;
+
+        } else {
+            currChar = '\0';
         }
-        return fileData;
+        return currChar;
     }
 }
