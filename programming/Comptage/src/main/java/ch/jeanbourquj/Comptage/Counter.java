@@ -10,11 +10,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.UNICODE_CHARACTER_CLASS;
 import jdk.jshell.spi.ExecutionControl;
 
 /**
@@ -79,7 +84,7 @@ public class Counter {
     }
 
     public Map<Character, Integer> countFrequency() {
-        Map<Character, Integer> lettersFrequency = new HashMap<Character, Integer>();
+        Map<Character, Integer> lettersFrequency = new HashMap<>();
         try (FilesReader reader
                 = new FilesReader(
                         new BufferedReader(
@@ -126,9 +131,20 @@ public class Counter {
         }
         return lettersFrequency;
     }
+   
 
     private int extractNumWords(String str) {
-        return str.split(" ").length;
+        str = str.replaceAll("^\\s+", "");
+        //str = str.replaceAll("[\\x00-\\x2f\\x3a-\\x40]", "");
+        String[] wordsInLine = str.split("\\s+");
+        List<String> wordsCleaned = new ArrayList<String>();
+        for(int i = 0; i < wordsInLine.length; i++){
+            wordsInLine[i] = wordsInLine[i].replaceAll("[\\x00-\\x2f\\x3a-\\x40]", "");
+            if(wordsInLine[i] != ""){
+                wordsCleaned.add(wordsInLine[i]);
+            }
+        }
+        return wordsCleaned.size();
     }
 
     public int countWords() {
