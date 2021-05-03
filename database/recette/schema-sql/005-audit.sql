@@ -5,8 +5,6 @@
 
 */
 
--- Ajout des champs d'audit dans les tables.
---- Table Recette
 CREATE OR REPLACE FUNCTION recette_audit_trigger_function()
 RETURNS TRIGGER AS $trigger_recette_func$
 BEGIN
@@ -18,7 +16,15 @@ BEGIN
 END;
 $trigger_recette_func$ language 'plpgsql';
 
+CREATE OR REPLACE FUNCTION recette_restrict_audit_column_function()
+RETURNS TRIGGER AS $restric_func$
+BEGIN
+	if UPDATE (ajDate, ajUser, moDate, moUser) then
+		RAISE EXCEPTION 'You can not modify those columns {ajDate, ajUser, moDate, moUser}';
+	end if;
+END;
 
+$restric_func$ language 'plpgsql';
 
 ALTER TABLE recettes 
 
@@ -29,15 +35,7 @@ ALTER TABLE recettes
 
 ;
 
-CREATE OR REPLACE FUNCTION recette_restrict_audit_column_function()
-RETURNS TRIGGER AS $restric_func$
-BEGIN
-	if UPDATE (ajDate, ajUser, moDate, moUser) then
-		RAISE EXCEPTION 'You can not modify those columns {ajDate, ajUser, moDate, moUser}';
-	end if;
-END;
 
-$restric_func$ language 'plpgsql';
 --REVOKE UPDATE (ajDate, ajUser, moDate, moUser) 
 --ON recettes FROM recette;
 
