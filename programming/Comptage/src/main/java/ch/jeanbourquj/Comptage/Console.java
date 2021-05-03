@@ -68,30 +68,30 @@ public class Console {
         int wordCount;
         Map<Character, Integer> wordsFrequency;
         switch (pAction) {
-            case COUNT_CHARS:
+            case COUNT_CHARS -> {
                 charsCount = counter.countChars();
                 System.out.printf("Count of characters of file '%s' :\n", this.fileName);
                 System.out.printf("\tNumbers of characters : %d\n", charsCount);
-                break;
-            case COUNT_LINES:
+            }
+            case COUNT_LINES -> {
                 linesCount = counter.countLines();
                 System.out.printf("Count of lines of file '%s' :\n", this.fileName);
                 System.out.printf("\tNumbers of lines : %d\n", linesCount);
-                break;
-            case COUNT_WORDS:
+            }
+            case COUNT_WORDS -> {
                 wordCount = counter.countWords();
                 System.out.printf("Count of words of file '%s' :\n", this.fileName);
                 System.out.printf("\tNumbers of words : %d\n", wordCount);
-                break;
-            case CHAR_FREQUENCY:
+            }
+            case CHAR_FREQUENCY -> {
                 System.out.printf("Count of each letters of file '%s' :\n", this.fileName);
                 wordsFrequency = counter.countFrequency();
-                for (Map.Entry<Character, Integer> entry : wordsFrequency.entrySet()) {
+                wordsFrequency.entrySet().forEach(entry -> {
                     Object key = entry.getKey();
                     Object val = entry.getValue();
                     System.out.printf("\tLetters %s : %d\n", key, val);
-                }
-                break;
+            });
+            }
         }
         System.out.printf("\n");
     }
