@@ -11,16 +11,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.UNICODE_CHARACTER_CLASS;
-import jdk.jshell.spi.ExecutionControl;
 
 /**
  *
@@ -137,7 +131,7 @@ public class Counter {
         str = str.replaceAll("^\\s+", "");
         //str = str.replaceAll("[\\x00-\\x2f\\x3a-\\x40]", "");
         String[] wordsInLine = str.split("\\s+");
-        List<String> wordsCleaned = new ArrayList<String>();
+        List<String> wordsCleaned = new ArrayList<>();
         for(int i = 0; i < wordsInLine.length; i++){
             wordsInLine[i] = wordsInLine[i].replaceAll("[\\x00-\\x2f\\x3a-\\x40]", "");
             if(wordsInLine[i] != ""){
