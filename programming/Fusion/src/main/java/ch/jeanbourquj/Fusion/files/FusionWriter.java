@@ -29,6 +29,6 @@ public class FusionWriter implements Closeable {
     }
     
     public void write(String line){
-        writer.printf("%s", line);
+        writer.printf("%s\n", line);
     }
 }

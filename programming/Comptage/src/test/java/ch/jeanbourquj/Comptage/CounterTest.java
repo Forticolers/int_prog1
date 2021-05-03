@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.jeanbourquj;
+package ch.jeanbourquj.Comptage;
 
 import ch.jeanbourquj.Comptage.Counter;
 import java.io.File;

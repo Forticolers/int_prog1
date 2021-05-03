@@ -43,10 +43,6 @@ ingredients
 &lt;&lt;NID-1&gt;&gt;&lt;&lt;M&gt;&gt;nom : TEXT {string}
 detail: TEXT{string}
 &lt;&lt;FK-1&gt;&gt;&lt;&lt;U-2&gt;&gt;recette_uuid:UUID {aid}
-&lt;&lt;AAU&gt;&gt; ajUser : VARCHAR {word}
-&lt;&lt;AAI&gt;&gt; ajDate : TIMESTAMP {dateTime}
-&lt;&lt;AMU&gt;&gt; moUser : VARCHAR {word}
-&lt;&lt;AMI&gt;&gt; moMode : TIMESTAMP {dateTime}
 --
 &lt;&lt;PK&gt;&gt;PK_ingredients(uuid)
 &lt;&lt;FK-1&gt;&gt;FK1_ingredients_recettes(recette_uuid)
@@ -89,6 +85,11 @@ quantite: NUMERIC(4,2) {positiveDecimal}
 commentaire: TEXT {string}
 &lt;&lt;FK-2&gt;&gt;&lt;&lt;M&gt;&gt;ingredients_uuid:UUID {aid}
 &lt;&lt;FK-3&gt;&gt;unites_uuid: UUID{aid}
+
+&lt;&lt;AAU&gt;&gt; ajUser : VARCHAR {word}
+&lt;&lt;AAI&gt;&gt; ajDate : TIMESTAMP {dateTime}
+&lt;&lt;AMU&gt;&gt; moUser : VARCHAR {word}
+&lt;&lt;AMI&gt;&gt; moMode : TIMESTAMP {dateTime}
 
 /quantite_par_personne:NUMERIC(4,2) {positiveDecimal} 
              = quantite / recettes.nombre_personnes
