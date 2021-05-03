@@ -77,6 +77,22 @@ public class Counter {
         A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z;
     }
 
+    private void extractLettersInMap(Map<Character, Integer> map, char c) {
+        for (Letters l : Letters.values()) {
+            if (Character.isLetter(c)) {
+                char lChar = (Character) l.toString().charAt(0);
+                if (Character.toUpperCase(c) == lChar) {
+                    if (map.containsKey(lChar)) {
+                        map.put(lChar, map.get(lChar) + 1);
+                    } else {
+                        map.put(lChar, 1);
+                    }
+
+                }
+            }
+        }
+    }
+
     public Map<Character, Integer> countFrequency() {
         Map<Character, Integer> lettersFrequency = new HashMap<>();
         try (FilesReader reader
@@ -84,35 +100,11 @@ public class Counter {
                         new BufferedReader(
                                 new FileReader(file)))) {
             char c = reader.readNextChar();
-            for (Letters l : Letters.values()) {
-                if (Character.isLetter(c)) {
-                    char lChar = l.toString().charAt(0);
-                    if (Character.toUpperCase(c) == lChar) {
-                        if (lettersFrequency.containsKey(lChar)) {
-                            lettersFrequency.put(lChar, lettersFrequency.get(lChar) + 1);
-                        } else {
-                            lettersFrequency.put(lChar, 1);
-                        }
-
-                    }
-                }
-            }
+            extractLettersInMap(lettersFrequency, c);
             while (c != '\0') {
                 c = reader.readNextChar();
 
-                for (Letters l : Letters.values()) {
-                    if (Character.isLetter(c)) {
-                        char lChar = (Character) l.toString().charAt(0);
-                        if (Character.toUpperCase(c) == lChar) {
-                            if (lettersFrequency.containsKey(lChar)) {
-                                lettersFrequency.put(lChar, lettersFrequency.get(lChar) + 1);
-                            } else {
-                                lettersFrequency.put(lChar, 1);
-                            }
-
-                        }
-                    }
-                }
+                extractLettersInMap(lettersFrequency, c);
 
             }
             for (Letters l : Letters.values()) {
@@ -125,16 +117,15 @@ public class Counter {
         }
         return lettersFrequency;
     }
-   
 
     private int extractNumWords(String str) {
         str = str.replaceAll("^\\s+", "");
         //str = str.replaceAll("[\\x00-\\x2f\\x3a-\\x40]", "");
         String[] wordsInLine = str.split("\\s+");
         List<String> wordsCleaned = new ArrayList<>();
-        for(int i = 0; i < wordsInLine.length; i++){
+        for (int i = 0; i < wordsInLine.length; i++) {
             wordsInLine[i] = wordsInLine[i].replaceAll("[\\x00-\\x2f\\x3a-\\x40]", "");
-            if(wordsInLine[i] != ""){
+            if (wordsInLine[i] != "") {
                 wordsCleaned.add(wordsInLine[i]);
             }
         }
