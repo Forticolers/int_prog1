@@ -1143,3 +1143,111 @@ tmpfs                      199M       0  199M   0% /run/user/1000
 
 ```
 
+#### Conteneur LXC
+
+Installation LXC + création machine CN
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo apt-get install lxc
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-create --name CN --template download
+Setting up the GPG keyring
+Downloading the image index
+
+---
+DIST	RELEASE	ARCH	VARIANT	BUILD
+---
+[...]
+ubuntu	focal	amd64	default	20210501_07:42
+ubuntu	focal	arm64	default	20210502_09:37
+ubuntu	focal	armhf	default	20210502_08:29
+[...]
+---
+
+Distribution: 
+ubuntu  
+Release: 
+focal
+Architecture: 
+amd64
+
+Downloading the image index
+Downloading the rootfs
+Downloading the metadata
+The image cache is now ready
+Unpacking the rootfs
+
+---
+You just created an Ubuntu focal amd64 (20210501_07:42) container.
+
+To enable SSH, run: apt install openssh-server
+No default root or user password are set by LXC.
+```
+
+Start LXC machine
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-start CN
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-ls --fancy
+NAME STATE   AUTOSTART GROUPS IPV4       IPV6 UNPRIVILEGED 
+CN   RUNNING 0         -      10.0.3.232 -    false   
+```
+
+Aller sur la nouvelle vm en tant que bash + installation openssh-server pour connexion SSH +  connexion par console
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-attach CN -- bash
+[sudo] Mot de passe de jeanbourquj : 
+root@CN:/# sudo apt-get install openssh-server
+--------------------
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo apt-get install lxc
+```
+
+Cloner une conteneur LXC
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-stop CN
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-ls -f
+NAME STATE   AUTOSTART GROUPS IPV4 IPV6 UNPRIVILEGED 
+CN   STOPPED 0         -      -    -    false       
+------------------------
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-copy -n CN -N C2
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-ls -f
+NAME STATE   AUTOSTART GROUPS IPV4 IPV6 UNPRIVILEGED 
+C2   STOPPED 0         -      -    -    false        
+CN   STOPPED 0         -      -    -    false        
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-start C2
+--------------------------
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-l
+NAME STATE   AUTOSTART GROUPS IPV4      IPV6 UNPRIVILEGED 
+C2   RUNNING 0         -      10.0.3.88 -    false        
+CN   STOPPED 0         -      -         -    false        
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ ssh ubuntu@10.0.3.88
+
+```
+
+Création d'un conteneur LXC dans un volume logique
+
+La commande effectue la création du volume logique `lxc-C1`.
+
+```bash
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lxc-create -t download -n C1 -B lvm --fssize 1G --vgname MC0-0315-JJU-VG --lvname lxc-C1 -- -d ubuntu -r focal -a amd64
+--------
+jeanbourquj@MC0-0315-JJU:~/virtualisation$ sudo lvdisplay MC0-0315-JJU-VG/lxc-C1
+  --- Logical volume ---
+  LV Path                /dev/MC0-0315-JJU-VG/lxc-C1
+  LV Name                lxc-C1
+  VG Name                MC0-0315-JJU-VG
+  LV UUID                5Efe4K-qAdH-Und8-khfE-FMDG-9Isv-NNTej4
+  LV Write Access        read/write
+  LV Creation host, time MC0-0315-JJU, 2021-05-04 11:03:27 +0200
+  LV Status              available
+  # open                 0
+  LV Size                1.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:8
+```
+
