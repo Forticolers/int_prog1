@@ -19,8 +19,8 @@ $trigger_recette_func$ language 'plpgsql';
 CREATE OR REPLACE FUNCTION recette_restrict_audit_column_function()
 RETURNS TRIGGER AS $restric_func$
 BEGIN
-	if UPDATE (ajDate, ajUser, moDate, moUser) then
-		RAISE EXCEPTION 'You can not modify those columns {ajDate, ajUser, moDate, moUser}';
+	if UPDATE OR SELECT (ajDate, ajUser, moDate, moUser) then
+		return OLD;
 	end if;
 END;
 
@@ -42,15 +42,15 @@ ALTER TABLE recettes
 
 --ALTER TABLE recettes ALTER COLUMN ajDate SET DEFAULT now();
 
---CREATE TRIGGER recettes_trigger_restrict_recettes
---BEFORE UPDATE ON recettes
---FOR EACH ROW EXECUTE FUNCTION recette_restrict_audit_column_function();
+CREATE TRIGGER recettes_trigger_restrict_recettes
+BEFORE UPDATE ON recettes
+FOR EACH STATEMENT EXECUTE FUNCTION recette_restrict_audit_column_function();
 
 CREATE TRIGGER recettes_trigger_recettes
 BEFORE INSERT OR UPDATE ON recettes
 FOR EACH ROW EXECUTE FUNCTION recette_audit_trigger_function();
 
-ALTER TABLE composants 
+ALTER TABLE ingredients 
 
 	ADD COLUMN	ajUser TEXT DEFAULT current_user, 
 	ADD COLUMN	ajDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
@@ -62,12 +62,12 @@ ALTER TABLE composants
 --ON composants FROM recette;
 --ALTER TABLE composants ALTER COLUMN ajDate SET DEFAULT now();
 
---CREATE TRIGGER recettes_trigger_restrict_composants
---BEFORE UPDATE ON composants
---FOR EACH ROW EXECUTE FUNCTION recette_restrict_audit_column_function();
+CREATE TRIGGER recettes_trigger_restrict_composants
+BEFORE UPDATE ON composants
+FOR EACH STATEMENT EXECUTE FUNCTION recette_restrict_audit_column_function();
 
-CREATE TRIGGER recettes_trigger_composants
-BEFORE INSERT OR UPDATE ON composants
+CREATE TRIGGER recettes_trigger_ingredients
+BEFORE INSERT OR UPDATE ON ingredients
 FOR EACH ROW EXECUTE FUNCTION recette_audit_trigger_function();
 
 
@@ -83,10 +83,30 @@ ALTER TABLE medias
 --ON medias FROM recette;
 --ALTER TABLE medias ALTER COLUMN ajDate SET DEFAULT now();
 
---CREATE TRIGGER recettes_trigger_restrict_medias
---BEFORE UPDATE ON medias
---FOR EACH ROW EXECUTE FUNCTION recette_restrict_audit_column_function();
+CREATE TRIGGER recettes_trigger_restrict_medias
+BEFORE UPDATE ON medias
+FOR EACH STATEMENT EXECUTE FUNCTION recette_restrict_audit_column_function();
 
 CREATE TRIGGER recettes_trigger_medias
 BEFORE INSERT OR UPDATE ON medias
+FOR EACH ROW EXECUTE FUNCTION recette_audit_trigger_function();
+
+ALTER TABLE unites 
+
+	ADD COLUMN	ajUser TEXT DEFAULT current_user, 
+	ADD COLUMN	ajDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+	ADD COLUMN	moUser TEXT DEFAULT NULL, 
+	ADD COLUMN	moDate TIMESTAMP DEFAULT NULL 
+;
+
+--REVOKE UPDATE (ajDate, ajUser, moDate, moUser) 
+--ON medias FROM recette;
+--ALTER TABLE medias ALTER COLUMN ajDate SET DEFAULT now();
+
+CREATE TRIGGER recettes_trigger_restrict_unites
+BEFORE UPDATE ON unites
+FOR EACH STATEMENT EXECUTE FUNCTION recette_restrict_audit_column_function();
+
+CREATE TRIGGER recettes_trigger_unites
+BEFORE INSERT OR UPDATE ON unites
 FOR EACH ROW EXECUTE FUNCTION recette_audit_trigger_function();
