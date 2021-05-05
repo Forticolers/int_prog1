@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,8 @@ public class FichierContacts {
                 break;
             case BINAIRE:
                 ecrireFichierBinaire(contacts);
+            case OBJET:
+                ecrireFichierObjet(contacts);
             default:
                 throw new RuntimeException("Erreur: format de fichier non taité!");
         }
@@ -66,10 +70,50 @@ public class FichierContacts {
                 break;
             case BINAIRE:
                 contacts = lireFichierBinaire();
+            case OBJET:
+                contacts = lireFichierObjet();
             default:
                 throw new RuntimeException("Erreur: format de fichier non taité!");
         }
         return contacts;
+    }
+
+    private List<Contact> lireFichierObjet() {
+        List<Contact> contacts = new ArrayList<>();
+        try (ContactInputStream inputStream
+                = new ContactInputStream(
+                        new ObjectInputStream(
+                                new FileInputStream(fichier)))) {
+            try {
+                Contact c = null;
+                while (true) {
+                    c = inputStream.readObject();;
+                    if (c == null) {
+                        break;
+                    }
+                    contacts.add(c);
+                }
+
+            } catch (EOFException ex) {
+
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return contacts;
+    }
+
+    private void ecrireFichierObjet(List<Contact> contacts) {
+        try (ContactOutputStream outputStream
+                = new ContactOutputStream(
+                        new ObjectOutputStream(
+                                new FileOutputStream(fichier)))) {
+            contacts.forEach(c -> {
+                outputStream.writeObject(c);
+            });
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     private List<Contact> lireFichierBinaire() {
@@ -78,33 +122,37 @@ public class FichierContacts {
                 = new ContactInputStream(
                         new DataInputStream(
                                 new FileInputStream(fichier)))) {
-            try{
+            try {
                 Contact c;
-                while(true){
-                    c = inputStream.read();
+                while (true) {
+                    c = inputStream.readBinary();
+                    if (c == null) {
+                        break;
+                    }
                     contacts.add(c);
                 }
-            }catch(EOFException ex){
-                
+            } catch (EOFException ex) {
+
             }
         } catch (IOException ex) {
-
+            throw new RuntimeException(ex);
         }
         return contacts;
     }
 
-    private void ecrireFichierBinaire(List<Contact> contacts){
-        try(ContactOutputStream outputStream
+    private void ecrireFichierBinaire(List<Contact> contacts) {
+        try (ContactOutputStream outputStream
                 = new ContactOutputStream(
-                    new DataOutputStream(
-                        new FileOutputStream(fichier)))){
+                        new DataOutputStream(
+                                new FileOutputStream(fichier)))) {
             contacts.forEach(c -> {
-                outputStream.write(c);
+                outputStream.writeBinary(c);
             });
-        }catch(IOException ex){
+        } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
+
     private void ecrireFichierTexte1(List<Contact> contacts) {
         try (ContactWriter writer
                 = new ContactWriter(

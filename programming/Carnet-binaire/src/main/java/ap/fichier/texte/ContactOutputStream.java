@@ -9,6 +9,7 @@ import carnet.domain.Contact;
 import java.io.Closeable;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  *
@@ -18,8 +19,14 @@ public class ContactOutputStream implements Closeable {
 
     private DataOutputStream outputStream;
 
+    private ObjectOutputStream objectOutputStream;
+
     public ContactOutputStream(DataOutputStream os) {
         this.outputStream = os;
+    }
+
+    public ContactOutputStream(ObjectOutputStream oos) {
+        this.objectOutputStream = oos;
     }
 
     @Override
@@ -29,28 +36,40 @@ public class ContactOutputStream implements Closeable {
         }
     }
 
-    public void write(Contact c) {
-        try {
-            Integer id = (c.getIdentifiant().getId() != null ? c.getIdentifiant().getId() : null);
-            String nom = (c.getNom() != null ? c.getNom() : null);
-            String dateNaissance = (c.getDateNaissance() != null ? c.getDateNaissance().toString() : null);
-            outputStream.writeInt(id);
-            outputStream.writeUTF(nom);
-            outputStream.writeUTF(dateNaissance);
-            if (c.getAdresse() != null) {
-                String rue = (c.getAdresse().getRue() != null ? c.getAdresse().getRue() : null);
-                Integer npa = (c.getAdresse().getNpa() != null ? c.getAdresse().getNpa() : null);
-                String localite = (c.getAdresse().getLocalite() != null ? c.getAdresse().getLocalite() : null);
-                outputStream.writeBoolean(true);
-                outputStream.writeUTF(rue);
-                outputStream.writeInt(npa);
-                outputStream.writeUTF(localite);
-            } else {
-                outputStream.writeBoolean(false);
-            }
+    public void writeBinary(Contact c) {
+        if (outputStream != null) {
+            try {
+                Integer id = (c.getIdentifiant().getId() != null ? c.getIdentifiant().getId() : null);
+                String nom = (c.getNom() != null ? c.getNom() : null);
+                String dateNaissance = (c.getDateNaissance() != null ? c.getDateNaissance().toString() : null);
+                outputStream.writeInt(id);
+                outputStream.writeUTF(nom);
+                outputStream.writeUTF(dateNaissance);
+                if (c.getAdresse() != null) {
+                    String rue = (c.getAdresse().getRue() != null ? c.getAdresse().getRue() : null);
+                    Integer npa = (c.getAdresse().getNpa() != null ? c.getAdresse().getNpa() : null);
+                    String localite = (c.getAdresse().getLocalite() != null ? c.getAdresse().getLocalite() : null);
+                    outputStream.writeBoolean(true);
+                    outputStream.writeUTF(rue);
+                    outputStream.writeInt(npa);
+                    outputStream.writeUTF(localite);
+                } else {
+                    outputStream.writeBoolean(false);
+                }
 
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
+    public void writeObject(Contact c) {
+        if(objectOutputStream != null){
+            try{
+            objectOutputStream.writeObject(c);
+            }catch(IOException ex){
+                throw new RuntimeException(ex);
+            }
         }
     }
 }

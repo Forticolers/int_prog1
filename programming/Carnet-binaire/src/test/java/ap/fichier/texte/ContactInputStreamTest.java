@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,7 @@ public class ContactInputStreamTest {
 
     private List<Contact> contactsRef;
     private File file;
+    private File fileObj;
 
     public ContactInputStreamTest() {
     }
@@ -43,17 +46,19 @@ public class ContactInputStreamTest {
         contactsRef = Arrays.asList(carnet.getContacts());
         file = new File("target/testContactInputStream.bin");
         file.delete();
+        fileObj = new File("target/testContactInputStreamObj.obj");
+        fileObj.delete();
     }
 
     @Test
-    public void testRead() {
+    public void testReadBinary() {
 
         try (ContactOutputStream outputStream
                 = new ContactOutputStream(
                         new DataOutputStream(
                                 new FileOutputStream(file)))) {
             contactsRef.forEach(c -> {
-                outputStream.write(c);
+                outputStream.writeBinary(c);
             });
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -69,7 +74,10 @@ public class ContactInputStreamTest {
             try {
                 Contact c;
                 while (true) {
-                    c = inputStream.read();
+                    c = inputStream.readBinary();
+                    if (c == null) {
+                        break;
+                    }
                     contacts.add(c);
                 }
             } catch (EOFException ex) {
@@ -78,6 +86,56 @@ public class ContactInputStreamTest {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        org.junit.Assert.assertEquals(contactsRef, contacts);
+        int index = 0;
+        while (index < contacts.size()) {
+            Assert.assertEquals(contactsRef.get(index).getIdentifiant(), contacts.get(index).getIdentifiant());
+            Assert.assertEquals(contactsRef.get(index).getNom(), contacts.get(index).getNom());
+            Assert.assertEquals(contactsRef.get(index).getDateNaissance(), contacts.get(index).getDateNaissance());
+            Assert.assertEquals(contactsRef.get(index).getAdresse(), contacts.get(index).getAdresse());
+
+            index += 1;
+        }
+    }
+
+    @Test
+    public void testReadObject() {
+        try (ContactOutputStream outputStream
+                = new ContactOutputStream(
+                        new ObjectOutputStream(
+                                new FileOutputStream(fileObj)))) {
+            contactsRef.forEach(c -> {
+                outputStream.writeObject(c);
+            });
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        Assert.assertTrue(fileObj.exists());
+
+        List<Contact> contacts = new ArrayList<>();
+        
+        try (ContactInputStream inputStream
+                = new ContactInputStream(
+                        new ObjectInputStream(
+                                new FileInputStream(fileObj)))) {
+            try{
+                Contact c = null;
+                while(true){
+                    c = inputStream.readObject();;
+                    if(c == null){
+                        break;
+                    }
+                    contacts.add(c);
+                }
+                
+            }catch(EOFException ex){
+                
+            }
+        } catch (IOException ex) {
+            //throw new RuntimeException(ex);
+        }
+        
         org.junit.Assert.assertEquals(contactsRef, contacts);
         int index = 0;
         while (index < contacts.size()) {
