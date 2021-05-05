@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>16</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>176</x>
+      <y>192</y>
+      <w>336</w>
+      <h>304</h>
+    </coordinates>
+    <panel_attributes>Console
+--
+
+--
+_+main(String[]):void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>624</x>
+      <y>192</y>
+      <w>336</w>
+      <h>304</h>
+    </coordinates>
+    <panel_attributes>FichierContacts
+--
+
+--
++FichierContacts(File)
++ecrire(List&lt;Contact&gt;):void
++lire():List&lt;Contact&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>352</y>
+      <w>160</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>576</x>
+      <y>96</y>
+      <w>432</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>dhu.fichier.texte
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>112</x>
+      <y>48</y>
+      <w>928</w>
+      <h>512</h>
+    </coordinates>
+    <panel_attributes>dhu.fichier
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
