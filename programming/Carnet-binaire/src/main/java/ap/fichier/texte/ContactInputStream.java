@@ -77,7 +77,7 @@ public class ContactInputStream implements Closeable {
                 }
                 c.setAdresse(adresse);
             } catch (EOFException ex) {
-                LOG.severe(String.format("EOFException : %s", ex.getMessage()));
+                // LOG.severe(String.format("EOFException : %s", ex.getMessage()));
             }
 
         } catch (IOException ex) {
@@ -87,14 +87,14 @@ public class ContactInputStream implements Closeable {
         return c;
     }
 
-    public Contact readObject() throws EOFException{
+    public Contact readObject() throws EOFException {
         Contact c = null;
-        try{            
-            c = (Contact)objectInputStream.readObject();
+        try {
+            c = (Contact) objectInputStream.readObject();
             LOG.info(String.format("Object file treatment of object %s", c.toString()));
-        }catch( EOFException ex){
+        } catch (EOFException ex) {
             LOG.severe(ex.getMessage());
-        }catch(IOException | ClassNotFoundException ex){
+        } catch (IOException | ClassNotFoundException ex) {
             LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
