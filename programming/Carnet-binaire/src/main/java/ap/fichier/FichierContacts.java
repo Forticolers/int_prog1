@@ -87,7 +87,10 @@ public class FichierContacts {
             try {
                 Contact c = null;
                 while (true) {
-                    c = inputStream.readObject();;
+                    Object o = inputStream.readObject();
+                    if (o instanceof Contact) {
+                        c = (Contact) o;
+                    }
                     if (c == null) {
                         break;
                     }
