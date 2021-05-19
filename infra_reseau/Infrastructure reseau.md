@@ -88,3 +88,35 @@ used_by: []
 
 ```
 
+```bash
+root@atomium:~# cat /etc/netplan/50-cloud-init.yaml 
+# This file is generated from information provided by the datasource.  Changes
+# to it will not persist across an instance reboot.  To disable cloud-init's
+# network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+  version: 2
+  #renderer: networkd
+  ethernets:
+    eth0:
+      addresses: 
+        - 192.168.200.8/24
+      gateway4: 192.168.200.1
+      nameservers:
+        addresses: 
+          - 192.168.200.1
+
+
+```
+
+
+
+
+
+```
+jeanbourquj@MC0-0315-JJU:~$ sudo zfs snapshot dpool/kvm/ubricande@v1
+jeanbourquj@MC0-0315-JJU:~$ 2048cavi
+
+```
+
